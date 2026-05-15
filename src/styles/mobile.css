@@ -36,6 +36,16 @@
     font-size: 1rem;
   }
 
+  .mobile-container:not(.is-mobile-container-active),
+  .mobile-section:not(.is-mobile-active) {
+    display: none;
+  }
+
+  .mobile-container.is-mobile-container-active,
+  .mobile-section.is-mobile-active {
+    min-width: 0;
+  }
+
   .hero-metrics,
   .garden-board,
   .workspace-sidebar,
@@ -114,11 +124,15 @@
   }
 
   .onboarding-card {
-    display: none;
+    bottom: 86px;
+    display: grid;
+    max-height: calc(100vh - 132px);
+    overflow: auto;
   }
 
   .toast {
     top: 16px;
+    bottom: auto;
   }
 
   .mobile-bottom-nav {

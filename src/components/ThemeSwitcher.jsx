@@ -1,27 +1,35 @@
-const themeOptions = [
-  { id: 'morning', label: '晨光' },
-  { id: 'paper', label: '手账' },
-  { id: 'night', label: '夜色' },
-]
-
-function ThemeSwitcher({ activeTheme, onThemeChange }) {
+function ThemeSwitcher({
+  activeTheme,
+  themes = [],
+  onThemeChange = () => {},
+  onOpenOnboarding = () => {},
+}) {
   return (
     <section className="surface-panel theme-switcher">
       <div className="panel-heading">
-        <p className="eyebrow">Theme</p>
-        <h2>主题外观</h2>
+        <div>
+          <p className="eyebrow">Theme</p>
+          <h2>主题外观</h2>
+        </div>
+        <button className="text-action" type="button" onClick={onOpenOnboarding}>
+          查看引导
+        </button>
       </div>
 
-      <div className="theme-options">
-        {themeOptions.map((theme) => (
+      <div className="theme-options" role="group" aria-label="选择主题外观">
+        {themes.map((theme) => (
           <button
+            aria-pressed={theme.id === activeTheme}
             className={theme.id === activeTheme ? 'theme-swatch is-active' : 'theme-swatch'}
             key={theme.id}
             type="button"
             onClick={() => onThemeChange(theme.id)}
           >
-            <span className={`swatch-dot dot-${theme.id}`}></span>
-            {theme.label}
+            <span className={`swatch-dot dot-${theme.id}`} aria-hidden="true"></span>
+            <span>
+              <strong>{theme.label}</strong>
+              <small>{theme.description}</small>
+            </span>
           </button>
         ))}
       </div>

@@ -14,11 +14,14 @@ import TagCloud from './components/TagCloud.jsx'
 import ThemeSwitcher from './components/ThemeSwitcher.jsx'
 import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
-import { mockHeroContent, mockNavItems, mockTags } from './data/mockData.js'
+import { mockHeroContent, mockTags } from './data/mockData.js'
 import useAnalytics from './hooks/useAnalytics.js'
 import useCalendar from './hooks/useCalendar.js'
 import useFilters from './hooks/useFilters.js'
+import useOnboarding from './hooks/useOnboarding.js'
 import useRecords from './hooks/useRecords.js'
+import useTheme from './hooks/useTheme.js'
+import useToast from './hooks/useToast.js'
 import {
   buildExportFilename,
   createJsonExport,
@@ -28,6 +31,29 @@ import {
   readFileAsText,
 } from './utils/importExport.js'
 import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './utils/records.js'
+
+const mobileNavItems = [
+  { id: 'records', label: '记录' },
+  { id: 'garden', label: '花园' },
+  { id: 'analytics', label: '分析' },
+  { id: 'data', label: '数据' },
+]
+
+function getMobileSectionClass(activeSection, sectionId, className = '') {
+  return [className, 'mobile-section', activeSection === sectionId ? 'is-mobile-active' : '']
+    .filter(Boolean)
+    .join(' ')
+}
+
+function getMobileContainerClass(activeSection, sectionIds, className = '') {
+  return [
+    className,
+    'mobile-container',
+    sectionIds.includes(activeSection) ? 'is-mobile-container-active' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+}
 
 function App() {
   const {
@@ -47,13 +73,20 @@ function App() {
     resetFilters,
     hasActiveFilters,
   } = useFilters()
+  const { theme, themes, setTheme } = useTheme()
+  const { toast, showToast, dismissToast } = useToast()
+  const {
+    isOnboardingOpen,
+    openOnboarding,
+    closeOnboarding,
+    completeOnboarding,
+  } = useOnboarding()
   const calendar = useCalendar(records)
   const analytics = useAnalytics(records)
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [detailMode, setDetailMode] = useState('view')
-  const [activeNavItem, setActiveNavItem] = useState('garden')
-  const [activeTheme, setActiveTheme] = useState('morning')
-  const [toastMessage, setToastMessage] = useState('记录系统已经连接到本地花园。')
+  const [mobileActiveSection, setMobileActiveSection] = useState('records')
+  const [dismissedRecordError, setDismissedRecordError] = useState('')
 
   const filteredRecords = filterRecords(records, filters)
   const recentRecords = sortRecords(records, 'newest').slice(0, 3)
@@ -63,16 +96,37 @@ function App() {
     filteredCount: filteredRecords.length,
     hasActiveFilters,
   })
+  const visibleRecordError = error && error !== dismissedRecordError
+  const activeToast = visibleRecordError ? { message: error, type: 'error' } : toast
 
-  function showToast(message) {
-    setToastMessage(message)
+  function handleToastDismiss() {
+    if (visibleRecordError) {
+      setDismissedRecordError(error)
+    }
+
+    dismissToast()
+  }
+
+  function handleThemeChange(nextTheme) {
+    setTheme(nextTheme)
+    showToast('主题外观已更新。', 'info')
+  }
+
+  function handleCloseOnboarding() {
+    closeOnboarding()
+    showToast('新手引导已收起，可以在主题外观里重新查看。', 'info')
+  }
+
+  function handleCompleteOnboarding() {
+    completeOnboarding()
+    showToast('准备好了，慢慢照看你的心情花园。', 'success')
   }
 
   function handleAddRecord(input) {
     const record = addRecord(input)
     setSelectedRecord(record)
     setDetailMode('view')
-    showToast('已经种下一朵新的心情花。')
+    showToast('已经种下一朵新的心情花。', 'success')
   }
 
   function handleViewRecord(record) {
@@ -89,7 +143,7 @@ function App() {
     const updatedRecord = updateRecord(id, patch)
     setSelectedRecord(updatedRecord)
     setDetailMode('view')
-    showToast('这朵花的记录已经更新。')
+    showToast('这朵花的记录已经更新。', 'success')
   }
 
   function handleDeleteRecord(id) {
@@ -99,7 +153,7 @@ function App() {
       setSelectedRecord(null)
     }
 
-    showToast('这条记录已经从花园中移除。')
+    showToast('这条记录已经从花园中移除。', 'info')
   }
 
   function handleToggleFavorite(id) {
@@ -113,7 +167,7 @@ function App() {
       })
     }
 
-    showToast('收藏状态已更新。')
+    showToast('收藏状态已更新。', 'info')
   }
 
   async function getImportedRecords(file) {
@@ -122,13 +176,13 @@ function App() {
       const result = parseImportPayload(content)
 
       if (!result.ok) {
-        showToast(result.message)
+        showToast(result.message, 'error')
         return null
       }
 
       return result.records
     } catch (importError) {
-      showToast(importError?.message || '读取文件失败，请确认是 JSON 备份。')
+      showToast(importError?.message || '读取文件失败，请确认是 JSON 备份。', 'error')
       return null
     }
   }
@@ -140,7 +194,10 @@ function App() {
       'text/plain;charset=utf-8',
     )
 
-    showToast(exported ? '已导出 TXT 日记。' : '当前环境暂时无法下载文件。')
+    showToast(
+      exported ? '已导出 TXT 日记。' : '当前环境暂时无法下载文件。',
+      exported ? 'success' : 'error',
+    )
   }
 
   function handleExportJson() {
@@ -150,7 +207,10 @@ function App() {
       'application/json;charset=utf-8',
     )
 
-    showToast(exported ? '已导出 JSON 备份。' : '当前环境暂时无法下载文件。')
+    showToast(
+      exported ? '已导出 JSON 备份。' : '当前环境暂时无法下载文件。',
+      exported ? 'success' : 'error',
+    )
   }
 
   async function handleImportMerge(file) {
@@ -161,7 +221,7 @@ function App() {
     }
 
     mergeRecords(importedRecords)
-    showToast(`已合并导入 ${importedRecords.length} 条记录。`)
+    showToast(`已合并导入 ${importedRecords.length} 条记录。`, 'success')
   }
 
   async function handleImportReplace(file) {
@@ -171,7 +231,7 @@ function App() {
         : false
 
     if (!confirmed) {
-      showToast('已取消覆盖导入。')
+      showToast('已取消覆盖导入。', 'info')
       return
     }
 
@@ -183,49 +243,86 @@ function App() {
 
     replaceRecords(importedRecords)
     setSelectedRecord(null)
-    showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`)
+    showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`, 'success')
   }
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-theme={theme}>
       <HeroSection content={mockHeroContent} />
 
       <main className="app-main">
-        <section className="daily-grid" aria-label="今日情绪记录">
+        <section
+          className={getMobileSectionClass(mobileActiveSection, 'records', 'daily-grid')}
+          aria-label="今日情绪记录"
+          data-mobile-section="records"
+        >
           <TodayStatusCard record={recentRecords[0]} />
           <RecordForm tags={mockTags.slice(0, 5)} onAddRecord={handleAddRecord} />
           <RecentRecords records={recentRecords} onViewRecord={handleViewRecord} />
         </section>
 
-        <section className="garden-workspace" aria-label="花园工作区">
+        <section
+          className={getMobileContainerClass(
+            mobileActiveSection,
+            ['garden', 'data'],
+            'garden-workspace',
+          )}
+          aria-label="花园工作区"
+        >
           <div className="workspace-main">
-            <GardenView
-              hasActiveFilters={hasActiveFilters}
-              onDeleteRecord={handleDeleteRecord}
-              onEditRecord={handleEditRecord}
-              onResetFilters={resetFilters}
-              onToggleFavorite={handleToggleFavorite}
-              onViewRecord={handleViewRecord}
-              records={filteredRecords}
-              selectedRecordId={selectedRecord?.id}
-              totalCount={records.length}
-            />
-            <CalendarView
-              days={calendar.calendarDays}
-              monthLabel={calendar.monthLabel}
-              onDeleteRecord={handleDeleteRecord}
-              onNextMonth={calendar.goToNextMonth}
-              onPrevMonth={calendar.goToPrevMonth}
-              onSelectDate={calendar.selectDate}
-              onToday={calendar.goToToday}
-              onToggleFavorite={handleToggleFavorite}
-              onViewRecord={handleViewRecord}
-              selectedDateKey={calendar.selectedDateKey}
-              selectedRecords={calendar.selectedRecords}
-            />
+            <div
+              className={getMobileSectionClass(
+                mobileActiveSection,
+                'garden',
+                'garden-panel-wrap',
+              )}
+              data-mobile-section="garden"
+            >
+              <GardenView
+                hasActiveFilters={hasActiveFilters}
+                onDeleteRecord={handleDeleteRecord}
+                onEditRecord={handleEditRecord}
+                onResetFilters={resetFilters}
+                onToggleFavorite={handleToggleFavorite}
+                onViewRecord={handleViewRecord}
+                records={filteredRecords}
+                selectedRecordId={selectedRecord?.id}
+                totalCount={records.length}
+              />
+            </div>
+            <div
+              className={getMobileSectionClass(
+                mobileActiveSection,
+                'data',
+                'calendar-panel-wrap',
+              )}
+              data-mobile-section="data"
+            >
+              <CalendarView
+                days={calendar.calendarDays}
+                monthLabel={calendar.monthLabel}
+                onDeleteRecord={handleDeleteRecord}
+                onNextMonth={calendar.goToNextMonth}
+                onPrevMonth={calendar.goToPrevMonth}
+                onSelectDate={calendar.selectDate}
+                onToday={calendar.goToToday}
+                onToggleFavorite={handleToggleFavorite}
+                onViewRecord={handleViewRecord}
+                selectedDateKey={calendar.selectedDateKey}
+                selectedRecords={calendar.selectedRecords}
+              />
+            </div>
           </div>
 
-          <aside className="workspace-sidebar" aria-label="筛选和偏好">
+          <aside
+            className={getMobileSectionClass(
+              mobileActiveSection,
+              'garden',
+              'workspace-sidebar',
+            )}
+            aria-label="筛选和偏好"
+            data-mobile-section="garden"
+          >
             <FilterPanel
               filteredCount={filteredRecords.length}
               filters={filters}
@@ -240,19 +337,45 @@ function App() {
               selectedTag={filters.selectedTag}
               tags={tagCounts}
             />
-            <ThemeSwitcher activeTheme={activeTheme} onThemeChange={setActiveTheme} />
+            <ThemeSwitcher
+              activeTheme={theme}
+              onOpenOnboarding={openOnboarding}
+              onThemeChange={handleThemeChange}
+              themes={themes}
+            />
           </aside>
         </section>
 
-        <section className="insight-grid" aria-label="数据和分析">
-          <AnalyticsDashboard analytics={analytics} />
-          <DataPanel
-            onExportJson={handleExportJson}
-            onExportText={handleExportText}
-            onImportMerge={handleImportMerge}
-            onImportReplace={handleImportReplace}
-            recordCount={records.length}
-          />
+        <section
+          className={getMobileContainerClass(
+            mobileActiveSection,
+            ['analytics', 'data'],
+            'insight-grid',
+          )}
+          aria-label="数据和分析"
+        >
+          <div
+            className={getMobileSectionClass(
+              mobileActiveSection,
+              'analytics',
+              'analytics-panel-wrap',
+            )}
+            data-mobile-section="analytics"
+          >
+            <AnalyticsDashboard analytics={analytics} />
+          </div>
+          <div
+            className={getMobileSectionClass(mobileActiveSection, 'data', 'data-panel-wrap')}
+            data-mobile-section="data"
+          >
+            <DataPanel
+              onExportJson={handleExportJson}
+              onExportText={handleExportText}
+              onImportMerge={handleImportMerge}
+              onImportReplace={handleImportReplace}
+              recordCount={records.length}
+            />
+          </div>
         </section>
       </main>
 
@@ -266,15 +389,18 @@ function App() {
         record={selectedRecord}
       />
       <Toast
-        isVisible={Boolean(toastMessage || error)}
-        message={error || toastMessage}
-        onDismiss={() => setToastMessage('')}
+        toast={activeToast}
+        onDismiss={handleToastDismiss}
       />
-      <OnboardingModal />
+      <OnboardingModal
+        isOpen={isOnboardingOpen}
+        onClose={handleCloseOnboarding}
+        onComplete={handleCompleteOnboarding}
+      />
       <MobileBottomNav
-        activeItem={activeNavItem}
-        items={mockNavItems}
-        onChange={setActiveNavItem}
+        activeItem={mobileActiveSection}
+        items={mobileNavItems}
+        onChange={setMobileActiveSection}
       />
     </div>
   )

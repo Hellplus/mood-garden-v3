@@ -3,6 +3,11 @@
   --color-surface: #fffdf8;
   --color-surface-strong: #ffffff;
   --color-surface-soft: #edf7f0;
+  --color-panel-bg: rgba(255, 253, 248, 0.92);
+  --color-card-bg: #ffffff;
+  --color-input-bg: #fffefa;
+  --color-note-bg: #fff8e7;
+  --color-garden-bg: linear-gradient(180deg, #fbfff9 0%, #edf7f0 100%);
   --color-text: #25352e;
   --color-heading: #1f2d25;
   --color-muted: #64746c;
@@ -20,4 +25,71 @@
   --shadow-subtle: 0 8px 24px rgba(58, 86, 66, 0.08);
   --radius-panel: 8px;
   --radius-control: 7px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --color-page: #151b18;
+  --color-surface: #202820;
+  --color-surface-strong: #27322b;
+  --color-surface-soft: #1b241f;
+  --color-panel-bg: rgba(32, 40, 34, 0.94);
+  --color-card-bg: #25302a;
+  --color-input-bg: #1a231f;
+  --color-note-bg: #2b3027;
+  --color-garden-bg: linear-gradient(180deg, #1b261f 0%, #17211b 100%);
+  --color-text: #d9e7dc;
+  --color-heading: #f3fbf4;
+  --color-muted: #a7b8ab;
+  --color-border: #3b4b40;
+  --color-border-strong: #59705e;
+  --color-accent: #8ac69d;
+  --color-accent-deep: #b6dfc1;
+  --color-accent-soft: #263a2d;
+  --color-blue: #8fb7df;
+  --color-rose: #e4a2ad;
+  --color-coral: #e29b80;
+  --color-gold: #e4c071;
+  --color-focus: rgba(138, 198, 157, 0.32);
+  --shadow-soft: 0 18px 44px rgba(0, 0, 0, 0.28);
+  --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme='cozy'] {
+  --color-page: #f8efe4;
+  --color-surface: #fffaf2;
+  --color-surface-strong: #fffdf8;
+  --color-surface-soft: #f4eadb;
+  --color-panel-bg: rgba(255, 250, 242, 0.94);
+  --color-card-bg: #fffdf8;
+  --color-input-bg: #fffaf1;
+  --color-note-bg: #fff0d8;
+  --color-garden-bg: linear-gradient(180deg, #fffaf2 0%, #f1eadb 100%);
+  --color-text: #433a31;
+  --color-heading: #2e2a24;
+  --color-muted: #756b60;
+  --color-border: #e4d4c3;
+  --color-border-strong: #ceb89e;
+  --color-accent: #b7794b;
+  --color-accent-deep: #835b3b;
+  --color-accent-soft: #f2dfca;
+  --color-blue: #779dc1;
+  --color-rose: #c9828c;
+  --color-coral: #cf765e;
+  --color-gold: #c9923a;
+  --color-focus: rgba(183, 121, 75, 0.28);
+  --shadow-soft: 0 18px 44px rgba(111, 82, 50, 0.13);
+  --shadow-subtle: 0 8px 24px rgba(111, 82, 50, 0.08);
+}
+
+html[data-theme='dark'] body {
+  background:
+    linear-gradient(180deg, rgba(21, 27, 24, 0.96), rgba(30, 36, 32, 0.96)),
+    var(--color-page);
+}
+
+html[data-theme='cozy'] body {
+  background:
+    linear-gradient(180deg, rgba(248, 239, 228, 0.92), rgba(255, 246, 232, 0.96)),
+    var(--color-page);
 }
