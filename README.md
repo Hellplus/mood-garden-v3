@@ -1,8 +1,18 @@
 # Mood Garden V3
 
-Mood Garden 是一个本地优先的 React + Vite 心情记录花园。它支持记录每日情绪，把记录展示成花园，并通过筛选、日历、数据分析、导入导出、主题、Toast、新手引导、移动端导航和轻量 PWA 外壳来组成完整体验。
+Mood Garden 是一个本地优先的心情记录花园。当前项目已经有 V3.0 React / Vite 稳定版，不再是 Vite 默认模板，也不再是原生 HTML/CSS/JS 单页脚本版本。
 
-## 当前范围
+V3.0 的重点是把原有体验拆成更清楚的 React 组件、hooks、utils 和样式模块，同时保留本地记录、花园浏览、日历、分析、导入导出、主题和移动端基础体验。
+
+## 线上访问
+
+GitHub Pages 地址：
+
+https://hellplus.github.io/mood-garden-v3/
+
+如果页面显示旧版本，可以尝试刷新浏览器缓存，或在浏览器开发者工具中注销旧的 service worker 后重新访问。
+
+## 核心功能
 
 - React + Vite + JavaScript
 - 基于 localStorage 的记录新增、编辑、删除、收藏
@@ -13,12 +23,17 @@ Mood Garden 是一个本地优先的 React + Vite 心情记录花园。它支持
 - 主题切换、Toast 提示、新手引导和移动端底部导航
 - V3.0-J PWA 基础能力：manifest、应用图标、service worker 和 GitHub Pages base 路径
 - V3.0-K GitHub Actions 自动部署到 GitHub Pages
+- V3.0-L 最终回归验收与 React / Vite 稳定版冻结
 
 ## 数据存储
 
 记录只保存在当前浏览器的 `localStorage` 中，并继续使用现有 records key。Mood Garden 不提供账号、后端存储、云同步、推送通知或远程备份。
 
 如果需要保留可迁移的数据副本，请定期导出 JSON 备份。
+
+## 使用边界
+
+Mood Garden 用于个人情绪记录、整理和回顾。应用中的统计、回顾文案和趋势展示不构成心理诊断、医学判断或医疗建议。如果正在经历持续痛苦、危机或需要专业支持，请寻求可信赖的人或专业机构帮助。
 
 ## PWA 说明
 
@@ -62,13 +77,9 @@ V3.0-K 新增 `.github/workflows/deploy.yml`，用于通过 GitHub Actions 自�
    - 上传 `dist`；
    - 部署到 GitHub Pages。
 
-线上访问地址格式：
+线上访问地址：
 
-```text
-https://<你的 GitHub 用户名>.github.io/mood-garden-v3/
-```
-
-如果仓库属于组织，则将用户名替换为组织名。
+https://hellplus.github.io/mood-garden-v3/
 
 ## 开发
 

@@ -1,5 +1,11 @@
 # 更新日志
 
+## V3.0-L
+
+- 完成 V3.0 最终回归验收，重点检查数据层、CRUD、筛选、日历、分析、导入导出、体验层交互、PWA 和部署配置。
+- 冻结 Mood Garden V3.0 React / Vite 稳定版，作为后续 V3.1 迭代的基础版本。
+- 完成 GitHub Pages 部署配置与线上访问地址确认：`https://hellplus.github.io/mood-garden-v3/`。
+
 ## V3.0-K
 
 - 新增 GitHub Actions 部署 workflow：`.github/workflows/deploy.yml`。
