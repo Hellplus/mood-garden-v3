@@ -1314,6 +1314,15 @@
   font-weight: 800;
 }
 
+.data-actions .danger-action {
+  border-color: #efc3c3;
+  color: #a34a4a;
+}
+
+.file-input {
+  display: none;
+}
+
 .toast {
   position: fixed;
   right: 24px;

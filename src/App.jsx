@@ -19,6 +19,14 @@ import useAnalytics from './hooks/useAnalytics.js'
 import useCalendar from './hooks/useCalendar.js'
 import useFilters from './hooks/useFilters.js'
 import useRecords from './hooks/useRecords.js'
+import {
+  buildExportFilename,
+  createJsonExport,
+  createTextExport,
+  downloadFile,
+  parseImportPayload,
+  readFileAsText,
+} from './utils/importExport.js'
 import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './utils/records.js'
 
 function App() {
@@ -29,6 +37,8 @@ function App() {
     updateRecord,
     deleteRecord,
     toggleFavorite,
+    replaceRecords,
+    mergeRecords,
   } = useRecords()
   const {
     filters,
@@ -106,6 +116,76 @@ function App() {
     showToast('收藏状态已更新。')
   }
 
+  async function getImportedRecords(file) {
+    try {
+      const content = await readFileAsText(file)
+      const result = parseImportPayload(content)
+
+      if (!result.ok) {
+        showToast(result.message)
+        return null
+      }
+
+      return result.records
+    } catch (importError) {
+      showToast(importError?.message || '读取文件失败，请确认是 JSON 备份。')
+      return null
+    }
+  }
+
+  function handleExportText() {
+    const exported = downloadFile(
+      buildExportFilename('txt'),
+      createTextExport(records),
+      'text/plain;charset=utf-8',
+    )
+
+    showToast(exported ? '已导出 TXT 日记。' : '当前环境暂时无法下载文件。')
+  }
+
+  function handleExportJson() {
+    const exported = downloadFile(
+      buildExportFilename('json'),
+      createJsonExport(records),
+      'application/json;charset=utf-8',
+    )
+
+    showToast(exported ? '已导出 JSON 备份。' : '当前环境暂时无法下载文件。')
+  }
+
+  async function handleImportMerge(file) {
+    const importedRecords = await getImportedRecords(file)
+
+    if (!importedRecords) {
+      return
+    }
+
+    mergeRecords(importedRecords)
+    showToast(`已合并导入 ${importedRecords.length} 条记录。`)
+  }
+
+  async function handleImportReplace(file) {
+    const confirmed =
+      typeof window !== 'undefined'
+        ? window.confirm('覆盖导入会替换当前所有记录，确定继续吗？')
+        : false
+
+    if (!confirmed) {
+      showToast('已取消覆盖导入。')
+      return
+    }
+
+    const importedRecords = await getImportedRecords(file)
+
+    if (!importedRecords) {
+      return
+    }
+
+    replaceRecords(importedRecords)
+    setSelectedRecord(null)
+    showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`)
+  }
+
   return (
     <div className="app-shell">
       <HeroSection content={mockHeroContent} />
@@ -166,7 +246,13 @@ function App() {
 
         <section className="insight-grid" aria-label="数据和分析">
           <AnalyticsDashboard analytics={analytics} />
-          <DataPanel />
+          <DataPanel
+            onExportJson={handleExportJson}
+            onExportText={handleExportText}
+            onImportMerge={handleImportMerge}
+            onImportReplace={handleImportReplace}
+            recordCount={records.length}
+          />
         </section>
       </main>
 

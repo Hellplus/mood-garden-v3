@@ -6,6 +6,7 @@ import {
   toggleFavoriteById,
   updateRecordById,
 } from '../utils/records.js'
+import { mergeRecordCollections } from '../utils/importExport.js'
 import { readRecords, writeRecords } from '../utils/storage.js'
 
 function getInitialRecords() {
@@ -62,6 +63,16 @@ function useRecords() {
     commitRecords(() => [])
   }
 
+  function replaceRecords(nextRecords) {
+    return commitRecords(() => normalizeRecords(nextRecords))
+  }
+
+  function mergeRecords(importedRecords) {
+    return commitRecords((currentRecords) =>
+      mergeRecordCollections(currentRecords, importedRecords),
+    )
+  }
+
   return {
     records,
     isReady: true,
@@ -71,6 +82,8 @@ function useRecords() {
     deleteRecord,
     toggleFavorite,
     clearRecords,
+    replaceRecords,
+    mergeRecords,
   }
 }
 
