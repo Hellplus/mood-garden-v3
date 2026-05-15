@@ -81,6 +81,7 @@
 
   .flower-detail-panel {
     bottom: 86px;
+    max-height: calc(100vh - 118px);
   }
 
   .onboarding-card {

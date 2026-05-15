@@ -17,27 +17,77 @@ import Toast from './components/Toast.jsx'
 import {
   mockAnalytics,
   mockCalendarDays,
-  mockFlowers,
   mockHeroContent,
   mockNavItems,
-  mockRecords,
   mockTags,
 } from './data/mockData.js'
+import useRecords from './hooks/useRecords.js'
 
 function App() {
-  const [selectedFlower, setSelectedFlower] = useState(mockFlowers[0])
-  const [isDetailOpen, setIsDetailOpen] = useState(true)
+  const {
+    records,
+    error,
+    addRecord,
+    updateRecord,
+    deleteRecord,
+    toggleFavorite,
+  } = useRecords()
+  const [selectedRecord, setSelectedRecord] = useState(null)
+  const [detailMode, setDetailMode] = useState('view')
   const [activeNavItem, setActiveNavItem] = useState('garden')
   const [activeTheme, setActiveTheme] = useState('morning')
-  const [isToastVisible, setIsToastVisible] = useState(true)
+  const [toastMessage, setToastMessage] = useState('记录系统已连接到本地花园。')
 
-  function handleFlowerSelect(flower) {
-    setSelectedFlower(flower)
-    setIsDetailOpen(true)
+  function showToast(message) {
+    setToastMessage(message)
   }
 
-  function handlePreviewSave() {
-    setIsToastVisible(true)
+  function handleAddRecord(input) {
+    const record = addRecord(input)
+    setSelectedRecord(record)
+    setDetailMode('view')
+    showToast('已经种下一朵新的心情花。')
+  }
+
+  function handleViewRecord(record) {
+    setSelectedRecord(record)
+    setDetailMode('view')
+  }
+
+  function handleEditRecord(record) {
+    setSelectedRecord(record)
+    setDetailMode('edit')
+  }
+
+  function handleSaveRecord(id, patch) {
+    const updatedRecord = updateRecord(id, patch)
+    setSelectedRecord(updatedRecord)
+    setDetailMode('view')
+    showToast('这朵花的记录已经更新。')
+  }
+
+  function handleDeleteRecord(id) {
+    deleteRecord(id)
+
+    if (selectedRecord?.id === id) {
+      setSelectedRecord(null)
+    }
+
+    showToast('这条记录已经从花园中移除。')
+  }
+
+  function handleToggleFavorite(id) {
+    toggleFavorite(id)
+
+    if (selectedRecord?.id === id) {
+      setSelectedRecord({
+        ...selectedRecord,
+        isFavorite: !selectedRecord.isFavorite,
+        updatedAt: Date.now(),
+      })
+    }
+
+    showToast('收藏状态已更新。')
   }
 
   return (
@@ -46,17 +96,20 @@ function App() {
 
       <main className="app-main">
         <section className="daily-grid" aria-label="今日情绪记录">
-          <TodayStatusCard record={mockRecords[0]} />
-          <RecordForm tags={mockTags.slice(0, 5)} onPreviewSave={handlePreviewSave} />
-          <RecentRecords records={mockRecords} />
+          <TodayStatusCard record={records[0]} />
+          <RecordForm tags={mockTags.slice(0, 5)} onAddRecord={handleAddRecord} />
+          <RecentRecords records={records.slice(0, 3)} onViewRecord={handleViewRecord} />
         </section>
 
         <section className="garden-workspace" aria-label="花园工作区">
           <div className="workspace-main">
             <GardenView
-              flowers={mockFlowers}
-              onSelectFlower={handleFlowerSelect}
-              selectedFlowerId={selectedFlower.id}
+              onDeleteRecord={handleDeleteRecord}
+              onEditRecord={handleEditRecord}
+              onToggleFavorite={handleToggleFavorite}
+              onViewRecord={handleViewRecord}
+              records={records}
+              selectedRecordId={selectedRecord?.id}
             />
             <CalendarView days={mockCalendarDays} />
           </div>
@@ -75,11 +128,19 @@ function App() {
       </main>
 
       <FlowerDetailModal
-        flower={selectedFlower}
-        isOpen={isDetailOpen}
-        onClose={() => setIsDetailOpen(false)}
+        key={selectedRecord ? `${selectedRecord.id}-${detailMode}` : 'closed'}
+        mode={detailMode}
+        onClose={() => setSelectedRecord(null)}
+        onDelete={handleDeleteRecord}
+        onSave={handleSaveRecord}
+        onToggleFavorite={handleToggleFavorite}
+        record={selectedRecord}
       />
-      <Toast isVisible={isToastVisible} onDismiss={() => setIsToastVisible(false)} />
+      <Toast
+        isVisible={Boolean(toastMessage || error)}
+        message={error || toastMessage}
+        onDismiss={() => setToastMessage('')}
+      />
       <OnboardingModal />
       <MobileBottomNav
         activeItem={activeNavItem}

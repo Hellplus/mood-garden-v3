@@ -42,6 +42,8 @@
 .segmented-control button,
 .theme-swatch,
 .data-actions button,
+.flower-card-actions button,
+.detail-actions button,
 .primary-action,
 .mobile-nav-button {
   transition:
