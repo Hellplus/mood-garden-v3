@@ -11,7 +11,7 @@ function RecentRecords({ records, onViewRecord }) {
       {records.length === 0 ? (
         <div className="empty-state compact-empty">
           <strong>还没有最近记录</strong>
-          <p>种下第一朵花后，它会出现在这里。</p>
+          <p>完成第一条记录后，这里会显示最近的心情花，方便你回看。</p>
         </div>
       ) : (
         <div className="record-list">

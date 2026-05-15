@@ -15,13 +15,13 @@ function AnalyticsDashboard({ analytics }) {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Analytics</p>
-            <h2>真实数据分析</h2>
+            <h2>数据回顾</h2>
           </div>
           <span className="section-caption">全部记录</span>
         </div>
 
         <div className="empty-state analytics-empty">
-          <strong>还没有足够的记录形成分析</strong>
+          <strong>记录还不够形成回顾</strong>
           <p>写下第一条心情后，这里会慢慢出现总览、趋势和温柔回顾。</p>
         </div>
       </section>
@@ -33,7 +33,7 @@ function AnalyticsDashboard({ analytics }) {
       <div className="section-heading">
         <div>
           <p className="eyebrow">Analytics</p>
-          <h2>真实数据分析</h2>
+          <h2>数据回顾</h2>
         </div>
         <span className="section-caption">基于全部记录</span>
       </div>
@@ -62,7 +62,7 @@ function AnalyticsDashboard({ analytics }) {
           </div>
 
           {analytics.moodDistribution.length === 0 ? (
-            <p className="soft-note">还没有形成情绪分布。</p>
+            <p className="soft-note">记录还不多，情绪分布会在这里慢慢出现。</p>
           ) : (
             <div className="mood-bars">
               {analytics.moodDistribution.map((bar) => (
@@ -137,7 +137,7 @@ function AnalyticsDashboard({ analytics }) {
           </div>
 
           {analytics.topTags.length === 0 ? (
-            <p className="soft-note">还没有常用标签。</p>
+            <p className="soft-note">还没有常用标签。记录时加上标签后，这里会开始整理。</p>
           ) : (
             <div className="tag-rank-list">
               {analytics.topTags.map((tag) => (

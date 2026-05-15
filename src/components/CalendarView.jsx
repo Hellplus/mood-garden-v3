@@ -128,7 +128,7 @@ function CalendarView({
         {selectedRecords.length === 0 ? (
           <div className="empty-state compact-empty">
             <strong>这一天还没有记录</strong>
-            <p>如果愿意，可以在上方写下一句心情，让这一天也开出一朵花。</p>
+            <p>可以回到记录区补上一句，也可以让这一天安静地留白。</p>
           </div>
         ) : (
           <div className="calendar-record-list">

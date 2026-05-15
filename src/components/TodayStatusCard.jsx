@@ -30,9 +30,9 @@ function TodayStatusCard({ record }) {
         </>
       ) : (
         <div className="today-empty">
-          <p className="status-label">还没有记录</p>
+          <p className="status-label">今天还没有记录</p>
           <strong>0 / 5</strong>
-          <span>写下一句话，第一朵花就会出现。</span>
+          <span>选一个情绪，写下一句话，第一朵花就会出现。</span>
         </div>
       )}
     </article>

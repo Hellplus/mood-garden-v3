@@ -32,20 +32,24 @@ function DataPanel({
 
       <div className="data-actions">
         <button type="button" onClick={onExportText}>
-          导出日记 TXT
+          <strong>导出日记 TXT</strong>
+          <small>适合阅读和保存文字版日记。</small>
         </button>
         <button type="button" onClick={onExportJson}>
-          导出备份 JSON
+          <strong>导出备份 JSON</strong>
+          <small>适合备份，也适合以后导回花园。</small>
         </button>
         <button type="button" onClick={() => mergeInputRef.current?.click()}>
-          合并导入 JSON
+          <strong>合并导入 JSON</strong>
+          <small>把备份追加到当前花园，不会清空现有记录。</small>
         </button>
         <button
           className="danger-action"
           type="button"
           onClick={() => replaceInputRef.current?.click()}
         >
-          覆盖导入 JSON
+          <strong>覆盖导入 JSON</strong>
+          <small>会替换当前所有记录，操作前会再次确认。</small>
         </button>
       </div>
 
@@ -64,8 +68,23 @@ function DataPanel({
         type="file"
       />
 
+      <div className="data-note-grid" aria-label="数据保存说明">
+        <article>
+          <strong>本地保存</strong>
+          <p>记录只保存在当前浏览器里，换设备不会自动同步。</p>
+        </article>
+        <article>
+          <strong>备份建议</strong>
+          <p>清理浏览器数据可能会删除记录，建议定期导出 JSON 备份。</p>
+        </article>
+        <article>
+          <strong>安装到主屏幕</strong>
+          <p>如果浏览器提示可以安装，添加到手机主屏幕后仍然是本地保存，不代表云同步。</p>
+        </article>
+      </div>
+
       <p className="soft-note">
-        导出始终基于全部记录；导入 JSON 后，花园、日历、分析和标签云会自动刷新。
+        导出始终基于全部记录；导入 JSON 前会先检查文件，格式不对时只会提示，不会覆盖现有记录。
       </p>
     </section>
   )

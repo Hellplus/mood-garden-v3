@@ -1335,14 +1335,50 @@
 }
 
 .data-actions button {
+  display: grid;
+  gap: 4px;
   background: var(--color-card-bg);
   text-align: left;
   font-weight: 800;
 }
 
+.data-actions button small {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
 .data-actions .danger-action {
   border-color: #efc3c3;
   color: #a34a4a;
+}
+
+.data-actions .danger-action small {
+  color: #9f5a5a;
+}
+
+.data-note-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.data-note-grid article {
+  display: grid;
+  gap: 4px;
+  border-radius: var(--radius-control);
+  padding: 12px;
+  background: var(--color-note-bg);
+}
+
+.data-note-grid strong {
+  color: var(--color-heading);
+}
+
+.data-note-grid p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .file-input {

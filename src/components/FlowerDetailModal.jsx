@@ -21,7 +21,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
 
         <p className="eyebrow">Flower Detail</p>
         <h2>没有找到这条记录</h2>
-        <p>这朵花可能已经被删除，或者本地数据暂时无法读取。</p>
+        <p>这朵花可能已经被删除。关闭面板后，可以继续查看其他记录。</p>
 
         <div className="detail-actions">
           <button type="button" onClick={onClose}>

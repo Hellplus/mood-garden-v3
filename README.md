@@ -4,6 +4,8 @@ Mood Garden 是一个本地优先的心情记录花园。当前项目已经有 V
 
 V3.0 的重点是把原有体验拆成更清楚的 React 组件、hooks、utils 和样式模块，同时保留本地记录、花园浏览、日历、分析、导入导出、主题和移动端基础体验。
 
+V3.1-A 在稳定版基础上做了一轮首次体验与文案优化，重点让新用户更容易理解如何开始记录、如何备份数据，以及 PWA 安装不等于云同步。
+
 ## 线上访问
 
 GitHub Pages 地址：
@@ -24,12 +26,13 @@ https://hellplus.github.io/mood-garden-v3/
 - V3.0-J PWA 基础能力：manifest、应用图标、service worker 和 GitHub Pages base 路径
 - V3.0-K GitHub Actions 自动部署到 GitHub Pages
 - V3.0-L 最终回归验收与 React / Vite 稳定版冻结
+- V3.1-A 首次使用引导、空状态、数据保存和导入导出说明优化
 
 ## 数据存储
 
 记录只保存在当前浏览器的 `localStorage` 中，并继续使用现有 records key。Mood Garden 不提供账号、后端存储、云同步、推送通知或远程备份。
 
-如果需要保留可迁移的数据副本，请定期导出 JSON 备份。
+换设备不会自动同步记录；清理浏览器数据也可能删除本地记录。如果需要保留可迁移的数据副本，请定期导出 JSON 备份。
 
 ## 使用边界
 
@@ -44,6 +47,7 @@ V3.0-J 增加了简单、手写的 PWA 层：
 - `public/service-worker.js`：缓存应用外壳和访问过的构建资源，用于基础离线访问。
 - service worker 不缓存、不读取、不管理用户记录；记录仍由 `localStorage` 管理。
 - service worker 只会在生产构建中注册，因此 `npm run dev` 不会被缓存行为干扰。
+- 如果浏览器提示可以安装，可以把 Mood Garden 添加到手机主屏幕；安装后仍然是本地保存，不代表账号登录或云同步。
 
 ## GitHub Pages
 

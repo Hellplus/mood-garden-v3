@@ -29,15 +29,15 @@ function GardenView({
 
       {hasNoRecords ? (
         <div className="empty-state garden-empty">
-          <strong>还没有种下第一朵花</strong>
-          <p>在上方写下一句今天的心情，记录会保存在当前浏览器中。</p>
+          <strong>花园还在等第一朵花</strong>
+          <p>到记录区选一个情绪，写下一句话，就可以开始照看它。</p>
         </div>
       ) : null}
 
       {hasNoMatches ? (
         <div className="empty-state garden-empty">
-          <strong>没有符合条件的花</strong>
-          <p>可以换一个关键词、标签或强度，也可以一键重置筛选。</p>
+          <strong>没有找到符合条件的花</strong>
+          <p>可以换个关键词，取消一些筛选条件，或一键重置筛选。</p>
           {onResetFilters ? (
             <button className="secondary-action" type="button" onClick={onResetFilters}>
               重置筛选

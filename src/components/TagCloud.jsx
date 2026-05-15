@@ -3,13 +3,13 @@ function TagCloud({ tags = [], selectedTag = '', onSelectTag = () => {} }) {
     <section className="surface-panel tag-cloud">
       <div className="panel-heading">
         <p className="eyebrow">Tags</p>
-        <h2>真实标签云</h2>
+        <h2>标签云</h2>
       </div>
 
       {tags.length === 0 ? (
         <div className="empty-state compact-empty">
-          <strong>还没有可筛选的标签</strong>
-          <p>新增记录时写下标签，它们会在这里长成一片小小的标签云。</p>
+          <strong>还没有标签</strong>
+          <p>记录时加上标签，以后就能按它们找回相似的心情花。</p>
         </div>
       ) : (
         <div className="tag-cloud-list">
