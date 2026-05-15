@@ -1,5 +1,13 @@
 # 更新日志
 
+## V3.0-K
+
+- 新增 GitHub Actions 部署 workflow：`.github/workflows/deploy.yml`。
+- workflow 会在推送到 `main` 分支时自动安装依赖、运行 lint、构建项目并上传 `dist`。
+- 部署方式改为 GitHub Pages 的 GitHub Actions Source，不使用 `gh-pages` 包，也不从分支根目录直接发布源码。
+- 文档补充 GitHub Pages 后台设置步骤、线上访问地址和部署验证清单。
+- 确认 Vite base 继续使用 `/mood-garden-v3/`，适配仓库同名 Pages 路径。
+
 ## V3.0-J
 
 - 新增 `manifest.webmanifest`，提供 PWA 安装所需的基础元数据。
