@@ -1,4 +1,4 @@
-@keyframes gentleFadeIn {
+@keyframes gentleRise {
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -10,21 +10,53 @@
   }
 }
 
-.placeholder-card,
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
 .hero-section,
-.onboarding-placeholder,
-.toast-placeholder {
-  animation: gentleFadeIn 180ms ease-out both;
+.surface-panel,
+.garden-view,
+.flower-detail-panel,
+.toast,
+.onboarding-card {
+  animation: gentleRise 180ms ease-out both;
 }
 
-.icon-animation-idle {
-  animation: none;
+.flower-card:hover .flower-visual,
+.flower-card:focus-visible .flower-visual {
+  animation: softFloat 1.8s ease-in-out infinite;
 }
 
-.icon-animation-grow {
-  animation: gentleFadeIn 240ms ease-out both;
+.flower-card,
+.choice-chip,
+.tag-chip,
+.tag-cloud-item,
+.segmented-control button,
+.theme-swatch,
+.data-actions button,
+.primary-action,
+.mobile-nav-button {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
-.icon-animation-pulse {
-  animation: gentleFadeIn 240ms ease-out both;
+.flower-card:hover,
+.choice-chip:hover,
+.tag-chip:hover,
+.tag-cloud-item:hover,
+.theme-swatch:hover,
+.data-actions button:hover,
+.primary-action:hover {
+  transform: translateY(-2px);
 }

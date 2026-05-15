@@ -1,9 +1,13 @@
 function OnboardingModal() {
   return (
-    <section className="onboarding-placeholder" aria-label="新手引导占位">
+    <section className="onboarding-card" aria-label="静态新手引导">
       <p className="eyebrow">Onboarding</p>
-      <h2>新手引导弹窗</h2>
-      <p>这里将承载首次进入时的引导内容。</p>
+      <h2>从一条小记录开始</h2>
+      <ol>
+        <li>写下今天的心情。</li>
+        <li>选择一朵花作为标记。</li>
+        <li>在花园里慢慢回看。</li>
+      </ol>
     </section>
   )
 }

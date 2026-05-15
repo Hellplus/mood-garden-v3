@@ -1,11 +1,29 @@
-function HeroSection() {
+function HeroSection({ content }) {
   return (
     <header className="hero-section">
-      <p className="eyebrow">Mood Garden V3.0</p>
-      <h1>情绪花园基础骨架</h1>
-      <p className="hero-copy">
-        用于后续迁移记录、花园、日历、分析和数据管理能力的 React / Vite 空壳。
-      </p>
+      <div className="brand-row">
+        <span className="brand-mark" aria-hidden="true"></span>
+        <span>{content.eyebrow}</span>
+      </div>
+
+      <div className="hero-layout">
+        <div className="hero-copy-stack">
+          <p className="eyebrow">Mood Journal</p>
+          <h1>{content.title}</h1>
+          <p className="hero-greeting">{content.greeting}</p>
+          <p className="hero-copy">{content.description}</p>
+        </div>
+
+        <div className="hero-metrics" aria-label="静态概览指标">
+          {content.metrics.map((metric) => (
+            <article className="metric-tile" key={metric.label}>
+              <span>{metric.label}</span>
+              <strong>{metric.value}</strong>
+              <small>{metric.hint}</small>
+            </article>
+          ))}
+        </div>
+      </div>
     </header>
   )
 }

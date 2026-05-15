@@ -4,24 +4,14 @@ export const STORAGE_KEYS = {
   onboarding: 'mood-garden-onboarding',
 }
 
-export function readFromStorage(key, fallback = null) {
-  const rawValue = window.localStorage.getItem(key)
-
-  if (!rawValue) {
-    return fallback
-  }
-
-  try {
-    return JSON.parse(rawValue)
-  } catch {
-    return fallback
-  }
+export function readFromStorage(_key, fallback = null) {
+  return fallback
 }
 
-export function writeToStorage(key, value) {
-  window.localStorage.setItem(key, JSON.stringify(value))
+export function writeToStorage() {
+  return undefined
 }
 
-export function removeFromStorage(key) {
-  window.localStorage.removeItem(key)
+export function removeFromStorage() {
+  return undefined
 }

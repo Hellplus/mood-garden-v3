@@ -1,44 +1,124 @@
-@media (max-width: 860px) {
-  .app-shell {
-    padding: 20px;
-  }
-
-  .hero-section {
-    padding-top: 32px;
-  }
-
-  .hero-section h1 {
-    font-size: 2.4rem;
-  }
-
-  .overview-grid,
-  .workspace-grid {
+@media (max-width: 1040px) {
+  .hero-layout,
+  .daily-grid,
+  .garden-workspace,
+  .insight-grid,
+  .analytics-content {
     grid-template-columns: 1fr;
   }
 
-  .garden-view {
-    grid-column: auto;
+  .workspace-sidebar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    padding: 18px;
   }
 
-  .onboarding-placeholder,
-  .toast-placeholder {
-    position: static;
-    width: 100%;
-    margin-top: 16px;
+  .app-main {
+    padding-bottom: 96px;
+  }
+
+  .hero-section {
+    padding-top: 10px;
+  }
+
+  .hero-copy-stack h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-greeting {
+    font-size: 1rem;
+  }
+
+  .hero-metrics,
+  .garden-board,
+  .workspace-sidebar,
+  .analytics-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .surface-panel,
+  .garden-view {
+    padding: 16px;
+  }
+
+  .panel-heading,
+  .section-heading {
+    display: grid;
+  }
+
+  .garden-summary {
+    justify-content: flex-start;
+  }
+
+  .calendar-grid {
+    gap: 5px;
+  }
+
+  .calendar-day {
+    min-height: 58px;
+    padding: 7px;
+  }
+
+  .calendar-day span {
+    font-size: 0.72rem;
+  }
+
+  .mood-bar-row {
+    grid-template-columns: 48px minmax(0, 1fr) 40px;
+  }
+
+  .flower-detail-panel,
+  .onboarding-card,
+  .toast {
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+
+  .flower-detail-panel {
+    bottom: 86px;
+  }
+
+  .onboarding-card {
+    display: none;
+  }
+
+  .toast {
+    top: 16px;
   }
 
   .mobile-bottom-nav {
     position: fixed;
-    right: 16px;
-    bottom: 16px;
-    left: 16px;
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    z-index: 28;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+    padding: 8px;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: var(--shadow-card);
+    border-radius: var(--radius-panel);
+    background: rgba(255, 253, 248, 0.94);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mobile-nav-button {
+    min-height: 42px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-muted);
+    font-weight: 800;
+  }
+
+  .mobile-nav-button.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent-deep);
   }
 }

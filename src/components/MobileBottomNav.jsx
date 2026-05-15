@@ -1,9 +1,16 @@
-function MobileBottomNav() {
+function MobileBottomNav({ items, activeItem, onChange }) {
   return (
-    <nav className="mobile-bottom-nav" aria-label="移动端底部导航占位">
-      <button type="button">记录</button>
-      <button type="button">花园</button>
-      <button type="button">分析</button>
+    <nav className="mobile-bottom-nav" aria-label="移动端底部导航">
+      {items.map((item) => (
+        <button
+          className={item.id === activeItem ? 'mobile-nav-button is-active' : 'mobile-nav-button'}
+          key={item.id}
+          type="button"
+          onClick={() => onChange(item.id)}
+        >
+          {item.label}
+        </button>
+      ))}
     </nav>
   )
 }

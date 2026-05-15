@@ -1,9 +1,19 @@
-function TagCloud() {
+function TagCloud({ tags }) {
   return (
-    <section className="placeholder-card">
-      <p className="eyebrow">Tags</p>
-      <h2>标签云</h2>
-      <p>这里将展示常用标签和标签筛选入口。</p>
+    <section className="surface-panel tag-cloud">
+      <div className="panel-heading">
+        <p className="eyebrow">Tags</p>
+        <h2>常用标签</h2>
+      </div>
+
+      <div className="tag-cloud-list">
+        {tags.map((tag) => (
+          <button className="tag-cloud-item" key={tag.id} type="button">
+            {tag.label}
+            <span>{tag.count}</span>
+          </button>
+        ))}
+      </div>
     </section>
   )
 }

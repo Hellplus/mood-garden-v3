@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import AnalyticsDashboard from './components/AnalyticsDashboard.jsx'
 import CalendarView from './components/CalendarView.jsx'
 import DataPanel from './components/DataPanel.jsx'
 import FilterPanel from './components/FilterPanel.jsx'
-import FlowerCard from './components/FlowerCard.jsx'
 import FlowerDetailModal from './components/FlowerDetailModal.jsx'
 import GardenView from './components/GardenView.jsx'
 import HeroSection from './components/HeroSection.jsx'
@@ -14,35 +14,78 @@ import TagCloud from './components/TagCloud.jsx'
 import ThemeSwitcher from './components/ThemeSwitcher.jsx'
 import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
+import {
+  mockAnalytics,
+  mockCalendarDays,
+  mockFlowers,
+  mockHeroContent,
+  mockNavItems,
+  mockRecords,
+  mockTags,
+} from './data/mockData.js'
 
 function App() {
+  const [selectedFlower, setSelectedFlower] = useState(mockFlowers[0])
+  const [isDetailOpen, setIsDetailOpen] = useState(true)
+  const [activeNavItem, setActiveNavItem] = useState('garden')
+  const [activeTheme, setActiveTheme] = useState('morning')
+  const [isToastVisible, setIsToastVisible] = useState(true)
+
+  function handleFlowerSelect(flower) {
+    setSelectedFlower(flower)
+    setIsDetailOpen(true)
+  }
+
+  function handlePreviewSave() {
+    setIsToastVisible(true)
+  }
+
   return (
     <div className="app-shell">
-      <HeroSection />
+      <HeroSection content={mockHeroContent} />
 
       <main className="app-main">
-        <section className="overview-grid" aria-label="今日记录入口">
-          <TodayStatusCard />
-          <RecordForm />
-          <RecentRecords />
+        <section className="daily-grid" aria-label="今日情绪记录">
+          <TodayStatusCard record={mockRecords[0]} />
+          <RecordForm tags={mockTags.slice(0, 5)} onPreviewSave={handlePreviewSave} />
+          <RecentRecords records={mockRecords} />
         </section>
 
-        <section className="workspace-grid" aria-label="花园工作区">
-          <GardenView />
-          <FlowerCard />
-          <FlowerDetailModal />
-          <FilterPanel />
-          <TagCloud />
-          <CalendarView />
-          <AnalyticsDashboard />
+        <section className="garden-workspace" aria-label="花园工作区">
+          <div className="workspace-main">
+            <GardenView
+              flowers={mockFlowers}
+              onSelectFlower={handleFlowerSelect}
+              selectedFlowerId={selectedFlower.id}
+            />
+            <CalendarView days={mockCalendarDays} />
+          </div>
+
+          <aside className="workspace-sidebar" aria-label="筛选和偏好">
+            <FilterPanel />
+            <TagCloud tags={mockTags} />
+            <ThemeSwitcher activeTheme={activeTheme} onThemeChange={setActiveTheme} />
+          </aside>
+        </section>
+
+        <section className="insight-grid" aria-label="数据和分析">
+          <AnalyticsDashboard analytics={mockAnalytics} />
           <DataPanel />
-          <ThemeSwitcher />
         </section>
       </main>
 
-      <Toast />
+      <FlowerDetailModal
+        flower={selectedFlower}
+        isOpen={isDetailOpen}
+        onClose={() => setIsDetailOpen(false)}
+      />
+      <Toast isVisible={isToastVisible} onDismiss={() => setIsToastVisible(false)} />
       <OnboardingModal />
-      <MobileBottomNav />
+      <MobileBottomNav
+        activeItem={activeNavItem}
+        items={mockNavItems}
+        onChange={setActiveNavItem}
+      />
     </div>
   )
 }
