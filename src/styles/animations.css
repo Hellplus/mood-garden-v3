@@ -1,0 +1,30 @@
+@keyframes gentleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.placeholder-card,
+.hero-section,
+.onboarding-placeholder,
+.toast-placeholder {
+  animation: gentleFadeIn 180ms ease-out both;
+}
+
+.icon-animation-idle {
+  animation: none;
+}
+
+.icon-animation-grow {
+  animation: gentleFadeIn 240ms ease-out both;
+}
+
+.icon-animation-pulse {
+  animation: gentleFadeIn 240ms ease-out both;
+}

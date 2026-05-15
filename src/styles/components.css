@@ -1,0 +1,146 @@
+.app-shell {
+  width: min(1180px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.hero-section {
+  padding: 48px 0 32px;
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero-section h1 {
+  max-width: 760px;
+  margin-top: 10px;
+  color: var(--color-text);
+  font-size: 5.5rem;
+  line-height: 0.95;
+}
+
+.hero-copy {
+  max-width: 680px;
+  margin-top: 18px;
+  color: var(--color-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.app-main {
+  display: grid;
+  gap: 24px;
+  padding-bottom: 112px;
+}
+
+.overview-grid,
+.workspace-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.overview-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.workspace-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.placeholder-card {
+  min-height: 190px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.placeholder-card h2,
+.onboarding-placeholder h2 {
+  margin-top: 10px;
+  color: var(--color-text);
+  font-size: 1.2rem;
+}
+
+.placeholder-card p:not(.eyebrow),
+.onboarding-placeholder p:not(.eyebrow) {
+  margin-top: 12px;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.garden-view {
+  grid-column: span 2;
+  background: var(--color-surface-soft);
+}
+
+.record-form {
+  display: grid;
+  gap: 12px;
+}
+
+.record-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.record-form input,
+.record-form textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #f8faf8;
+  color: var(--color-muted);
+}
+
+.record-form textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+
+.record-form button,
+.mobile-bottom-nav button {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #ffffff;
+  background: var(--color-accent);
+}
+
+.toast-placeholder {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  box-shadow: var(--shadow-card);
+}
+
+.onboarding-placeholder {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  width: min(320px, calc(100% - 48px));
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.mobile-bottom-nav {
+  display: none;
+}

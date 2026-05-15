@@ -1,0 +1,44 @@
+@media (max-width: 860px) {
+  .app-shell {
+    padding: 20px;
+  }
+
+  .hero-section {
+    padding-top: 32px;
+  }
+
+  .hero-section h1 {
+    font-size: 2.4rem;
+  }
+
+  .overview-grid,
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .garden-view {
+    grid-column: auto;
+  }
+
+  .onboarding-placeholder,
+  .toast-placeholder {
+    position: static;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow-card);
+  }
+}
