@@ -1,0 +1,25 @@
+{
+  "name": "Mood Garden",
+  "short_name": "MoodGarden",
+  "description": "A gentle local mood journal and garden for daily records.",
+  "start_url": "/mood-garden-v3/",
+  "scope": "/mood-garden-v3/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#3d8a62",
+  "background_color": "#f2f8ee",
+  "icons": [
+    {
+      "src": "/mood-garden-v3/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/mood-garden-v3/favicon.svg",
+      "sizes": "48x46",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

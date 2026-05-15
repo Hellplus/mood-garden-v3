@@ -12,3 +12,19 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+function registerServiceWorker() {
+  if (!import.meta.env.PROD || !('serviceWorker' in navigator)) {
+    return
+  }
+
+  window.addEventListener('load', () => {
+    const serviceWorkerUrl = `${import.meta.env.BASE_URL}service-worker.js`
+
+    navigator.serviceWorker.register(serviceWorkerUrl).catch((error) => {
+      console.warn('Mood Garden service worker registration failed.', error)
+    })
+  })
+}
+
+registerServiceWorker()
