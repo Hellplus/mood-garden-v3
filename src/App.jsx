@@ -16,11 +16,11 @@ import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
 import {
   mockAnalytics,
-  mockCalendarDays,
   mockHeroContent,
   mockNavItems,
   mockTags,
 } from './data/mockData.js'
+import useCalendar from './hooks/useCalendar.js'
 import useFilters from './hooks/useFilters.js'
 import useRecords from './hooks/useRecords.js'
 import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './utils/records.js'
@@ -41,6 +41,7 @@ function App() {
     resetFilters,
     hasActiveFilters,
   } = useFilters()
+  const calendar = useCalendar(records)
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [detailMode, setDetailMode] = useState('view')
   const [activeNavItem, setActiveNavItem] = useState('garden')
@@ -132,7 +133,19 @@ function App() {
               selectedRecordId={selectedRecord?.id}
               totalCount={records.length}
             />
-            <CalendarView days={mockCalendarDays} />
+            <CalendarView
+              days={calendar.calendarDays}
+              monthLabel={calendar.monthLabel}
+              onDeleteRecord={handleDeleteRecord}
+              onNextMonth={calendar.goToNextMonth}
+              onPrevMonth={calendar.goToPrevMonth}
+              onSelectDate={calendar.selectDate}
+              onToday={calendar.goToToday}
+              onToggleFavorite={handleToggleFavorite}
+              onViewRecord={handleViewRecord}
+              selectedDateKey={calendar.selectedDateKey}
+              selectedRecords={calendar.selectedRecords}
+            />
           </div>
 
           <aside className="workspace-sidebar" aria-label="筛选和偏好">

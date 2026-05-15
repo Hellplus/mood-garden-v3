@@ -54,17 +54,30 @@
     justify-content: flex-start;
   }
 
+  .calendar-controls {
+    justify-content: flex-start;
+  }
+
   .calendar-grid {
     gap: 5px;
   }
 
   .calendar-day {
-    min-height: 58px;
-    padding: 7px;
+    min-height: 64px;
+    padding: 6px;
   }
 
   .calendar-day span {
     font-size: 0.72rem;
+  }
+
+  .calendar-mood-icons {
+    gap: 1px;
+  }
+
+  .calendar-record-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .mood-bar-row {

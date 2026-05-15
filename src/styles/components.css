@@ -876,7 +876,30 @@
 }
 
 .calendar-view {
+  display: grid;
+  gap: 16px;
   overflow: hidden;
+}
+
+.calendar-heading {
+  align-items: center;
+}
+
+.calendar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.calendar-controls button {
+  min-height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 8px 10px;
+  background: #ffffff;
+  color: var(--color-text);
+  font-weight: 800;
 }
 
 .calendar-grid {
@@ -897,11 +920,14 @@
 .calendar-day {
   display: grid;
   gap: 6px;
+  align-content: start;
   min-height: 72px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-control);
   padding: 9px;
   background: #ffffff;
+  color: var(--color-text);
+  text-align: left;
 }
 
 .calendar-day strong {
@@ -916,6 +942,100 @@
 .calendar-day.is-today {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.calendar-day.is-selected {
+  border-color: var(--color-accent-deep);
+  background: var(--color-accent-soft);
+}
+
+.calendar-day.has-records {
+  background: #fbfff9;
+}
+
+.calendar-day.is-blank {
+  border-style: dashed;
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: none;
+}
+
+.calendar-mood-icons {
+  display: flex;
+  gap: 3px;
+}
+
+.calendar-mood-icons i {
+  font-style: normal;
+}
+
+.calendar-selected-panel {
+  display: grid;
+  gap: 14px;
+  border-top: 1px dashed var(--color-border);
+  padding-top: 16px;
+}
+
+.calendar-selected-panel h3 {
+  margin-top: 6px;
+  color: var(--color-heading);
+  font-size: 1.08rem;
+}
+
+.calendar-record-list {
+  display: grid;
+  gap: 10px;
+}
+
+.calendar-record-card {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.calendar-record-main {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.calendar-record-main strong {
+  color: var(--color-heading);
+}
+
+.calendar-record-main span,
+.calendar-record-main p {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.calendar-record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.calendar-record-actions button {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 7px 10px;
+  background: #ffffff;
+  color: var(--color-text);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.calendar-record-actions .danger-action {
+  border-color: #efc3c3;
+  color: #a34a4a;
 }
 
 .tone-green {
