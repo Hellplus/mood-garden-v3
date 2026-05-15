@@ -35,7 +35,7 @@ import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './ut
 const mobileNavItems = [
   { id: 'records', label: '记录' },
   { id: 'garden', label: '花园' },
-  { id: 'analytics', label: '分析' },
+  { id: 'analytics', label: '回顾' },
   { id: 'data', label: '数据' },
 ]
 
@@ -264,7 +264,7 @@ function App() {
         <section
           className={getMobileContainerClass(
             mobileActiveSection,
-            ['garden', 'data'],
+            ['garden', 'analytics'],
             'garden-workspace',
           )}
           aria-label="花园工作区"
@@ -293,10 +293,10 @@ function App() {
             <div
               className={getMobileSectionClass(
                 mobileActiveSection,
-                'data',
+                'analytics',
                 'calendar-panel-wrap',
               )}
-              data-mobile-section="data"
+              data-mobile-section="analytics"
             >
               <CalendarView
                 days={calendar.calendarDays}

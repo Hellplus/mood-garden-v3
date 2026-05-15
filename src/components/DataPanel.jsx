@@ -30,28 +30,35 @@ function DataPanel({
         <span className="section-caption">{recordCount} 条记录</span>
       </div>
 
-      <div className="data-actions">
-        <button type="button" onClick={onExportText}>
-          <strong>导出日记 TXT</strong>
-          <small>适合阅读和保存文字版日记。</small>
-        </button>
-        <button type="button" onClick={onExportJson}>
-          <strong>导出备份 JSON</strong>
-          <small>适合备份，也适合以后导回花园。</small>
-        </button>
-        <button type="button" onClick={() => mergeInputRef.current?.click()}>
-          <strong>合并导入 JSON</strong>
-          <small>把备份追加到当前花园，不会清空现有记录。</small>
-        </button>
-        <button
-          className="danger-action"
-          type="button"
-          onClick={() => replaceInputRef.current?.click()}
-        >
-          <strong>覆盖导入 JSON</strong>
-          <small>会替换当前所有记录，操作前会再次确认。</small>
-        </button>
-      </div>
+      <section className="data-section" aria-labelledby="backup-title">
+        <div>
+          <h3 id="backup-title">备份与恢复</h3>
+          <p>导出始终基于全部记录；导入前会先检查 JSON 文件。</p>
+        </div>
+
+        <div className="data-actions">
+          <button type="button" onClick={onExportText}>
+            <strong>导出日记 TXT</strong>
+            <small>适合阅读和保存文字版日记。</small>
+          </button>
+          <button type="button" onClick={onExportJson}>
+            <strong>导出备份 JSON</strong>
+            <small>适合备份，也适合以后导回花园。</small>
+          </button>
+          <button type="button" onClick={() => mergeInputRef.current?.click()}>
+            <strong>合并导入 JSON</strong>
+            <small>把备份追加到当前花园，不会清空现有记录。</small>
+          </button>
+          <button
+            className="danger-action"
+            type="button"
+            onClick={() => replaceInputRef.current?.click()}
+          >
+            <strong>覆盖导入 JSON</strong>
+            <small>会替换当前所有记录，操作前会再次确认。</small>
+          </button>
+        </div>
+      </section>
 
       <input
         accept="application/json,.json"
@@ -68,24 +75,37 @@ function DataPanel({
         type="file"
       />
 
-      <div className="data-note-grid" aria-label="数据保存说明">
-        <article>
-          <strong>本地保存</strong>
-          <p>记录只保存在当前浏览器里，换设备不会自动同步。</p>
-        </article>
-        <article>
-          <strong>备份建议</strong>
-          <p>清理浏览器数据可能会删除记录，建议定期导出 JSON 备份。</p>
-        </article>
-        <article>
-          <strong>安装到主屏幕</strong>
-          <p>如果浏览器提示可以安装，添加到手机主屏幕后仍然是本地保存，不代表云同步。</p>
-        </article>
-      </div>
+      <section className="data-section" aria-labelledby="local-data-title">
+        <div>
+          <h3 id="local-data-title">本地数据说明</h3>
+          <p>记录保存在当前浏览器中，换设备不会自动同步。</p>
+        </div>
 
-      <p className="soft-note">
-        导出始终基于全部记录；导入 JSON 前会先检查文件，格式不对时只会提示，不会覆盖现有记录。
-      </p>
+        <div className="data-note-grid" aria-label="数据保存说明">
+          <article>
+            <strong>本地保存</strong>
+            <p>记录只保存在当前浏览器里，刷新页面后会从本机恢复。</p>
+          </article>
+          <article>
+            <strong>备份建议</strong>
+            <p>清理浏览器数据可能会删除记录，建议定期导出 JSON 备份。</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="data-section" aria-labelledby="app-note-title">
+        <div>
+          <h3 id="app-note-title">应用说明</h3>
+          <p>可以添加到主屏幕使用，但这不代表账号登录或云同步。</p>
+        </div>
+
+        <div className="data-note-grid" aria-label="应用安装说明">
+          <article>
+            <strong>安装到主屏幕</strong>
+            <p>如果浏览器提示可以安装，添加后仍然是本地保存。</p>
+          </article>
+        </div>
+      </section>
     </section>
   )
 }

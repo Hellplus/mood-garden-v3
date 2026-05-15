@@ -13,7 +13,8 @@ function MobileBottomNav({ items = [], activeItem, onChange = () => {} }) {
             type="button"
             onClick={() => onChange(item.id)}
           >
-            {item.label}
+            <span className="mobile-nav-label">{item.label}</span>
+            {isActive ? <span className="mobile-nav-dot" aria-hidden="true"></span> : null}
           </button>
         )
       })}
