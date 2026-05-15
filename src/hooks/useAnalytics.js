@@ -1,12 +1,8 @@
-function useAnalytics() {
-  return {
-    summary: {
-      totalRecords: 0,
-      streakDays: 0,
-      moodDistribution: [],
-    },
-    refreshAnalytics: () => {},
-  }
+import { useMemo } from 'react'
+import { buildAnalytics } from '../utils/analytics.js'
+
+function useAnalytics(records = []) {
+  return useMemo(() => buildAnalytics(records), [records])
 }
 
 export default useAnalytics

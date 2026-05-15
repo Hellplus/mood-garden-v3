@@ -14,12 +14,8 @@ import TagCloud from './components/TagCloud.jsx'
 import ThemeSwitcher from './components/ThemeSwitcher.jsx'
 import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
-import {
-  mockAnalytics,
-  mockHeroContent,
-  mockNavItems,
-  mockTags,
-} from './data/mockData.js'
+import { mockHeroContent, mockNavItems, mockTags } from './data/mockData.js'
+import useAnalytics from './hooks/useAnalytics.js'
 import useCalendar from './hooks/useCalendar.js'
 import useFilters from './hooks/useFilters.js'
 import useRecords from './hooks/useRecords.js'
@@ -42,6 +38,7 @@ function App() {
     hasActiveFilters,
   } = useFilters()
   const calendar = useCalendar(records)
+  const analytics = useAnalytics(records)
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [detailMode, setDetailMode] = useState('view')
   const [activeNavItem, setActiveNavItem] = useState('garden')
@@ -168,7 +165,7 @@ function App() {
         </section>
 
         <section className="insight-grid" aria-label="数据和分析">
-          <AnalyticsDashboard analytics={mockAnalytics} />
+          <AnalyticsDashboard analytics={analytics} />
           <DataPanel />
         </section>
       </main>

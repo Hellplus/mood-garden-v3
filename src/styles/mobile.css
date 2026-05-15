@@ -3,7 +3,10 @@
   .daily-grid,
   .garden-workspace,
   .insight-grid,
-  .analytics-content {
+  .analytics-content,
+  .analytics-insights,
+  .analytics-detail-grid,
+  .analytics-review {
     grid-template-columns: 1fr;
   }
 
@@ -36,7 +39,10 @@
   .hero-metrics,
   .garden-board,
   .workspace-sidebar,
-  .analytics-summary {
+  .analytics-summary,
+  .analytics-insights,
+  .analytics-detail-grid,
+  .analytics-review {
     grid-template-columns: 1fr;
   }
 
@@ -82,6 +88,16 @@
 
   .mood-bar-row {
     grid-template-columns: 48px minmax(0, 1fr) 40px;
+  }
+
+  .trend-strip {
+    gap: 3px;
+    min-height: 70px;
+    padding: 10px;
+  }
+
+  .tag-rank-row {
+    grid-template-columns: 64px minmax(0, 1fr) 28px;
   }
 
   .flower-detail-panel,
