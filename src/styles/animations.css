@@ -42,9 +42,18 @@
 .segmented-control button,
 .theme-swatch,
 .data-actions button,
+.filter-collapse-toggle,
+.record-more-toggle,
+.filter-toggle,
+.filter-reset,
+.calendar-controls button,
+.calendar-record-actions button,
 .flower-card-actions button,
 .detail-actions button,
 .primary-action,
+.secondary-action,
+.text-action,
+.toast-close,
 .mobile-nav-button {
   transition:
     transform 160ms ease,
@@ -59,6 +68,47 @@
 .tag-cloud-item:hover,
 .theme-swatch:hover,
 .data-actions button:hover,
+.filter-collapse-toggle:hover,
+.record-more-toggle:hover,
+.filter-toggle:hover,
+.filter-reset:not(:disabled):hover,
+.calendar-controls button:hover,
+.calendar-record-actions button:hover,
+.flower-card-actions button:hover,
+.detail-actions button:hover,
+.secondary-action:hover,
+.text-action:hover,
 .primary-action:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .flower-card:hover,
+  .choice-chip:hover,
+  .tag-chip:hover,
+  .tag-cloud-item:hover,
+  .theme-swatch:hover,
+  .data-actions button:hover,
+  .filter-collapse-toggle:hover,
+  .record-more-toggle:hover,
+  .filter-toggle:hover,
+  .filter-reset:not(:disabled):hover,
+  .calendar-controls button:hover,
+  .calendar-record-actions button:hover,
+  .flower-card-actions button:hover,
+  .detail-actions button:hover,
+  .secondary-action:hover,
+  .text-action:hover,
+  .primary-action:hover {
+    transform: none;
+  }
 }

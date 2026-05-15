@@ -12,7 +12,7 @@ function Toast({ toast, isVisible, message, type = 'info', onDismiss = () => {} 
   return (
     <div className={`toast toast-${toastType}`} role={role} aria-live={ariaLive}>
       <span>{activeToast.message}</span>
-      <button type="button" onClick={onDismiss} aria-label="关闭通知">
+      <button className="toast-close" type="button" onClick={onDismiss} aria-label="关闭通知">
         x
       </button>
     </div>
