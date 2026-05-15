@@ -8,6 +8,7 @@ function RecordForm({ tags, onAddRecord }) {
   const [selectedTags, setSelectedTags] = useState([])
   const [customTags, setCustomTags] = useState('')
   const [formMessage, setFormMessage] = useState('')
+  const [showMoreOptions, setShowMoreOptions] = useState(false)
 
   function toggleTag(tagLabel) {
     setSelectedTags((currentTags) =>
@@ -23,6 +24,7 @@ function RecordForm({ tags, onAddRecord }) {
     setIntensity(3)
     setSelectedTags([])
     setCustomTags('')
+    setShowMoreOptions(false)
   }
 
   function handleSubmit(event) {
@@ -71,52 +73,73 @@ function RecordForm({ tags, onAddRecord }) {
       </fieldset>
 
       <label className="form-field">
-        情绪强度：{intensity} / 5
-        <input
-          max="5"
-          min="1"
-          onChange={(event) => setIntensity(Number(event.target.value))}
-          type="range"
-          value={intensity}
-        />
-      </label>
-
-      <fieldset>
-        <legend>标签</legend>
-        <div className="chip-row">
-          {tags.map((tag) => (
-            <button
-              className={
-                selectedTags.includes(tag.label) ? 'tag-chip is-selected' : 'tag-chip'
-              }
-              key={tag.id}
-              onClick={() => toggleTag(tag.label)}
-              type="button"
-            >
-              {tag.label}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
-      <label className="form-field">
-        自定义标签
-        <input
-          onChange={(event) => setCustomTags(event.target.value)}
-          placeholder="用空格或逗号分隔"
-          type="text"
-          value={customTags}
-        />
-      </label>
-
-      <label className="form-field">
-        记录片段
+        写一句心情
         <textarea
           onChange={(event) => setNote(event.target.value)}
-          placeholder="今天发生了什么？哪怕只是一句话也很好。"
+          placeholder="今天发生了什么？一句话也很好。"
           value={note}
         />
       </label>
+
+      <div className="record-more">
+        <button
+          aria-controls="record-more-options"
+          aria-expanded={showMoreOptions}
+          className="record-more-toggle"
+          onClick={() => setShowMoreOptions((isOpen) => !isOpen)}
+          type="button"
+        >
+          <span>{showMoreOptions ? '收起更多细节' : '添加更多细节（可选）'}</span>
+          <small>
+            {showMoreOptions
+              ? '强度和标签会随这条记录一起保存。'
+              : '强度、标签和自定义标签都可以不填。'}
+          </small>
+        </button>
+
+        {showMoreOptions ? (
+          <div className="record-more-options" id="record-more-options">
+            <label className="form-field">
+              情绪强度：{intensity} / 5
+              <input
+                max="5"
+                min="1"
+                onChange={(event) => setIntensity(Number(event.target.value))}
+                type="range"
+                value={intensity}
+              />
+            </label>
+
+            <fieldset>
+              <legend>标签（可选）</legend>
+              <div className="chip-row">
+                {tags.map((tag) => (
+                  <button
+                    className={
+                      selectedTags.includes(tag.label) ? 'tag-chip is-selected' : 'tag-chip'
+                    }
+                    key={tag.id}
+                    onClick={() => toggleTag(tag.label)}
+                    type="button"
+                  >
+                    {tag.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <label className="form-field">
+              自定义标签（可选）
+              <input
+                onChange={(event) => setCustomTags(event.target.value)}
+                placeholder="用空格或逗号分隔"
+                type="text"
+                value={customTags}
+              />
+            </label>
+          </div>
+        ) : null}
+      </div>
 
       {formMessage ? (
         <p className="form-message" role="status">

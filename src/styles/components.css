@@ -268,6 +268,13 @@
   gap: 16px;
 }
 
+.record-form .primary-action {
+  min-height: 48px;
+  width: 100%;
+  font-size: 1rem;
+  box-shadow: 0 12px 24px rgba(61, 138, 98, 0.18);
+}
+
 .record-form legend,
 .form-field {
   display: grid;
@@ -326,6 +333,43 @@
   color: var(--color-accent-deep);
   font-size: 0.92rem;
   font-weight: 700;
+}
+
+.record-more {
+  display: grid;
+  gap: 10px;
+}
+
+.record-more-toggle {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-control);
+  padding: 11px 12px;
+  background: var(--color-card-bg);
+  color: var(--color-accent-deep);
+  text-align: left;
+}
+
+.record-more-toggle span {
+  font-weight: 800;
+}
+
+.record-more-toggle small {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.record-more-options {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  padding: 14px;
+  background: var(--color-note-bg);
 }
 
 .form-field input[type='text'],
