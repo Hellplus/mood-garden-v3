@@ -1,13 +1,19 @@
 import FlowerCard from './FlowerCard.jsx'
 
 function GardenView({
-  records,
+  records = [],
+  totalCount = records.length,
+  hasActiveFilters = false,
   selectedRecordId,
   onViewRecord,
   onEditRecord,
   onDeleteRecord,
   onToggleFavorite,
+  onResetFilters,
 }) {
+  const hasNoRecords = totalCount === 0
+  const hasNoMatches = totalCount > 0 && records.length === 0
+
   return (
     <section className="garden-view">
       <div className="section-heading">
@@ -16,17 +22,31 @@ function GardenView({
           <h2>我的情绪花园</h2>
         </div>
         <div className="garden-summary">
-          <span>{records.length} 朵记录中</span>
-          <span>localStorage</span>
+          <span>{hasActiveFilters ? `${records.length} / ${totalCount} 朵` : `${totalCount} 朵`}</span>
+          <span>{hasActiveFilters ? '筛选结果' : '全部记录'}</span>
         </div>
       </div>
 
-      {records.length === 0 ? (
+      {hasNoRecords ? (
         <div className="empty-state garden-empty">
-          <strong>花园还在等第一朵花</strong>
+          <strong>还没有种下第一朵花</strong>
           <p>在上方写下一句今天的心情，记录会保存在当前浏览器中。</p>
         </div>
-      ) : (
+      ) : null}
+
+      {hasNoMatches ? (
+        <div className="empty-state garden-empty">
+          <strong>没有符合条件的花</strong>
+          <p>可以换一个关键词、标签或强度，也可以一键重置筛选。</p>
+          {onResetFilters ? (
+            <button className="secondary-action" type="button" onClick={onResetFilters}>
+              重置筛选
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      {!hasNoRecords && !hasNoMatches ? (
         <div className="garden-board" aria-label="真实记录花卡">
           {records.map((record) => (
             <FlowerCard
@@ -40,7 +60,7 @@ function GardenView({
             />
           ))}
         </div>
-      )}
+      ) : null}
     </section>
   )
 }

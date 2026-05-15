@@ -21,7 +21,9 @@ import {
   mockNavItems,
   mockTags,
 } from './data/mockData.js'
+import useFilters from './hooks/useFilters.js'
 import useRecords from './hooks/useRecords.js'
+import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './utils/records.js'
 
 function App() {
   const {
@@ -32,11 +34,27 @@ function App() {
     deleteRecord,
     toggleFavorite,
   } = useRecords()
+  const {
+    filters,
+    setFilter,
+    toggleTag,
+    resetFilters,
+    hasActiveFilters,
+  } = useFilters()
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [detailMode, setDetailMode] = useState('view')
   const [activeNavItem, setActiveNavItem] = useState('garden')
   const [activeTheme, setActiveTheme] = useState('morning')
-  const [toastMessage, setToastMessage] = useState('记录系统已连接到本地花园。')
+  const [toastMessage, setToastMessage] = useState('记录系统已经连接到本地花园。')
+
+  const filteredRecords = filterRecords(records, filters)
+  const recentRecords = sortRecords(records, 'newest').slice(0, 3)
+  const tagCounts = getTagCounts(records)
+  const filterSummary = getFilterSummary({
+    totalCount: records.length,
+    filteredCount: filteredRecords.length,
+    hasActiveFilters,
+  })
 
   function showToast(message) {
     setToastMessage(message)
@@ -96,27 +114,42 @@ function App() {
 
       <main className="app-main">
         <section className="daily-grid" aria-label="今日情绪记录">
-          <TodayStatusCard record={records[0]} />
+          <TodayStatusCard record={recentRecords[0]} />
           <RecordForm tags={mockTags.slice(0, 5)} onAddRecord={handleAddRecord} />
-          <RecentRecords records={records.slice(0, 3)} onViewRecord={handleViewRecord} />
+          <RecentRecords records={recentRecords} onViewRecord={handleViewRecord} />
         </section>
 
         <section className="garden-workspace" aria-label="花园工作区">
           <div className="workspace-main">
             <GardenView
+              hasActiveFilters={hasActiveFilters}
               onDeleteRecord={handleDeleteRecord}
               onEditRecord={handleEditRecord}
+              onResetFilters={resetFilters}
               onToggleFavorite={handleToggleFavorite}
               onViewRecord={handleViewRecord}
-              records={records}
+              records={filteredRecords}
               selectedRecordId={selectedRecord?.id}
+              totalCount={records.length}
             />
             <CalendarView days={mockCalendarDays} />
           </div>
 
           <aside className="workspace-sidebar" aria-label="筛选和偏好">
-            <FilterPanel />
-            <TagCloud tags={mockTags} />
+            <FilterPanel
+              filteredCount={filteredRecords.length}
+              filters={filters}
+              hasActiveFilters={hasActiveFilters}
+              onFilterChange={setFilter}
+              onResetFilters={resetFilters}
+              summary={filterSummary}
+              totalCount={records.length}
+            />
+            <TagCloud
+              onSelectTag={toggleTag}
+              selectedTag={filters.selectedTag}
+              tags={tagCounts}
+            />
             <ThemeSwitcher activeTheme={activeTheme} onThemeChange={setActiveTheme} />
           </aside>
         </section>

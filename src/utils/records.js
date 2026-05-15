@@ -346,3 +346,152 @@ export function sortRecordsByDate(records = []) {
     return new Date(second.createdAt || 0) - new Date(first.createdAt || 0)
   })
 }
+
+function getRecordTimestamp(record) {
+  const createdAt = Number(record?.createdAt)
+
+  if (Number.isFinite(createdAt)) {
+    return createdAt
+  }
+
+  const parsedDate = Date.parse(record?.date)
+  return Number.isFinite(parsedDate) ? parsedDate : 0
+}
+
+function normalizeSearchText(value) {
+  return String(value || '').trim().toLowerCase()
+}
+
+function matchesSearchQuery(record, searchQuery) {
+  const query = normalizeSearchText(searchQuery)
+
+  if (!query) {
+    return true
+  }
+
+  const emotionMeta = getEmotionMeta(record.emotion || record.mood)
+  const searchableText = [
+    record.note,
+    record.detailNote,
+    record.mood,
+    record.emotion,
+    emotionMeta.label,
+    record.flowerQuote,
+    ...normalizeTags(record.tags),
+  ]
+    .map(normalizeSearchText)
+    .join(' ')
+
+  return searchableText.includes(query)
+}
+
+function matchesIntensity(record, selectedIntensity) {
+  if (!selectedIntensity || selectedIntensity === 'all') {
+    return true
+  }
+
+  const intensity = normalizeIntensity(record.intensity)
+
+  if (selectedIntensity === 'low') {
+    return intensity <= 2
+  }
+
+  if (selectedIntensity === 'medium') {
+    return intensity === 3
+  }
+
+  if (selectedIntensity === 'high') {
+    return intensity >= 4
+  }
+
+  return true
+}
+
+export function sortRecords(records = [], sortOrder = 'newest') {
+  const direction = sortOrder === 'oldest' ? 1 : -1
+
+  return [...normalizeRecords(records)].sort((first, second) => {
+    return (getRecordTimestamp(first) - getRecordTimestamp(second)) * direction
+  })
+}
+
+export function filterRecords(records = [], filters = {}) {
+  const normalizedRecords = normalizeRecords(records)
+  const {
+    selectedEmotion = 'all',
+    searchQuery = '',
+    selectedTag = '',
+    favoriteOnly = false,
+    selectedIntensity = 'all',
+    sortOrder = 'newest',
+  } = filters
+
+  const filteredRecords = normalizedRecords.filter((record) => {
+    const emotion = normalizeEmotion(record.emotion || record.mood)
+    const tags = normalizeTags(record.tags)
+
+    if (selectedEmotion !== 'all' && emotion !== selectedEmotion) {
+      return false
+    }
+
+    if (selectedTag && !tags.includes(selectedTag)) {
+      return false
+    }
+
+    if (favoriteOnly && record.isFavorite !== true) {
+      return false
+    }
+
+    if (!matchesIntensity(record, selectedIntensity)) {
+      return false
+    }
+
+    return matchesSearchQuery(record, searchQuery)
+  })
+
+  return sortRecords(filteredRecords, sortOrder)
+}
+
+export function getTagCounts(records = []) {
+  const tagCounts = normalizeRecords(records).reduce((counts, record) => {
+    normalizeTags(record.tags).forEach((tag) => {
+      counts.set(tag, (counts.get(tag) || 0) + 1)
+    })
+
+    return counts
+  }, new Map())
+
+  return [...tagCounts.entries()]
+    .map(([label, count]) => ({
+      id: `tag-${encodeURIComponent(label)}`,
+      label,
+      count,
+    }))
+    .sort((first, second) => {
+      if (second.count !== first.count) {
+        return second.count - first.count
+      }
+
+      return first.label.localeCompare(second.label, 'zh-CN')
+    })
+}
+
+export function getFilterSummary({
+  totalCount = 0,
+  filteredCount = 0,
+  hasActiveFilters = false,
+} = {}) {
+  if (totalCount === 0) {
+    return '还没有记录'
+  }
+
+  if (hasActiveFilters && filteredCount === 0) {
+    return `没有符合条件的花 · 共 ${totalCount} 条`
+  }
+
+  if (hasActiveFilters) {
+    return `当前显示 ${filteredCount} / ${totalCount} 条`
+  }
+
+  return `全部 ${totalCount} 条记录`
+}

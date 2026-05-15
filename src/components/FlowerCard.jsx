@@ -22,14 +22,25 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
           <small>
             {view.date} · {view.emotionLabel}
           </small>
-          <em>{view.stage}</em>
+          <span className="flower-card-meta">
+            <em>{view.stage}</em>
+            <em>强度 {view.intensityText}</em>
+            {view.isFavorite ? <em>已收藏</em> : null}
+          </span>
           <span className="flower-note">{view.note}</span>
+          {view.tags.length > 0 ? (
+            <span className="flower-card-tags">
+              {view.tags.slice(0, 4).map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </span>
+          ) : null}
         </span>
       </button>
 
       <div className="flower-card-actions" aria-label="记录操作">
         <button type="button" onClick={() => onToggleFavorite(record.id)}>
-          {view.isFavorite ? '已收藏' : '收藏'}
+          {view.isFavorite ? '取消收藏' : '收藏'}
         </button>
         <button type="button" onClick={() => onView(record)}>
           详情
