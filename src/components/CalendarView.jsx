@@ -1,5 +1,13 @@
+import emptyCalendarImage from '../assets/ui/empty-states/empty-calendar-no-record.png'
+import actionCalendarIcon from '../assets/ui/icons/action-calendar.png'
+import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
+import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
+import calendarFlowerDotIcon from '../assets/ui/icons/calendar-flower-dot.png'
+import calendarSelectedMarkerIcon from '../assets/ui/icons/calendar-selected-marker.png'
+import calendarTodayFlowerIcon from '../assets/ui/icons/calendar-today-flower.png'
 import { formatDisplayDate } from '../utils/dates.js'
 import { getRecordView } from '../utils/records.js'
+import { getFlowerAsset } from '../utils/uiAssets.js'
 
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 
@@ -20,7 +28,13 @@ function CalendarRecordCard({ record, onViewRecord, onToggleFavorite, onDeleteRe
     <article className="calendar-record-card">
       <button className="calendar-record-main" type="button" onClick={() => onViewRecord(record)}>
         <strong>
-          {view.moodIcon} {view.emotionLabel}
+          <img
+            alt=""
+            aria-hidden="true"
+            className="mood-icon mood-icon--recent mood-inline-icon"
+            src={getFlowerAsset(record)}
+          />
+          {view.emotionLabel}
         </strong>
         <span>
           {view.time || '当天'} · 强度 {view.intensityText}
@@ -33,6 +47,12 @@ function CalendarRecordCard({ record, onViewRecord, onToggleFavorite, onDeleteRe
           详情
         </button>
         <button type="button" onClick={() => onToggleFavorite(record.id)}>
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-icon ui-icon--sm"
+            src={view.isFavorite ? starFilledIcon : starEmptyIcon}
+          />
           {view.isFavorite ? '取消收藏' : '收藏'}
         </button>
         <button className="danger-action" type="button" onClick={() => onDeleteRecord(record.id)}>
@@ -61,7 +81,10 @@ function CalendarView({
       <div className="section-heading calendar-heading">
         <div>
           <p className="eyebrow">Calendar</p>
-          <h2>{monthLabel}</h2>
+          <h2 className="heading-with-icon">
+            <img alt="" aria-hidden="true" className="card-icon card-icon--sm" src={actionCalendarIcon} />
+            {monthLabel}
+          </h2>
         </div>
         <div className="calendar-controls" aria-label="日历月份切换">
           <button type="button" onClick={onPrevMonth}>
@@ -100,15 +123,30 @@ function CalendarView({
               onClick={() => onSelectDate(day.dateKey)}
               type="button"
             >
+              {day.isToday ? (
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  className="calendar-day-marker calendar-today-marker"
+                  src={calendarTodayFlowerIcon}
+                />
+              ) : null}
+              {day.isSelected ? (
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  className="calendar-day-marker calendar-selected-marker"
+                  src={calendarSelectedMarkerIcon}
+                />
+              ) : null}
               <strong>{day.dayNumber}</strong>
               {day.hasRecords ? (
                 <>
                   <span>{day.recordCount} 条记录</span>
                   <span className="calendar-mood-icons" aria-label="当天情绪">
-                    {day.records.slice(0, 3).map((record) => {
-                      const view = getRecordView(record)
-                      return <i key={record.id}>{view.moodIcon}</i>
-                    })}
+                    {day.records.slice(0, 3).map((record) => (
+                      <img alt="" aria-hidden="true" key={record.id} src={calendarFlowerDotIcon} />
+                    ))}
                   </span>
                 </>
               ) : (
@@ -127,6 +165,12 @@ function CalendarView({
 
         {selectedRecords.length === 0 ? (
           <div className="empty-state compact-empty">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="ui-illustration ui-illustration--sm empty-state-asset"
+              src={emptyCalendarImage}
+            />
             <strong>这一天还没有记录</strong>
             <p>可以回到记录区补上一句，也可以让这一天安静地留白。</p>
           </div>

@@ -35,6 +35,44 @@ Codex 在实现时必须遵守以下原则：
 
 本次 UI 落地必须以以下 9 张参考图为视觉依据。
 
+### UI 参考图路径与验收标准
+
+后续所有 UI 实现和验收必须使用项目内图片目录：
+
+```text
+pic/ui-reference/
+```
+
+具体文件如下：
+
+```text
+pic/ui-reference/01-final-visual-direction.png
+pic/ui-reference/02-component-style-board.png
+pic/ui-reference/03-empty-state-system.png
+pic/ui-reference/04-emotion-icon-system.png
+pic/ui-reference/05-mobile-record-page.png
+pic/ui-reference/06-mobile-garden-page.png
+pic/ui-reference/07-mobile-review-page.png
+pic/ui-reference/08-mobile-data-page.png
+pic/ui-reference/09-mobile-detail-modal.png
+```
+
+这些图片不是“可选参考”，而是后续 UI 实现和验收的视觉标准。Codex 必须按这些图进行对照实现和验收，不允许自行重新设计 UI。
+
+用途对应关系：
+
+```text
+1. 01-final-visual-direction.png：用于整体视觉方向验收。
+2. 02-component-style-board.png：是 DX.2 基础组件视觉验收主依据。
+3. 03-empty-state-system.png：用于空状态验收。
+4. 04-emotion-icon-system.png：用于情绪图标、底部导航图标、小花强度、星星收藏验收。
+5. 05-mobile-record-page.png：用于移动端记录页验收。
+6. 06-mobile-garden-page.png：用于移动端花园页验收。
+7. 07-mobile-review-page.png：用于移动端回顾页验收。
+8. 08-mobile-data-page.png：用于移动端数据页验收。
+9. 09-mobile-detail-modal.png：用于详情弹窗、bottom sheet、删除确认弹窗验收。
+```
+
 ### 01 最终视觉方向
 
 用途：

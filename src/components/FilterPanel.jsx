@@ -1,5 +1,27 @@
 import { useState } from 'react'
+import chevronDownIcon from '../assets/ui/icons/chevron-down.png'
+import chevronUpIcon from '../assets/ui/icons/chevron-up.png'
+import filterIcon from '../assets/ui/icons/action-filter.png'
+import resetIcon from '../assets/ui/icons/action-reset.png'
+import searchIcon from '../assets/ui/icons/action-search.png'
+import sortIcon from '../assets/ui/icons/action-sort.png'
+import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
+import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
+import tagIcon from '../assets/ui/icons/action-tag.png'
+import moodAnxiousIcon from '../assets/ui/icons/mood-anxious.png'
+import moodCalmIcon from '../assets/ui/icons/mood-calm.png'
+import moodExcitedIcon from '../assets/ui/icons/mood-excited.png'
+import moodHappyIcon from '../assets/ui/icons/mood-happy.png'
+import moodTiredIcon from '../assets/ui/icons/mood-tired.png'
 import { EMOTION_OPTIONS } from '../utils/records.js'
+
+const emotionIcons = {
+  happy: moodHappyIcon,
+  calm: moodCalmIcon,
+  anxious: moodAnxiousIcon,
+  tired: moodTiredIcon,
+  excited: moodExcitedIcon,
+}
 
 const INTENSITY_OPTIONS = [
   { value: 'all', label: '全部' },
@@ -47,7 +69,13 @@ function FilterPanel({
           onClick={() => setIsMobileFilterOpen((isOpen) => !isOpen)}
           type="button"
         >
-          {isMobileFilterOpen ? '收起' : '展开'}
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-icon ui-icon--sm"
+            src={isMobileFilterOpen ? chevronUpIcon : chevronDownIcon}
+          />
+          <span>{isMobileFilterOpen ? '收起' : '展开'}</span>
         </button>
       </div>
 
@@ -62,6 +90,7 @@ function FilterPanel({
           onClick={onResetFilters}
           type="button"
         >
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={resetIcon} />
           重置筛选
         </button>
       ) : null}
@@ -71,7 +100,10 @@ function FilterPanel({
         id="garden-filter-body"
       >
         <label className="filter-search">
-          <span>关键词搜索</span>
+          <span className="field-label-row">
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={searchIcon} />
+            关键词搜索
+          </span>
           <input
             onChange={(event) => onFilterChange('searchQuery', event.target.value)}
             placeholder="搜索记录、备注或标签"
@@ -81,7 +113,10 @@ function FilterPanel({
         </label>
 
         <div className="filter-group">
-          <span>情绪</span>
+          <span className="field-label-row">
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={filterIcon} />
+            情绪
+          </span>
           <div className="segmented-control flexible-control" aria-label="情绪筛选">
             <button
               className={safeFilters.selectedEmotion === 'all' ? 'is-active' : ''}
@@ -95,8 +130,14 @@ function FilterPanel({
                 className={safeFilters.selectedEmotion === emotion.key ? 'is-active' : ''}
                 key={emotion.key}
                 onClick={() => onFilterChange('selectedEmotion', emotion.key)}
-                type="button"
-              >
+              type="button"
+            >
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  className="mood-icon mood-icon--chip"
+                  src={emotionIcons[emotion.key]}
+                />
                 {emotion.label}
               </button>
             ))}
@@ -104,7 +145,10 @@ function FilterPanel({
         </div>
 
         <div className="filter-group">
-          <span>排序</span>
+          <span className="field-label-row">
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={sortIcon} />
+            排序
+          </span>
           <div className="segmented-control two-column-control" aria-label="排序方式">
             {SORT_OPTIONS.map((option) => (
               <button
@@ -120,7 +164,10 @@ function FilterPanel({
         </div>
 
         <div className="filter-group">
-          <span>强度</span>
+          <span className="field-label-row">
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={tagIcon} />
+            强度
+          </span>
           <div className="segmented-control flexible-control" aria-label="强度筛选">
             {INTENSITY_OPTIONS.map((option) => (
               <button
@@ -141,6 +188,12 @@ function FilterPanel({
           onClick={() => onFilterChange('favoriteOnly', !safeFilters.favoriteOnly)}
           type="button"
         >
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-icon ui-icon--sm"
+            src={safeFilters.favoriteOnly ? starFilledIcon : starEmptyIcon}
+          />
           只看收藏
         </button>
 
@@ -150,6 +203,7 @@ function FilterPanel({
           onClick={onResetFilters}
           type="button"
         >
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={resetIcon} />
           重置筛选
         </button>
       </div>

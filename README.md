@@ -16,6 +16,12 @@ V3.1-DX.1 根据设计系统文档落地底层设计 token 与基础样式：三
 
 V3.1-DX.2 继续按 UI 实现规范统一原子组件和基础 UI：按钮、表单、chip、基础卡片、Toast 和 EmptyState 视觉更一致，仍未调整页面结构或业务逻辑。
 
+V3.1-DX.2-R 对 DX.2 基础 UI 做返工，要求以项目内 UI 参考图和 `src/assets/ui/` 正式素材作为视觉验收标准，重点校准按钮、表单、chip、card、Toast、EmptyState 和 Modal / Dialog 基础视觉。
+
+V3.1-DX.2-R.1-B 基于裁剪后的正式 PNG 素材重新调整图标尺寸系统，让情绪、花卡、数据、分析、Toast、空状态和移动端导航里的图标更清楚，同时保持页面结构和业务逻辑不变。
+
+V3.1-DX.2-R.1-B.2 修复回顾区、日历和收藏回顾的素材映射：补齐统一 emotion asset map，校准移动端日历小标记尺寸，并让本周 / 本月回顾使用正式 review 素材。
+
 ## 线上访问
 
 GitHub Pages 地址：
@@ -42,6 +48,9 @@ https://hellplus.github.io/mood-garden-v3/
 - V3.1-D UI 视觉抛光与交互一致性优化
 - V3.1-DX.1 设计 token 与基础样式落地，补充主题、字体、间距、圆角、阴影、focus 和 reduced motion 基础变量
 - V3.1-DX.2 原子组件和基础 UI 统一，覆盖按钮、表单、chip、card、Toast 和 EmptyState 基础样式
+- V3.1-DX.2-R 基础 UI 视觉返工，接入正式 UI 素材并按参考图校准基础组件视觉
+- V3.1-DX.2-R.1-B 裁剪后图标尺寸系统修复，统一正式素材显示尺寸和基础卡片标题图标融合规则
+- V3.1-DX.2-R.1-B.2 回顾区、日历与收藏回顾素材映射修复，统一情绪素材映射并校准移动端日历小标记
 
 ## 数据存储
 

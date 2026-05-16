@@ -1,3 +1,13 @@
+import themeCozyIcon from '../assets/ui/icons/theme-cozy.png'
+import themeDarkIcon from '../assets/ui/icons/theme-dark.png'
+import themeLightIcon from '../assets/ui/icons/theme-light.png'
+
+const themeIcons = {
+  light: themeLightIcon,
+  dark: themeDarkIcon,
+  cozy: themeCozyIcon,
+}
+
 function ThemeSwitcher({
   activeTheme,
   themes = [],
@@ -25,7 +35,12 @@ function ThemeSwitcher({
             type="button"
             onClick={() => onThemeChange(theme.id)}
           >
-            <span className={`swatch-dot dot-${theme.id}`} aria-hidden="true"></span>
+            <img
+              alt=""
+              aria-hidden="true"
+              className="theme-icon ui-icon--xl"
+              src={themeIcons[theme.id] || themeLightIcon}
+            />
             <span>
               <strong>{theme.label}</strong>
               <small>{theme.description}</small>

@@ -1,8 +1,27 @@
-function InsightCard({ insight }) {
+import emptyAnalyticsImage from '../assets/ui/empty-states/empty-analytics-insufficient.png'
+import analyticsFavoriteIcon from '../assets/ui/icons/analytics-favorite.png'
+import analyticsIntensityIcon from '../assets/ui/icons/analytics-intensity.png'
+import analyticsMonthIcon from '../assets/ui/icons/analytics-month.png'
+import analyticsOverviewIcon from '../assets/ui/icons/analytics-overview.png'
+import analyticsStreakIcon from '../assets/ui/icons/analytics-streak.png'
+import analyticsTagsIcon from '../assets/ui/icons/analytics-tags.png'
+import analyticsTodayIcon from '../assets/ui/icons/analytics-today.png'
+import analyticsTrendIcon from '../assets/ui/icons/analytics-trend.png'
+import analyticsWeekIcon from '../assets/ui/icons/analytics-week.png'
+import reviewMonthIcon from '../assets/ui/icons/review-month.png'
+import reviewWeekIcon from '../assets/ui/icons/review-week.png'
+import { getMoodIconAsset } from '../utils/uiAssets.js'
+
+function InsightCard({ insight, icon }) {
   return (
     <article className="analytics-insight-card">
-      <span>{insight.title}</span>
-      <strong>{insight.count} 条</strong>
+      <div className="card-header card-header--with-icon analytics-card-header">
+        <img alt="" aria-hidden="true" className="analytics-icon analytics-icon--panel" src={icon} />
+        <div className="card-title-group">
+          <span className="card-subtitle">{insight.title}</span>
+          <strong className="analytics-count">{insight.count} 条</strong>
+        </div>
+      </div>
       <p>{insight.text}</p>
     </article>
   )
@@ -21,6 +40,12 @@ function AnalyticsDashboard({ analytics }) {
         </div>
 
         <div className="empty-state analytics-empty">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-illustration ui-illustration--md empty-state-asset"
+            src={emptyAnalyticsImage}
+          />
           <strong>记录还不够形成回顾</strong>
           <p>写下第一条心情后，这里会慢慢出现总览、趋势和温柔回顾。</p>
         </div>
@@ -41,6 +66,12 @@ function AnalyticsDashboard({ analytics }) {
       <div className="analytics-summary">
         {analytics.summaryCards.map((card) => (
           <article className="analytics-tile" key={card.label}>
+            <img
+              alt=""
+              aria-hidden="true"
+              className="analytics-icon analytics-icon--tile"
+              src={analyticsOverviewIcon}
+            />
             <span>{card.label}</span>
             <strong>{card.value}</strong>
             <small>{card.hint}</small>
@@ -49,16 +80,24 @@ function AnalyticsDashboard({ analytics }) {
       </div>
 
       <div className="analytics-insights">
-        <InsightCard insight={analytics.todayInsight} />
-        <InsightCard insight={analytics.weekInsight} />
-        <InsightCard insight={analytics.monthInsight} />
+        <InsightCard icon={analyticsTodayIcon} insight={analytics.todayInsight} />
+        <InsightCard icon={analyticsWeekIcon} insight={analytics.weekInsight} />
+        <InsightCard icon={analyticsMonthIcon} insight={analytics.monthInsight} />
       </div>
 
       <div className="analytics-content">
         <section className="analytics-panel">
           <div className="panel-heading">
             <p className="eyebrow">Mood Mix</p>
-            <h3>情绪分布</h3>
+            <h3 className="heading-with-icon">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="analytics-icon analytics-icon--heading"
+                src={analyticsOverviewIcon}
+              />
+              情绪分布
+            </h3>
           </div>
 
           {analytics.moodDistribution.length === 0 ? (
@@ -81,7 +120,15 @@ function AnalyticsDashboard({ analytics }) {
         <section className="analytics-panel">
           <div className="panel-heading">
             <p className="eyebrow">7 Days</p>
-            <h3>最近 7 天</h3>
+            <h3 className="heading-with-icon">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="analytics-icon analytics-icon--heading"
+                src={analyticsTrendIcon}
+              />
+              最近 7 天
+            </h3>
           </div>
 
           <div className="weekly-chart" aria-label="最近 7 天记录统计">
@@ -98,7 +145,15 @@ function AnalyticsDashboard({ analytics }) {
       <section className="analytics-panel">
         <div className="panel-heading">
           <p className="eyebrow">30 Days</p>
-          <h3>最近 30 天趋势</h3>
+          <h3 className="heading-with-icon">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="analytics-icon analytics-icon--heading"
+              src={analyticsTrendIcon}
+            />
+            最近 30 天趋势
+          </h3>
         </div>
 
         <div className="trend-strip" aria-label="最近 30 天记录趋势">
@@ -117,7 +172,15 @@ function AnalyticsDashboard({ analytics }) {
         <section className="analytics-panel">
           <div className="panel-heading">
             <p className="eyebrow">Intensity</p>
-            <h3>心情强度</h3>
+            <h3 className="heading-with-icon">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="analytics-icon analytics-icon--wide"
+                src={analyticsIntensityIcon}
+              />
+              心情强度
+            </h3>
           </div>
 
           <div className="stat-list">
@@ -133,7 +196,15 @@ function AnalyticsDashboard({ analytics }) {
         <section className="analytics-panel">
           <div className="panel-heading">
             <p className="eyebrow">Tags</p>
-            <h3>标签 Top 5</h3>
+            <h3 className="heading-with-icon">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="analytics-icon analytics-icon--heading"
+                src={analyticsTagsIcon}
+              />
+              标签 Top 5
+            </h3>
           </div>
 
           {analytics.topTags.length === 0 ? (
@@ -156,7 +227,15 @@ function AnalyticsDashboard({ analytics }) {
         <section className="analytics-panel">
           <div className="panel-heading">
             <p className="eyebrow">Favorites</p>
-            <h3>收藏回顾</h3>
+            <h3 className="heading-with-icon">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="analytics-icon analytics-icon--heading"
+                src={analyticsFavoriteIcon}
+              />
+              收藏回顾
+            </h3>
           </div>
 
           <p className="soft-note">共收藏 {analytics.favoriteSummary.count} 条记录。</p>
@@ -165,7 +244,13 @@ function AnalyticsDashboard({ analytics }) {
               {analytics.favoriteSummary.recent.map((record) => (
                 <article key={record.id}>
                   <strong>
-                    {record.moodIcon} {record.emotionLabel}
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      className="mood-icon mood-icon--recent"
+                      src={getMoodIconAsset(record)}
+                    />
+                    {record.emotionLabel}
                   </strong>
                   <span>{record.date}</span>
                   <p>{record.note}</p>
@@ -178,16 +263,40 @@ function AnalyticsDashboard({ analytics }) {
 
       <div className="analytics-review">
         <article>
-          <span>连续记录</span>
+          <div className="card-header card-header--with-icon analytics-card-header">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="analytics-icon analytics-icon--heading"
+              src={analyticsStreakIcon}
+            />
+            <span>连续记录</span>
+          </div>
           <strong>{analytics.streakDays} 天</strong>
           <p>从今天向前计算，记录只表示留下痕迹，不代表状态好坏。</p>
         </article>
         <article>
-          <span>本周回顾</span>
+          <div className="card-header card-header--with-icon analytics-card-header">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="review-icon review-icon--wide"
+              src={reviewWeekIcon}
+            />
+            <span>本周回顾</span>
+          </div>
           <p>{analytics.weeklySummary}</p>
         </article>
         <article>
-          <span>本月回顾</span>
+          <div className="card-header card-header--with-icon analytics-card-header">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="review-icon review-icon--wide"
+              src={reviewMonthIcon}
+            />
+            <span>本月回顾</span>
+          </div>
           <p>{analytics.monthlySummary}</p>
         </article>
       </div>

@@ -1,5 +1,29 @@
 # 更新日志
 
+## V3.1-DX.2-R.1-B.2
+
+- 新增轻量 UI 素材映射文件，统一开心、平静、焦虑、疲惫、兴奋到正式 mood / flower 素材的映射。
+- 修复收藏回顾中情绪图标可能与记录 emotion 不对应的问题，避免继续依赖旧的 moodIcon / emoji 展示。
+- 将本周回顾和本月回顾接入 `review-week.png` 与 `review-month.png`，并优化回顾区图标与标题的组合样式。
+- 针对移动端 CalendarView 缩小日期格内的 `calendar-*` 小标记，减少多标记挤压和溢出风险。
+- 未新增业务功能，未改变 records localStorage 主结构，也未修改 CRUD、筛选、日历计算、分析计算或导入导出逻辑。
+
+## V3.1-DX.2-R.1-B
+
+- 基于裁剪后的 `src/assets/ui/` 正式 PNG 素材，重新校准图标和插画显示尺寸，避免沿用裁剪前的过度放大规则。
+- 新增并整理 `.ui-icon--xs/sm/md/lg/xl`、`.mood-icon`、`.flower-visual`、`.ui-illustration`、`.data-icon`、`.analytics-icon`、`.toast-icon`、`.nav-icon` 等基础尺寸 class。
+- 优化 RecordForm、TodayStatusCard、RecentRecords、FlowerCard、AnalyticsDashboard、DataPanel、Toast、EmptyState、MobileBottomNav、ThemeSwitcher 和 OnboardingModal 的图标尺寸。
+- 补充基础 card header 图标融合规则，让图标与标题形成同一视觉组，减少孤立漂浮感。
+- 未新增业务功能，未改变 records localStorage 主结构，也未修改 CRUD、筛选、日历、分析或导入导出的核心逻辑。
+
+## V3.1-DX.2-R
+
+- 对 V3.1-DX.2 基础 UI 做视觉返工，明确以 `pic/ui-reference/02-component-style-board.png`、`03-empty-state-system.png`、`04-emotion-icon-system.png` 和 `09-mobile-detail-modal.png` 作为验收标准。
+- 接入 `src/assets/ui/` 中的正式素材，用于情绪 chip、花卡片、Toast、空状态、日历标记、分析卡、数据面板、主题切换和基础操作按钮。
+- 返工主按钮、次按钮、文本按钮、图标按钮和危险按钮的基础视觉，使其更接近柔和绿色胶囊按钮、浅底描边按钮和弱危险按钮。
+- 返工 input、textarea、chip、segmented control、基础 card、Toast、EmptyState 和 Modal / Dialog 外壳的基础样式。
+- 保留 focus-visible 与 prefers-reduced-motion，不新增业务功能，不改变 records localStorage 主结构，也不修改 CRUD、筛选、日历、分析或导入导出的核心逻辑。
+
 ## V3.1-DX.2
 
 - 按 `UI_IMPLEMENTATION_SPEC_V3_1.md` 和 02 UI 组件样式板统一原子组件基础视觉。

@@ -1,7 +1,9 @@
 import { getRecordView } from '../utils/records.js'
+import { getFlowerAsset } from '../utils/uiAssets.js'
 
 function TodayStatusCard({ record }) {
   const view = record ? getRecordView(record) : null
+  const flowerImage = getFlowerAsset(record)
 
   return (
     <article className="surface-panel today-status">
@@ -10,8 +12,8 @@ function TodayStatusCard({ record }) {
         <h2>今日状态</h2>
       </div>
 
-      <div className="mood-orbit" aria-hidden="true">
-        <span>{view?.moodIcon || '🌱'}</span>
+      <div className="mood-orbit flower-visual flower-visual--today" aria-hidden="true">
+        <img alt="" className="flower-asset" src={flowerImage} />
       </div>
 
       {view ? (

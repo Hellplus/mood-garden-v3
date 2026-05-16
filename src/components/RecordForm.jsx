@@ -1,5 +1,22 @@
 import { useState } from 'react'
+import chevronDownIcon from '../assets/ui/icons/chevron-down.png'
+import chevronUpIcon from '../assets/ui/icons/chevron-up.png'
+import moodAnxiousIcon from '../assets/ui/icons/mood-anxious.png'
+import moodCalmIcon from '../assets/ui/icons/mood-calm.png'
+import moodExcitedIcon from '../assets/ui/icons/mood-excited.png'
+import moodHappyIcon from '../assets/ui/icons/mood-happy.png'
+import moodTiredIcon from '../assets/ui/icons/mood-tired.png'
+import strengthFlowerEmptyIcon from '../assets/ui/strength/strength-flower-empty.png'
+import strengthFlowerFilledIcon from '../assets/ui/strength/strength-flower-filled.png'
 import { EMOTION_OPTIONS, parseTagsInput } from '../utils/records.js'
+
+const emotionIcons = {
+  happy: moodHappyIcon,
+  calm: moodCalmIcon,
+  anxious: moodAnxiousIcon,
+  tired: moodTiredIcon,
+  excited: moodExcitedIcon,
+}
 
 function RecordForm({ tags, onAddRecord }) {
   const [emotion, setEmotion] = useState('calm')
@@ -65,8 +82,13 @@ function RecordForm({ tags, onAddRecord }) {
               onClick={() => setEmotion(option.key)}
               type="button"
             >
-              <span aria-hidden="true">{option.moodIcon}</span>
-              {option.label}
+              <img
+                alt=""
+                aria-hidden="true"
+                className="mood-icon mood-icon--picker"
+                src={emotionIcons[option.key]}
+              />
+              <span>{option.label}</span>
             </button>
           ))}
         </div>
@@ -89,7 +111,15 @@ function RecordForm({ tags, onAddRecord }) {
           onClick={() => setShowMoreOptions((isOpen) => !isOpen)}
           type="button"
         >
-          <span>{showMoreOptions ? '收起更多细节' : '添加更多细节（可选）'}</span>
+          <span className="record-more-toggle-title">
+            <span>{showMoreOptions ? '收起更多细节' : '添加更多细节（可选）'}</span>
+            <img
+              alt=""
+              aria-hidden="true"
+              className="ui-icon ui-icon--sm"
+              src={showMoreOptions ? chevronUpIcon : chevronDownIcon}
+            />
+          </span>
           <small>
             {showMoreOptions
               ? '强度和标签会随这条记录一起保存。'
@@ -100,7 +130,19 @@ function RecordForm({ tags, onAddRecord }) {
         {showMoreOptions ? (
           <div className="record-more-options" id="record-more-options">
             <label className="form-field">
-              情绪强度：{intensity} / 5
+              <span className="field-label-row">
+                情绪强度：{intensity} / 5
+                <span className="strength-preview" aria-hidden="true">
+                  {[1, 2, 3, 4, 5].map((level) => (
+                    <img
+                      alt=""
+                      className="ui-icon ui-icon--sm strength-flower-icon"
+                      key={level}
+                      src={level <= intensity ? strengthFlowerFilledIcon : strengthFlowerEmptyIcon}
+                    />
+                  ))}
+                </span>
+              </span>
               <input
                 max="5"
                 min="1"

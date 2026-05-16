@@ -2014,3 +2014,952 @@ select:focus {
   font-size: var(--font-size-body-sm);
   font-weight: 700;
 }
+
+/* V3.1-DX.2-R visual rework: align atomic UI with approved component board. */
+.ui-icon,
+.inline-icon,
+.chip-icon,
+.heading-icon,
+.card-icon,
+.toast-icon,
+.theme-icon,
+.mobile-nav-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.ui-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.inline-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}
+
+.chip-icon,
+.heading-icon,
+.card-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.emotion-chip-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.field-label-row,
+.heading-with-icon,
+.record-more-toggle-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.primary-action,
+.secondary-action,
+.text-action,
+.danger-action,
+.filter-collapse-toggle,
+.filter-toggle,
+.filter-reset,
+.calendar-controls button,
+.calendar-record-actions button,
+.flower-card-actions button,
+.detail-actions button,
+.toast-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.primary-action {
+  min-height: 46px;
+  border-radius: var(--radius-pill);
+  padding-inline: 20px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-primary) 90%, #ffffff),
+    var(--color-primary)
+  );
+  letter-spacing: 0;
+}
+
+.secondary-action,
+.calendar-controls button,
+.calendar-record-actions button,
+.flower-card-actions button,
+.detail-actions button {
+  border-color: color-mix(in srgb, var(--color-primary) 48%, var(--color-border));
+  background: color-mix(in srgb, var(--color-card) 88%, var(--color-primary-soft));
+  color: var(--color-primary-hover);
+}
+
+.danger-action,
+.flower-card-actions .danger-action,
+.detail-actions .danger-action,
+.calendar-record-actions .danger-action,
+.data-actions .danger-action {
+  border-color: color-mix(in srgb, var(--color-danger) 32%, var(--color-border));
+  background: color-mix(in srgb, var(--color-danger-soft) 78%, var(--color-card));
+  color: color-mix(in srgb, var(--color-danger) 74%, var(--color-text));
+}
+
+.icon-button,
+.toast-close {
+  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-card) 82%, var(--color-bg-soft));
+  box-shadow: 0 8px 18px rgba(79, 67, 48, 0.08);
+}
+
+.form-field input[type='text'],
+.detail-form input[type='text'],
+.filter-search input,
+.form-field textarea,
+.detail-form textarea,
+select {
+  min-height: 46px;
+  border-color: color-mix(in srgb, var(--color-border) 84%, var(--color-card));
+  border-radius: var(--radius-input);
+  background: color-mix(in srgb, var(--color-card) 92%, var(--color-bg-soft));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 4px 14px rgba(79, 67, 48, 0.04);
+}
+
+.form-field textarea,
+.detail-form textarea {
+  min-height: 104px;
+}
+
+.choice-chip,
+.tag-chip,
+.tag-cloud-item,
+.filter-toggle,
+.segmented-control button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-color: color-mix(in srgb, var(--color-border) 86%, var(--color-card));
+  background: color-mix(in srgb, var(--color-card) 80%, var(--color-bg-soft));
+}
+
+.choice-chip {
+  min-height: 56px;
+  flex-direction: column;
+  padding: 8px 12px;
+}
+
+.tag-chip,
+.tag-cloud-item {
+  min-height: 34px;
+  background: color-mix(in srgb, var(--color-primary-soft) 48%, var(--color-card));
+}
+
+.choice-chip.is-selected,
+.tag-chip.is-selected,
+.tag-cloud-item.is-active,
+.filter-toggle.is-active,
+.segmented-control button.is-active {
+  border-color: color-mix(in srgb, var(--color-primary) 58%, var(--color-border));
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+}
+
+.segmented-control button {
+  min-height: 38px;
+  padding: 8px 11px;
+}
+
+.record-more-toggle {
+  border-style: dashed;
+  border-radius: var(--radius-card-sm);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), transparent),
+    color-mix(in srgb, var(--color-primary-soft) 42%, var(--color-card));
+}
+
+.strength-preview {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.strength-preview img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.surface-panel,
+.metric-tile,
+.flower-card,
+.calendar-day,
+.analytics-tile,
+.analytics-insight-card,
+.analytics-panel,
+.analytics-review article,
+.calendar-record-card,
+.data-note-grid article,
+.flower-detail-panel,
+.onboarding-card {
+  border-color: color-mix(in srgb, var(--color-border) 88%, var(--color-card));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0)),
+    var(--component-card-bg);
+  box-shadow: var(--component-card-shadow);
+}
+
+.flower-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.92)),
+    var(--flower-soft);
+}
+
+.flower-card-decoration {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.flower-card-leaf {
+  right: 8px;
+  bottom: 8px;
+  width: 42px;
+  opacity: 0.72;
+}
+
+.flower-card-paper {
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  opacity: 0.46;
+}
+
+.favorite-ribbon {
+  top: 10px;
+  left: 10px;
+  width: 34px;
+}
+
+.flower-card-main,
+.flower-card-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.flower-visual {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 98px;
+  margin-bottom: 14px;
+}
+
+.flower-asset {
+  width: 78px;
+  height: 92px;
+  object-fit: contain;
+}
+
+.flower-card-copy small,
+.calendar-record-main strong,
+.record-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.flower-card-tags span,
+.detail-tags span,
+.garden-summary span,
+.section-caption {
+  border-color: color-mix(in srgb, var(--color-border) 86%, var(--color-card));
+  background: color-mix(in srgb, var(--color-card) 72%, var(--color-primary-soft));
+}
+
+.empty-state {
+  min-height: 232px;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) 86%, var(--color-card));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.66), transparent),
+    var(--empty-state-bg);
+}
+
+.empty-state::before {
+  display: none;
+  content: none;
+}
+
+.empty-state-asset {
+  width: min(128px, 46vw);
+  max-height: 112px;
+  object-fit: contain;
+}
+
+.compact-empty .empty-state-asset {
+  width: 92px;
+  max-height: 78px;
+}
+
+.toast {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-left-width: 1px;
+  padding: 12px 12px;
+}
+
+.toast-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.toast-message {
+  color: var(--color-heading);
+  font-size: var(--font-size-body-sm);
+  font-weight: 700;
+}
+
+.toast-success {
+  border-color: color-mix(in srgb, var(--color-success) 38%, var(--color-border));
+}
+
+.toast-error {
+  border-color: color-mix(in srgb, var(--color-danger) 38%, var(--color-border));
+}
+
+.toast-info {
+  border-color: color-mix(in srgb, var(--color-info) 38%, var(--color-border));
+}
+
+.flower-detail-panel,
+.onboarding-card {
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-modal);
+}
+
+.detail-hero-image {
+  display: block;
+  width: 104px;
+  max-height: 112px;
+  margin: 4px auto 12px;
+  object-fit: contain;
+}
+
+.onboarding-brand-asset {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.onboarding-steps {
+  padding-left: 0;
+  list-style: none;
+}
+
+.onboarding-steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.theme-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.theme-swatch {
+  min-height: 56px;
+}
+
+.data-actions button {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.data-actions button span,
+.data-note-grid article {
+  min-width: 0;
+}
+
+.data-note-grid article {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+}
+
+.data-note-grid article .card-icon {
+  grid-row: span 2;
+}
+
+.calendar-day {
+  position: relative;
+}
+
+.calendar-day-marker {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.calendar-selected-marker {
+  right: 24px;
+}
+
+.calendar-mood-icons img {
+  width: 12px;
+  height: 12px;
+}
+
+.analytics-tile,
+.analytics-insight-card,
+.analytics-review article {
+  align-content: start;
+}
+
+.analytics-tile .card-icon,
+.analytics-insight-card .card-icon,
+.analytics-review .card-icon {
+  margin-bottom: 4px;
+}
+
+.mobile-nav-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* V3.1-DX.2-R.1 icon readability fix: formal PNG assets have generous canvas padding. */
+.ui-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.inline-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: -6px;
+}
+
+.chip-icon,
+.heading-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.emotion-chip-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.record-form .emotion-chip-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.record-form .choice-chip {
+  min-width: 82px;
+  min-height: 86px;
+}
+
+.segmented-control .emotion-chip-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.strength-preview {
+  gap: 5px;
+}
+
+.strength-preview img {
+  width: 30px;
+  height: 30px;
+}
+
+.toast-icon {
+  width: 46px;
+  height: 46px;
+}
+
+.theme-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.theme-swatch {
+  min-height: 82px;
+  gap: 12px;
+}
+
+.mobile-nav-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.empty-state-asset {
+  width: min(184px, 58vw);
+  max-height: 164px;
+}
+
+.compact-empty .empty-state-asset {
+  width: 128px;
+  max-height: 112px;
+}
+
+.flower-visual {
+  width: 136px;
+  height: 148px;
+}
+
+.flower-asset {
+  width: 132px;
+  height: 142px;
+}
+
+.detail-hero-image {
+  width: 152px;
+  max-height: 162px;
+}
+
+.onboarding-brand-asset {
+  width: 100px;
+  height: 100px;
+}
+
+.calendar-day-marker {
+  width: 26px;
+  height: 26px;
+}
+
+.calendar-selected-marker {
+  right: 36px;
+}
+
+.calendar-mood-icons {
+  gap: 5px;
+}
+
+.calendar-mood-icons img {
+  width: 20px;
+  height: 20px;
+}
+
+.data-actions button {
+  gap: 14px;
+}
+
+.analytics-tile .card-icon,
+.analytics-insight-card .card-icon,
+.analytics-review .card-icon,
+.data-actions .card-icon,
+.data-note-grid .card-icon {
+  width: 58px;
+  height: 58px;
+}
+
+/* V3.1-DX.2-R.1-B cropped asset sizing system. */
+.ui-icon,
+.ui-icon--md,
+.mood-icon,
+.card-icon,
+.data-icon,
+.analytics-icon,
+.toast-icon,
+.nav-icon,
+.theme-icon,
+.onboarding-step-icon,
+.ui-illustration {
+  display: inline-block;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.ui-icon,
+.ui-icon--md {
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon--xs {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-icon--sm,
+.inline-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.ui-icon--lg {
+  width: 32px;
+  height: 32px;
+}
+
+.ui-icon--xl {
+  width: 40px;
+  height: 40px;
+}
+
+.mood-icon,
+.mood-icon--chip,
+.emotion-chip-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.mood-icon--picker,
+.record-form .emotion-chip-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.mood-icon--recent {
+  width: 38px;
+  height: 38px;
+}
+
+.record-form .choice-chip {
+  min-width: 84px;
+  min-height: 88px;
+  gap: 8px;
+}
+
+.segmented-control .mood-icon,
+.segmented-control .emotion-chip-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.strength-preview {
+  gap: 4px;
+}
+
+.strength-preview img,
+.strength-flower-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.flower-visual {
+  display: grid;
+  place-items: center;
+  width: 118px;
+  height: 132px;
+}
+
+.flower-visual--card {
+  width: 124px;
+  height: 138px;
+}
+
+.flower-visual--today {
+  width: 156px;
+  height: 174px;
+  margin: 18px auto;
+}
+
+.flower-asset {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flower-visual--modal,
+.detail-hero-image {
+  display: block;
+  width: 190px;
+  max-width: min(220px, 64vw);
+  max-height: 220px;
+  object-fit: contain;
+}
+
+.data-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.data-icon--note {
+  width: 44px;
+  height: 44px;
+}
+
+.analytics-icon {
+  width: 44px;
+  height: 44px;
+}
+
+.card-icon,
+.card-icon--md {
+  width: 32px;
+  height: 32px;
+}
+
+.card-icon--sm,
+.heading-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.card-icon--lg {
+  width: 44px;
+  height: 44px;
+}
+
+.card-icon--badge {
+  box-sizing: content-box;
+  padding: 8px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-primary-soft) 72%, var(--color-card));
+}
+
+.toast-icon-frame {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-card) 68%, var(--color-primary-soft));
+}
+
+.toast-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.toast-close .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-illustration,
+.empty-state-asset {
+  width: min(184px, 54vw);
+  max-height: 184px;
+  object-fit: contain;
+}
+
+.ui-illustration--sm,
+.compact-empty .empty-state-asset {
+  width: min(142px, 42vw);
+  max-height: 142px;
+}
+
+.ui-illustration--md {
+  width: min(188px, 56vw);
+  max-height: 188px;
+}
+
+.ui-illustration--lg {
+  width: min(220px, 66vw);
+  max-height: 220px;
+}
+
+.nav-icon,
+.mobile-nav-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.theme-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.theme-swatch {
+  min-height: 72px;
+  gap: 10px;
+}
+
+.onboarding-brand-asset {
+  width: 92px;
+  height: 92px;
+}
+
+.onboarding-step-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.calendar-day-marker {
+  width: 18px;
+  height: 18px;
+}
+
+.calendar-selected-marker {
+  right: 28px;
+}
+
+.calendar-mood-icons img {
+  width: 18px;
+  height: 18px;
+}
+
+.card-header,
+.card-header--with-icon,
+.card-title-group,
+.panel-heading,
+.section-heading,
+.heading-with-icon {
+  align-items: center;
+}
+
+.card-header--with-icon,
+.card-title-group,
+.heading-with-icon {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.card-title {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: var(--font-size-card-title);
+  line-height: var(--line-height-heading);
+}
+
+.card-subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+.panel-heading .heading-with-icon,
+.section-heading .heading-with-icon {
+  gap: 10px;
+}
+
+.analytics-tile,
+.analytics-insight-card,
+.data-actions button,
+.data-note-grid article,
+.toast {
+  align-items: center;
+}
+
+.analytics-tile .analytics-icon,
+.analytics-insight-card .analytics-icon,
+.analytics-review .analytics-icon,
+.data-actions .data-icon,
+.data-note-grid .data-icon {
+  margin-bottom: 0;
+}
+
+.data-note-grid article .data-icon {
+  grid-row: span 2;
+}
+
+.record-row strong,
+.favorite-list strong,
+.calendar-record-main strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* V3.1-DX.2-R.1-B.2 review, calendar and favorite asset tuning. */
+.analytics-card-header {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.analytics-card-header .card-title-group {
+  display: grid;
+  gap: 2px;
+}
+
+.analytics-count {
+  color: var(--color-heading);
+  font-size: 1.32rem;
+  line-height: 1.15;
+}
+
+.analytics-icon--tile {
+  width: 52px;
+  height: 52px;
+}
+
+.analytics-icon--panel {
+  width: 50px;
+  height: 50px;
+}
+
+.analytics-icon--heading {
+  width: 48px;
+  height: auto;
+  max-height: 44px;
+}
+
+.analytics-icon--wide,
+.review-icon--wide {
+  width: 76px;
+  height: auto;
+  max-height: 42px;
+}
+
+.review-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.analytics-insight-card {
+  align-items: start;
+}
+
+.analytics-tile {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.analytics-tile .analytics-icon {
+  grid-row: span 3;
+}
+
+.analytics-tile span,
+.analytics-tile strong,
+.analytics-tile small {
+  min-width: 0;
+}
+
+.analytics-panel .heading-with-icon {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.analytics-review article {
+  align-content: start;
+}
+
+.favorite-list .mood-icon--recent {
+  width: 34px;
+  height: 34px;
+}
+
+.calendar-mood-icons {
+  max-width: 100%;
+  overflow: hidden;
+}

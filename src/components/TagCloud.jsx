@@ -1,3 +1,6 @@
+import tagIcon from '../assets/ui/icons/action-tag.png'
+import emptyNoTagsImage from '../assets/ui/empty-states/empty-no-tags.png'
+
 function TagCloud({ tags = [], selectedTag = '', onSelectTag = () => {} }) {
   return (
     <section className="surface-panel tag-cloud">
@@ -8,6 +11,12 @@ function TagCloud({ tags = [], selectedTag = '', onSelectTag = () => {} }) {
 
       {tags.length === 0 ? (
         <div className="empty-state compact-empty">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-illustration ui-illustration--sm empty-state-asset"
+            src={emptyNoTagsImage}
+          />
           <strong>还没有标签</strong>
           <p>记录时加上标签，以后就能按它们找回相似的心情花。</p>
         </div>
@@ -23,6 +32,7 @@ function TagCloud({ tags = [], selectedTag = '', onSelectTag = () => {} }) {
               onClick={() => onSelectTag(tag.label)}
               type="button"
             >
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={tagIcon} />
               {tag.label}
               <span>{tag.count}</span>
             </button>
