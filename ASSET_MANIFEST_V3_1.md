@@ -315,6 +315,70 @@ corner-flower.svg
 7. 如果某个场景缺少正式素材，应先在验收或方案中说明缺口，不得自行重新设计新的图标风格。
 8. 接入第二批素材时不得改变业务逻辑、records localStorage 主结构、导入导出格式或核心计算逻辑。
 
+## 第三批 UI 素材清单（V3.1-DX.2-C 准备）
+
+第三批素材用于补齐基础控制、花卡片与记录页装饰、分析与回顾页视觉入口。素材分别放在 `src/assets/ui/icons/` 和 `src/assets/ui/decorations/`，后续接入时必须作为正式素材使用。
+
+### 基础控制图标
+
+| 文件 | 用途 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- |
+| `theme-light.png` | 浅色主题入口图标 | `ThemeSwitcher` | `02-component-style-board.png` |
+| `theme-dark.png` | 深色主题入口图标 | `ThemeSwitcher` | `02-component-style-board.png` |
+| `theme-cozy.png` | cozy 主题入口图标 | `ThemeSwitcher` | `02-component-style-board.png` |
+| `chevron-down.png` | 展开更多内容、折叠面板下拉状态 | `RecordForm`、`FilterPanel`、折叠区 | `02-component-style-board.png`、`05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `chevron-up.png` | 收起更多内容、折叠面板收起状态 | `RecordForm`、`FilterPanel`、折叠区 | `02-component-style-board.png`、`05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `action-more.png` | 更多操作入口 | `FlowerCard`、操作菜单、卡片操作区 | `02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `action-check.png` | 确认、保存、完成状态 | 保存按钮、确认操作、状态提示 | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
+| `action-cancel.png` | 取消、关闭编辑或取消选择 | 弹窗按钮、编辑态操作 | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
+| `action-reset.png` | 重置筛选、清除条件 | `FilterPanel` | `02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `action-sort.png` | 排序入口或排序选择 | `FilterPanel` | `02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `action-tag.png` | 标签入口、标签筛选或标签说明 | `TagCloud`、`FilterPanel`、`RecordForm` | `02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `action-clock.png` | 时间、最近记录、记录时间标识 | `RecentRecords`、`FlowerCard`、详情弹窗 | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
+| `action-calendar.png` | 日期、日历入口、日期字段标识 | `CalendarView`、`FlowerCard`、详情弹窗 | `02-component-style-board.png`、`07-mobile-review-page.png` |
+
+### 花卡片与记录页装饰
+
+| 文件 | 用途 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- |
+| `flower-card-corner-leaf.png` | 花卡片角落叶片装饰 | `FlowerCard` | `01-final-visual-direction.png`、`06-mobile-garden-page.png` |
+| `flower-card-paper-corner.png` | 花卡片纸张角标装饰 | `FlowerCard` | `01-final-visual-direction.png`、`02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `favorite-ribbon.png` | 收藏状态的轻量丝带装饰 | `FlowerCard`、收藏状态展示 | `02-component-style-board.png`、`04-emotion-icon-system.png`、`06-mobile-garden-page.png` |
+| `record-date-pin.png` | 记录日期或时间的小别针装饰 | `FlowerCard`、`RecentRecords` | `02-component-style-board.png`、`06-mobile-garden-page.png` |
+| `hero-garden-corner.png` | Hero 区域花园角落装饰 | `HeroSection` | `01-final-visual-direction.png`、`05-mobile-record-page.png` |
+| `hero-soft-cloud.png` | Hero 区域柔和云朵氛围 | `HeroSection` | `01-final-visual-direction.png`、`05-mobile-record-page.png` |
+| `hero-floating-star.png` | Hero 或空状态中的轻量星点装饰 | `HeroSection`、空状态 | `01-final-visual-direction.png`、`03-empty-state-system.png` |
+| `record-sprout.png` | 快速记录区的小芽装饰 | `RecordForm` | `02-component-style-board.png`、`05-mobile-record-page.png` |
+| `record-pencil-note.png` | 记录输入区的便签 / 铅笔装饰 | `RecordForm`、`RecentRecords` | `02-component-style-board.png`、`05-mobile-record-page.png` |
+
+### 分析与回顾页图标
+
+| 文件 | 用途 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- |
+| `analytics-overview.png` | 数据总览卡片图标 | `AnalyticsDashboard` | `02-component-style-board.png`、`07-mobile-review-page.png` |
+| `analytics-today.png` | 今日洞察图标 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `analytics-week.png` | 本周洞察图标 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `analytics-month.png` | 本月洞察图标 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `analytics-trend.png` | 趋势统计图标 | `AnalyticsDashboard` | `02-component-style-board.png`、`07-mobile-review-page.png` |
+| `analytics-tags.png` | 标签 Top 5 或标签分析图标 | `AnalyticsDashboard` | `02-component-style-board.png`、`07-mobile-review-page.png` |
+| `analytics-favorite.png` | 收藏回顾图标 | `AnalyticsDashboard` | `02-component-style-board.png`、`04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+| `analytics-streak.png` | 连续记录天数图标 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `analytics-intensity.png` | 心情强度分析图标 | `AnalyticsDashboard` | `04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+| `review-today.png` | 回顾页今日分段入口图标 | 回顾 tab、`AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `review-week.png` | 回顾页本周分段入口图标 | 回顾 tab、`AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `review-month.png` | 回顾页本月分段入口图标 | 回顾 tab、`CalendarView`、`AnalyticsDashboard` | `07-mobile-review-page.png` |
+
+### 第三批素材接入规则
+
+1. `ThemeSwitcher` 必须优先使用 `theme-light.png`、`theme-dark.png`、`theme-cozy.png` 展示主题入口。
+2. 展开 / 收起控件必须优先使用 `chevron-down.png` 和 `chevron-up.png`。
+3. 更多、确认、取消、重置、排序、标签、时间、日历操作必须优先使用对应 `action-*` 图标。
+4. `FlowerCard` 与 `RecordForm` 的轻量装饰必须优先使用 `src/assets/ui/decorations/` 中的对应素材。
+5. `AnalyticsDashboard` 和 `CalendarView` 必须优先使用 `analytics-*` 和 `review-*` 图标。
+6. 已存在正式素材时，不允许用 emoji、临时 SVG、随机 CSS 图形或浏览器默认符号替代。
+7. 如果后续组件需要图标但素材缺失，Codex 必须先报告缺失素材，并等待补充或明确授权，不能自由替代。
+8. 接入第三批素材时不得新增业务功能，不得修改 records localStorage 主结构，不得改动 CRUD、筛选、日历、分析或导入导出核心逻辑。
+
 ## 12. 必须使用 SVG 的素材
 
 以下素材必须优先使用 SVG：
@@ -337,6 +401,8 @@ Toast 状态图标
 - 更适合不同分辨率和移动端。
 
 第二批素材中已提供正式 PNG 的 `toast-*`、`data-*`、`onboarding-*`、`warning-soft.png`、`delete-confirm-flower.png` 和 `calendar-*` 文件，后续接入时应优先使用这些正式素材，不再临时改画同类 SVG。
+
+第三批素材中已提供正式 PNG 的 `theme-*`、`chevron-*`、`action-*`、`analytics-*`、`review-*` 和 `decorations/` 目录下的花卡片 / 记录页装饰素材，后续接入时应优先使用这些正式素材，不再临时改画同类 SVG 或 CSS 图形。
 
 ## 13. 可以用 CSS 简化的素材
 
@@ -377,6 +443,8 @@ emoji 可以在早期占位中出现，但 V3.1 UI 素材库落地后，正式 U
 
 第二批素材中的 `toast-*`、`data-*`、`onboarding-*`、`warning-soft.png`、`delete-confirm-flower.png` 和 `calendar-*` 都属于正式素材，不允许在已有素材存在时改用 emoji、临时 SVG 或浏览器符号替代。
 
+第三批素材中的 `theme-*`、`chevron-*`、`action-*`、`analytics-*`、`review-*` 和花卡片 / 记录页装饰素材也属于正式素材，不允许在已有素材存在时改用 emoji、临时 SVG、随机 CSS 图形或浏览器默认符号替代。
+
 ## 15. Codex 后续使用素材规则
 
 Codex 后续实现 UI 时必须遵守：
@@ -392,7 +460,9 @@ Codex 后续实现 UI 时必须遵守：
 9. 新增素材必须命名清楚，放入对应目录；
 10. 新增素材后必须更新本清单或目录 README；
 11. `Toast`、`DataPanel`、`OnboardingModal`、删除确认 / 覆盖导入确认、`CalendarView` 已有第二批正式素材时，必须优先使用本清单指定文件；
-12. 不得用 emoji、临时 SVG 或自行绘制的新风格图标替代已经存在的正式素材。
+12. `ThemeSwitcher`、展开 / 收起、基础操作、`FlowerCard`、`RecordForm`、`AnalyticsDashboard`、`CalendarView` 已有第三批正式素材时，必须优先使用本清单指定文件；
+13. 不得用 emoji、临时 SVG、随机 CSS 图形或自行绘制的新风格图标替代已经存在的正式素材；
+14. 如果后续组件需要图标而素材缺失，必须先报告缺失素材，不能自由替代。
 
 ## 16. 验收标准
 
