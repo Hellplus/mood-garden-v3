@@ -1,7 +1,7 @@
 @keyframes gentleRise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(var(--motion-enter-offset));
   }
 
   to {
@@ -17,7 +17,7 @@
   }
 
   50% {
-    transform: translateY(-4px);
+    transform: translateY(var(--motion-float-offset));
   }
 }
 
@@ -27,7 +27,7 @@
 .flower-detail-panel,
 .toast,
 .onboarding-card {
-  animation: gentleRise 180ms ease-out both;
+  animation: gentleRise var(--motion-duration-base) var(--motion-ease-standard) both;
 }
 
 .flower-card:hover .flower-visual,
@@ -56,10 +56,11 @@
 .toast-close,
 .mobile-nav-button {
   transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background-color 160ms ease,
-    box-shadow 160ms ease;
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .flower-card:hover,
@@ -79,15 +80,14 @@
 .secondary-action:hover,
 .text-action:hover,
 .primary-action:hover {
-  transform: translateY(-1px);
+  transform: translateY(var(--motion-hover-lift));
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }

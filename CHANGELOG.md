@@ -1,5 +1,14 @@
 # 更新日志
 
+## V3.1-DX.1
+
+- 根据 `DESIGN_SYSTEM_V3_1.md` 落地底层设计 token，补充 light / dark / cozy 三套主题基础变量。
+- 新增五种现有情绪的低饱和色变量：开心、平静、焦虑、疲惫、兴奋。
+- 补充字体、字号、间距、圆角、阴影、动效和底部安全区等基础变量，并保留旧变量别名以兼容现有组件。
+- 优化全局 body 背景、文字基础样式和统一 focus-visible 覆盖范围。
+- 完善 prefers-reduced-motion 基础支持，减少动态效果时关闭位移和持续动画。
+- 未修改 React 业务逻辑，未改变 records localStorage 主结构，也未调整 CRUD、筛选、日历、分析或导入导出逻辑。
+
 ## V3.1-D
 
 - 统一按钮系统的基础视觉、hover、active、focus 和移动端触控尺寸。
