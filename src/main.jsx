@@ -13,54 +13,61 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 
-function registerServiceWorker() {
-  if (!import.meta.env.PROD || !('serviceWorker' in navigator)) {
+const SERVICE_WORKER_CACHE_PREFIX = 'mood-garden-v3-cache-'
+const SERVICE_WORKER_CLEANUP_RELOAD_KEY = 'mood-garden-v3-sw-cleanup-reloaded'
+
+async function getServiceWorkerRegistrations() {
+  if (!('serviceWorker' in navigator)) {
+    return []
+  }
+
+  if (typeof navigator.serviceWorker.getRegistrations === 'function') {
+    return navigator.serviceWorker.getRegistrations()
+  }
+
+  const registration = await navigator.serviceWorker.getRegistration()
+  return registration ? [registration] : []
+}
+
+async function cleanupServiceWorker() {
+  if (!import.meta.env.PROD) {
     return
   }
 
   window.addEventListener('load', () => {
-    const serviceWorkerUrl = `${import.meta.env.BASE_URL}service-worker.js`
-    const hadController = Boolean(navigator.serviceWorker.controller)
-    let hasReloadedForUpdate = false
+    const runCleanup = async () => {
+      const hadController = Boolean(navigator.serviceWorker?.controller)
+      const registrations = await getServiceWorkerRegistrations()
+      const cacheNames =
+        'caches' in window
+          ? (await window.caches.keys()).filter((cacheName) =>
+              cacheName.startsWith(SERVICE_WORKER_CACHE_PREFIX),
+            )
+          : []
 
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!hadController || hasReloadedForUpdate) {
+      await Promise.all([
+        ...registrations.map((registration) => registration.unregister()),
+        ...cacheNames.map((cacheName) => window.caches.delete(cacheName)),
+      ])
+
+      const shouldReload = hadController || registrations.length > 0 || cacheNames.length > 0
+      const hasReloaded = window.sessionStorage.getItem(SERVICE_WORKER_CLEANUP_RELOAD_KEY)
+
+      if (shouldReload && !hasReloaded) {
+        window.sessionStorage.setItem(SERVICE_WORKER_CLEANUP_RELOAD_KEY, 'true')
+        window.location.reload()
         return
       }
 
-      hasReloadedForUpdate = true
-      window.location.reload()
+      if (!shouldReload) {
+        window.sessionStorage.removeItem(SERVICE_WORKER_CLEANUP_RELOAD_KEY)
+      }
+    }
+
+    runCleanup().catch((error) => {
+      console.warn('Mood Garden service worker cleanup failed.', error)
     })
-
-    navigator.serviceWorker
-      .register(serviceWorkerUrl)
-      .then((registration) => {
-        registration.update().catch((error) => {
-          console.warn('Mood Garden service worker update check failed.', error)
-        })
-
-        if (registration.waiting) {
-          registration.waiting.postMessage({ type: 'SKIP_WAITING' })
-        }
-
-        registration.addEventListener('updatefound', () => {
-          const nextWorker = registration.installing
-
-          if (!nextWorker) {
-            return
-          }
-
-          nextWorker.addEventListener('statechange', () => {
-            if (nextWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              nextWorker.postMessage({ type: 'SKIP_WAITING' })
-            }
-          })
-        })
-      })
-      .catch((error) => {
-        console.warn('Mood Garden service worker registration failed.', error)
-      })
   })
 }
 
-registerServiceWorker()
+cleanupServiceWorker()

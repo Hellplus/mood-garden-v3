@@ -23,6 +23,7 @@ V3.1-DX.2-R.1-B 基于裁剪后的正式 PNG 素材重新调整图标尺寸系�
 V3.1-DX.2-R.1-B.2 修复回顾区、日历和收藏回顾的素材映射：补齐统一 emotion asset map，校准移动端日历小标记尺寸，并让本周 / 本月回顾使用正式 review 素材。
 V3.1-DX.2-R-FIX 将 UI PNG 素材集中到 `src/assets/uiAssets.js` 通过 ES import 打包，并更新 service worker 缓存版本，用于修复 GitHub Pages 手机端可能继续使用旧图片路径的问题。
 V3.1-DX.2-R-FIX.2 继续收紧手机端缓存更新：service worker 对构建资源改为 network-first，并在注册后主动检查、激活新 worker，减少旧缓存遮挡新图片的情况。
+V3.1-DX.2-R-FIX.3A 临时关闭 PWA service worker 注册，并在页面加载时注销旧 worker、清理 `mood-garden-v3-cache-*` 缓存，用于排查手机端 GitHub Pages 图片资源问号问题；本地记录仍保存在 localStorage。
 
 ## 线上访问
 

@@ -1,5 +1,12 @@
 # 更新日志
 
+## V3.1-DX.2-R-FIX.3A
+
+- 临时暂停生产环境 service worker 注册，用于排查 GitHub Pages 手机端 UI 图片蓝色问号问题。
+- 页面加载时会注销当前站点下已有 service worker，并删除所有 `mood-garden-v3-cache-*` Cache Storage 缓存。
+- 使用 sessionStorage 标记控制最多自动刷新一次，避免无限刷新。
+- 清理逻辑不删除 localStorage，因此不会影响本地 records 记录；后续确认资源加载稳定后可重新启用 PWA。
+
 ## V3.1-DX.2-R-FIX.2
 
 - 更新 service worker 缓存版本为 `mood-garden-v3-cache-v3-1-dx2-r-fix2`。
