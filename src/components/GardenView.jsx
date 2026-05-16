@@ -21,6 +21,7 @@ function GardenView({
         <div>
           <p className="eyebrow">Garden</p>
           <h2>我的情绪花园</h2>
+          <p className="section-intro">每一条记录都会在这里长成一朵小花。</p>
         </div>
         <div className="garden-summary">
           <span>{hasActiveFilters ? `${records.length} / ${totalCount} 朵` : `${totalCount} 朵`}</span>

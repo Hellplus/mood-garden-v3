@@ -32,22 +32,19 @@ function RecentRecords({ records, onViewRecord }) {
                 onClick={() => onViewRecord(record)}
                 type="button"
               >
-                <div>
+                <span className="recent-record-icon-frame" aria-hidden="true">
+                  <img className="mood-icon mood-icon--recent" src={getMoodIconAsset(record)} alt="" />
+                </span>
+                <div className="recent-record-copy">
                   <strong>
-                    <img
-                      alt=""
-                      aria-hidden="true"
-                      className="mood-icon mood-icon--recent"
-                      src={getMoodIconAsset(record)}
-                    />
                     {view.emotionLabel}
                   </strong>
                   <span>
                     <img alt="" aria-hidden="true" className="ui-icon ui-icon--xs" src={actionIcons.clock} />
                     {view.date} · {view.time}
                   </span>
+                  <p>{view.note}</p>
                 </div>
-                <p>{view.note}</p>
               </button>
             )
           })}

@@ -450,3 +450,145 @@
     --flower-asset-max-width: 96px;
   }
 }
+
+@media (max-width: 760px) {
+  .hero-section {
+    margin-bottom: 16px;
+    padding: 18px;
+  }
+
+  .brand-mark-asset {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hero-layout {
+    display: grid;
+    gap: 16px;
+  }
+
+  .hero-copy-stack h1 {
+    max-width: 12ch;
+    font-size: clamp(2.2rem, 11vw, 3rem);
+  }
+
+  .hero-copy {
+    font-size: 0.94rem;
+  }
+
+  .hero-side {
+    gap: 10px;
+  }
+
+  .hero-visual-card {
+    min-height: 112px;
+  }
+
+  .hero-window-plant {
+    right: -28px;
+    bottom: -38px;
+    width: 230px;
+    opacity: 0.72;
+  }
+
+  .hero-garden-corner {
+    width: 92px;
+  }
+
+  .hero-leaf-sprig {
+    width: 46px;
+  }
+
+  .hero-decoration--cloud {
+    top: 48px;
+    right: -40px;
+    width: 170px;
+  }
+
+  .hero-decoration--star {
+    top: 96px;
+    left: auto;
+    right: 28px;
+    width: 34px;
+  }
+
+  .daily-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'record'
+      'today'
+      'recent';
+  }
+
+  .record-heading-asset {
+    width: 54px;
+    max-height: 46px;
+  }
+
+  .record-form-decoration--sprout {
+    right: 10px;
+    bottom: 70px;
+    width: 54px;
+  }
+
+  .record-emotion-fieldset .chip-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .record-form .choice-chip,
+  .record-form .emotion-choice-chip {
+    min-width: 0;
+    min-height: 76px;
+    padding: 9px 5px;
+  }
+
+  .record-form .mood-icon--picker,
+  .emotion-choice-chip .mood-icon--picker {
+    width: 42px;
+    height: 42px;
+  }
+
+  .record-form .form-field textarea {
+    min-height: 96px;
+  }
+
+  .today-status {
+    min-height: 0;
+  }
+
+  .today-flower-stage {
+    margin-top: 8px;
+  }
+
+  .record-row {
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: 11px;
+  }
+
+  .recent-record-icon-frame {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+  }
+
+  .garden-board {
+    grid-template-columns: 1fr;
+  }
+
+  .flower-card-main {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .flower-card-actions {
+    justify-content: flex-start;
+  }
+
+  .flower-card-actions button {
+    flex: 1 1 42%;
+    justify-content: center;
+  }
+}

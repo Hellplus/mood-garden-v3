@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { actionIcons, moodIcons, strengthIcons } from '../assets/uiAssets.js'
+import { actionIcons, decorationImages, moodIcons, strengthIcons } from '../assets/uiAssets.js'
 import { EMOTION_OPTIONS, parseTagsInput } from '../utils/records.js'
 
 function RecordForm({ tags, onAddRecord }) {
@@ -51,17 +51,35 @@ function RecordForm({ tags, onAddRecord }) {
 
   return (
     <form className="surface-panel record-form" onSubmit={handleSubmit}>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="record-form-decoration record-form-decoration--sprout"
+        src={decorationImages.recordSprout}
+      />
       <div className="panel-heading">
-        <p className="eyebrow">Record</p>
-        <h2>写一朵今天的花</h2>
+        <div className="card-title-group">
+          <p className="eyebrow">Record</p>
+          <h2>写一朵今天的花</h2>
+        </div>
+        <img
+          alt=""
+          aria-hidden="true"
+          className="record-heading-asset"
+          src={decorationImages.recordPencilNote}
+        />
       </div>
 
-      <fieldset>
+      <fieldset className="record-emotion-fieldset">
         <legend>选择心情</legend>
         <div className="chip-row">
           {EMOTION_OPTIONS.map((option) => (
             <button
-              className={emotion === option.key ? 'choice-chip is-selected' : 'choice-chip'}
+              className={
+                emotion === option.key
+                  ? 'choice-chip emotion-choice-chip is-selected'
+                  : 'choice-chip emotion-choice-chip'
+              }
               key={option.key}
               onClick={() => setEmotion(option.key)}
               type="button"
@@ -174,6 +192,7 @@ function RecordForm({ tags, onAddRecord }) {
       ) : null}
 
       <button className="primary-action" type="submit">
+        <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={decorationImages.recordSprout} />
         种下这朵花
       </button>
     </form>

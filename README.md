@@ -24,6 +24,8 @@ V3.1-DX.2-R.1-B.2 修复回顾区、日历和收藏回顾的素材映射：补�
 V3.1-DX.2-R-FIX 将 UI PNG 素材集中到 `src/assets/uiAssets.js` 通过 ES import 打包，并更新 service worker 缓存版本，用于修复 GitHub Pages 手机端可能继续使用旧图片路径的问题。
 V3.1-DX.2-R-FIX.2 继续收紧手机端缓存更新：service worker 对构建资源改为 network-first，并在注册后主动检查、激活新 worker，减少旧缓存遮挡新图片的情况。
 
+V3.1-DX.3 按 UI 参考图推进核心页面重设计，重点调整 Hero、快速记录、今日状态、最近记录和花卡片的视觉层级，继续使用正式 UI 素材，不改变业务逻辑或 records 数据结构。
+
 ## 线上访问
 
 GitHub Pages 地址：
@@ -53,6 +55,7 @@ https://hellplus.github.io/mood-garden-v3/
 - V3.1-DX.2-R 基础 UI 视觉返工，接入正式 UI 素材并按参考图校准基础组件视觉
 - V3.1-DX.2-R.1-B 裁剪后图标尺寸系统修复，统一正式素材显示尺寸和基础卡片标题图标融合规则
 - V3.1-DX.2-R.1-B.2 回顾区、日历与收藏回顾素材映射修复，统一情绪素材映射并校准移动端日历小标记
+- V3.1-DX.3 核心页面重设计，按参考图优化 Hero、快速记录、今日状态、最近记录和花卡片层级
 
 ## 数据存储
 

@@ -3053,3 +3053,363 @@ select {
   --flower-asset-height: 106px;
   --flower-asset-max-width: 104px;
 }
+
+/* V3.1-DX.3 core page and card visual pass. */
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-bottom: var(--space-card-group);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card-lg);
+  padding: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 250, 242, 0.78)),
+    var(--color-panel-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-section::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  background:
+    radial-gradient(circle at 12% 18%, rgba(143, 191, 149, 0.14), transparent 28%),
+    radial-gradient(circle at 78% 12%, rgba(255, 223, 166, 0.22), transparent 26%),
+    linear-gradient(180deg, transparent, rgba(246, 241, 234, 0.55));
+}
+
+.brand-mark-asset {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.hero-decoration {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.hero-decoration--cloud {
+  top: 18px;
+  right: 22%;
+  width: min(220px, 24vw);
+  opacity: 0.3;
+}
+
+.hero-decoration--star {
+  top: 18%;
+  left: 46%;
+  width: 46px;
+  opacity: 0.55;
+}
+
+.hero-layout {
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  align-items: stretch;
+}
+
+.hero-copy-stack {
+  align-self: center;
+  padding: 12px 0;
+}
+
+.hero-copy-stack h1 {
+  max-width: 700px;
+  font-size: clamp(3.2rem, 7vw, 5rem);
+  letter-spacing: 0;
+}
+
+.hero-side {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.hero-visual-card {
+  position: relative;
+  min-height: 176px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 251, 244, 0.86)),
+    var(--color-bg-soft);
+}
+
+.hero-window-plant {
+  position: absolute;
+  right: -16px;
+  bottom: -18px;
+  width: min(330px, 100%);
+  max-height: 240px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.hero-garden-corner {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  width: 132px;
+  opacity: 0.74;
+}
+
+.hero-leaf-sprig {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  width: 64px;
+  opacity: 0.76;
+}
+
+.daily-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.78fr) minmax(260px, 0.9fr);
+  grid-template-areas: 'record today recent';
+  align-items: stretch;
+}
+
+.record-form {
+  grid-area: record;
+  position: relative;
+  overflow: hidden;
+}
+
+.today-status {
+  grid-area: today;
+}
+
+.recent-records {
+  grid-area: recent;
+}
+
+.record-form-decoration {
+  position: absolute;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.record-form-decoration--sprout {
+  right: 18px;
+  bottom: 74px;
+  width: 72px;
+  opacity: 0.15;
+}
+
+.record-heading-asset {
+  width: 72px;
+  max-height: 58px;
+  object-fit: contain;
+  opacity: 0.86;
+}
+
+.record-emotion-fieldset {
+  position: relative;
+  z-index: 1;
+}
+
+.emotion-choice-chip {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  min-width: 92px;
+  min-height: 98px;
+  padding: 12px 14px;
+}
+
+.emotion-choice-chip .mood-icon--picker {
+  width: 54px;
+  height: 54px;
+}
+
+.record-form .form-field textarea {
+  min-height: 126px;
+  font-size: 1rem;
+}
+
+.record-form .primary-action {
+  justify-content: center;
+  min-height: 54px;
+  font-size: 1.02rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.today-status {
+  display: grid;
+  align-content: start;
+  min-height: 0;
+}
+
+.today-status-decoration {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  width: 58px;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.today-flower-stage {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.85) 0 38%, transparent 39%),
+    conic-gradient(
+      from 22deg,
+      rgba(143, 191, 149, 0.18),
+      rgba(255, 223, 166, 0.24),
+      rgba(216, 231, 245, 0.24),
+      rgba(247, 184, 183, 0.18),
+      rgba(143, 191, 149, 0.18)
+    );
+}
+
+.today-strength-flowers,
+.flower-strength-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.today-strength-flowers {
+  justify-content: center;
+  margin: 8px 0 10px;
+}
+
+.today-strength-flowers .strength-flower-icon,
+.flower-strength-icons .strength-flower-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.record-list {
+  display: grid;
+  gap: 10px;
+}
+
+.record-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-card-sm);
+  background: color-mix(in srgb, var(--color-card-bg) 88%, var(--color-primary-soft));
+  text-align: left;
+}
+
+.record-row:hover {
+  border-color: var(--color-border);
+  background: var(--color-card-bg);
+}
+
+.recent-record-icon-frame {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: var(--color-primary-soft);
+}
+
+.recent-record-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.record-row .recent-record-copy strong {
+  display: block;
+  color: var(--color-heading);
+}
+
+.record-row .recent-record-copy span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.record-row .recent-record-copy p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.section-intro {
+  max-width: 28rem;
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 0.94rem;
+}
+
+.garden-board {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.flower-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  padding: 18px;
+}
+
+.flower-card-main {
+  display: grid;
+  grid-template-columns: minmax(96px, 0.38fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.flower-card-copy {
+  align-content: center;
+  gap: 7px;
+}
+
+.flower-card-copy strong {
+  font-size: 1.14rem;
+}
+
+.flower-card-meta em,
+.flower-card-tags span {
+  background: color-mix(in srgb, var(--color-card-bg) 86%, var(--flower-soft));
+}
+
+.flower-strength-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.flower-card-actions {
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.flower-card-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.flower-card-actions .flower-card-delete-action {
+  border-color: color-mix(in srgb, var(--color-danger) 28%, var(--color-border));
+  background: color-mix(in srgb, var(--color-danger-soft) 64%, transparent);
+  color: var(--color-danger);
+  box-shadow: none;
+}

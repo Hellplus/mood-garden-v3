@@ -1,5 +1,5 @@
 import { getRecordView } from '../utils/records.js'
-import { getEmotionAssetKey, getFlowerAsset } from '../assets/uiAssets.js'
+import { decorationImages, getEmotionAssetKey, getFlowerAsset, strengthIcons } from '../assets/uiAssets.js'
 
 function TodayStatusCard({ record }) {
   const view = record ? getRecordView(record) : null
@@ -8,13 +8,19 @@ function TodayStatusCard({ record }) {
 
   return (
     <article className="surface-panel today-status">
+      <img
+        alt=""
+        aria-hidden="true"
+        className="today-status-decoration"
+        src={decorationImages.leafSprig}
+      />
       <div className="panel-heading">
         <p className="eyebrow">Today</p>
         <h2>今日状态</h2>
       </div>
 
       <div
-        className={`mood-orbit flower-visual flower-visual--today flower-visual--${flowerKey}`}
+        className={`today-flower-stage flower-visual flower-visual--today flower-visual--${flowerKey}`}
         aria-hidden="true"
       >
         <img alt="" className="flower-asset" src={flowerImage} />
@@ -26,6 +32,18 @@ function TodayStatusCard({ record }) {
             <p className="status-label">{view.emotionLabel}</p>
             <strong>{view.intensityText}</strong>
             <span>情绪强度</span>
+          </div>
+
+          <div className="today-strength-flowers" aria-label={`情绪强度 ${view.intensityText}`}>
+            {[1, 2, 3, 4, 5].map((level) => (
+              <img
+                alt=""
+                aria-hidden="true"
+                className="strength-flower-icon"
+                key={level}
+                src={level <= view.intensity ? strengthIcons.filled : strengthIcons.empty}
+              />
+            ))}
           </div>
 
           <div className="progress-track" aria-label={`情绪强度 ${view.intensityText}`}>

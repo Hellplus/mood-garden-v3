@@ -1,5 +1,15 @@
 # 更新日志
 
+## V3.1-DX.3
+
+- 按 UI 参考图推进核心页面重设计，重点优化 HeroSection、RecordForm、TodayStatusCard、RecentRecords、GardenView 和 FlowerCard。
+- Hero 区接入品牌小花、柔和云朵、窗边植物和花园装饰素材，让首页更接近现代治愈手账 App 的视觉方向。
+- 快速记录卡继续保持情绪选择、心情输入和“种下这朵花”为主路径，强度和标签仍保留在可选更多细节中。
+- 今日状态卡和花卡片继续使用正式 flower 素材，并补充小花强度展示，避免使用爱心或旧 emoji 作为核心视觉。
+- 最近记录改为轻量预览卡，继续使用正式 mood 素材和时间图标，不新增操作入口。
+- FlowerCard 降低删除操作的视觉优先级，保留原有删除逻辑，不新增删除确认弹窗。
+- 未新增业务功能，未改变 records localStorage 主结构，也未修改 CRUD、筛选、日历、分析或导入导出的核心逻辑。
+
 ## V3.1-DX.2-R-FIX.2
 
 - 更新 service worker 缓存版本为 `mood-garden-v3-cache-v3-1-dx2-r-fix2`。
