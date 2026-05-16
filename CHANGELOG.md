@@ -1,5 +1,12 @@
 # 更新日志
 
+## V3.1-DX.2-R-FIX
+
+- 新增统一 UI 素材入口 `src/assets/uiAssets.js`，让情绪、花朵、导航、操作、Toast、空状态、数据、分析、新手引导和装饰素材都通过 ES import 进入 Vite 构建。
+- 将仍在组件中分散引用的 PNG 素材改为从统一素材映射读取，避免线上 GitHub Pages 环境出现 `/src/assets` 或错误绝对路径导致的图片加载问题。
+- 更新 service worker 缓存版本，降低手机端继续使用旧 JS 或旧图片路径的风险。
+- 未新增业务功能，未改变 records localStorage 主结构，也未修改 CRUD、筛选、日历、分析或导入导出核心逻辑。
+
 ## V3.1-DX.2-R.1-B.2
 
 - 新增轻量 UI 素材映射文件，统一开心、平静、焦虑、疲惫、兴奋到正式 mood / flower 素材的映射。

@@ -1,5 +1,5 @@
 import { getRecordView } from '../utils/records.js'
-import { getEmotionAssetKey, getFlowerAsset } from '../utils/uiAssets.js'
+import { getEmotionAssetKey, getFlowerAsset } from '../assets/uiAssets.js'
 
 function TodayStatusCard({ record }) {
   const view = record ? getRecordView(record) : null

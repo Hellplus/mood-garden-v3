@@ -21,6 +21,7 @@ V3.1-DX.2-R 对 DX.2 基础 UI 做返工，要求以项目内 UI 参考图和 `s
 V3.1-DX.2-R.1-B 基于裁剪后的正式 PNG 素材重新调整图标尺寸系统，让情绪、花卡、数据、分析、Toast、空状态和移动端导航里的图标更清楚，同时保持页面结构和业务逻辑不变。
 
 V3.1-DX.2-R.1-B.2 修复回顾区、日历和收藏回顾的素材映射：补齐统一 emotion asset map，校准移动端日历小标记尺寸，并让本周 / 本月回顾使用正式 review 素材。
+V3.1-DX.2-R-FIX 将 UI PNG 素材集中到 `src/assets/uiAssets.js` 通过 ES import 打包，并更新 service worker 缓存版本，用于修复 GitHub Pages 手机端可能继续使用旧图片路径的问题。
 
 ## 线上访问
 

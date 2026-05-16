@@ -1,12 +1,4 @@
-import themeCozyIcon from '../assets/ui/icons/theme-cozy.png'
-import themeDarkIcon from '../assets/ui/icons/theme-dark.png'
-import themeLightIcon from '../assets/ui/icons/theme-light.png'
-
-const themeIcons = {
-  light: themeLightIcon,
-  dark: themeDarkIcon,
-  cozy: themeCozyIcon,
-}
+import { themeIcons } from '../assets/uiAssets.js'
 
 function ThemeSwitcher({
   activeTheme,
@@ -39,7 +31,7 @@ function ThemeSwitcher({
               alt=""
               aria-hidden="true"
               className="theme-icon ui-icon--xl"
-              src={themeIcons[theme.id] || themeLightIcon}
+              src={themeIcons[theme.id] || themeIcons.light}
             />
             <span>
               <strong>{theme.label}</strong>

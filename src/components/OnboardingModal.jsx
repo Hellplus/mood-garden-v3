@@ -1,8 +1,4 @@
-import brandFlowerImage from '../assets/ui/decorations/brand-flower.png'
-import closeIcon from '../assets/ui/icons/action-close.png'
-import onboardingMoodIcon from '../assets/ui/icons/onboarding-mood.png'
-import onboardingPlantIcon from '../assets/ui/icons/onboarding-plant.png'
-import onboardingWriteIcon from '../assets/ui/icons/onboarding-write.png'
+import { actionIcons, decorationImages, onboardingIcons } from '../assets/uiAssets.js'
 
 function OnboardingModal({
   isOpen = false,
@@ -28,14 +24,14 @@ function OnboardingModal({
           type="button"
           onClick={onClose}
         >
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={closeIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
         </button>
 
         <img
           alt=""
           aria-hidden="true"
           className="ui-illustration ui-illustration--sm onboarding-brand-asset"
-          src={brandFlowerImage}
+          src={decorationImages.brandFlower}
         />
         <p className="eyebrow">开始使用</p>
         <h2 id="onboarding-title">先写一句今天的心情</h2>
@@ -44,15 +40,15 @@ function OnboardingModal({
         </p>
         <ol className="onboarding-steps">
           <li>
-            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingMoodIcon} />
+            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingIcons.mood} />
             <span>在记录区选择情绪，也可以调整强度和标签。</span>
           </li>
           <li>
-            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingWriteIcon} />
+            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingIcons.write} />
             <span>点“种下这朵花”后，记录会保存在当前浏览器。</span>
           </li>
           <li>
-            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingPlantIcon} />
+            <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingIcons.plant} />
             <span>想长期保存或换设备查看，记得导出 JSON 备份。</span>
           </li>
         </ol>

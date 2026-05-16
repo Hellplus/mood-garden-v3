@@ -1,16 +1,4 @@
-import emptyAnalyticsImage from '../assets/ui/empty-states/empty-analytics-insufficient.png'
-import analyticsFavoriteIcon from '../assets/ui/icons/analytics-favorite.png'
-import analyticsIntensityIcon from '../assets/ui/icons/analytics-intensity.png'
-import analyticsMonthIcon from '../assets/ui/icons/analytics-month.png'
-import analyticsOverviewIcon from '../assets/ui/icons/analytics-overview.png'
-import analyticsStreakIcon from '../assets/ui/icons/analytics-streak.png'
-import analyticsTagsIcon from '../assets/ui/icons/analytics-tags.png'
-import analyticsTodayIcon from '../assets/ui/icons/analytics-today.png'
-import analyticsTrendIcon from '../assets/ui/icons/analytics-trend.png'
-import analyticsWeekIcon from '../assets/ui/icons/analytics-week.png'
-import reviewMonthIcon from '../assets/ui/icons/review-month.png'
-import reviewWeekIcon from '../assets/ui/icons/review-week.png'
-import { getMoodIconAsset } from '../utils/uiAssets.js'
+import { analyticsIcons, emptyStateImages, getMoodIconAsset } from '../assets/uiAssets.js'
 
 function InsightCard({ insight, icon }) {
   return (
@@ -44,7 +32,7 @@ function AnalyticsDashboard({ analytics }) {
             alt=""
             aria-hidden="true"
             className="ui-illustration ui-illustration--md empty-state-asset"
-            src={emptyAnalyticsImage}
+            src={emptyStateImages.analyticsInsufficient}
           />
           <strong>记录还不够形成回顾</strong>
           <p>写下第一条心情后，这里会慢慢出现总览、趋势和温柔回顾。</p>
@@ -70,7 +58,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="analytics-icon analytics-icon--tile"
-              src={analyticsOverviewIcon}
+              src={analyticsIcons.overview}
             />
             <span>{card.label}</span>
             <strong>{card.value}</strong>
@@ -80,9 +68,9 @@ function AnalyticsDashboard({ analytics }) {
       </div>
 
       <div className="analytics-insights">
-        <InsightCard icon={analyticsTodayIcon} insight={analytics.todayInsight} />
-        <InsightCard icon={analyticsWeekIcon} insight={analytics.weekInsight} />
-        <InsightCard icon={analyticsMonthIcon} insight={analytics.monthInsight} />
+        <InsightCard icon={analyticsIcons.today} insight={analytics.todayInsight} />
+        <InsightCard icon={analyticsIcons.week} insight={analytics.weekInsight} />
+        <InsightCard icon={analyticsIcons.month} insight={analytics.monthInsight} />
       </div>
 
       <div className="analytics-content">
@@ -94,7 +82,7 @@ function AnalyticsDashboard({ analytics }) {
                 alt=""
                 aria-hidden="true"
                 className="analytics-icon analytics-icon--heading"
-                src={analyticsOverviewIcon}
+                src={analyticsIcons.overview}
               />
               情绪分布
             </h3>
@@ -125,7 +113,7 @@ function AnalyticsDashboard({ analytics }) {
                 alt=""
                 aria-hidden="true"
                 className="analytics-icon analytics-icon--heading"
-                src={analyticsTrendIcon}
+                src={analyticsIcons.trend}
               />
               最近 7 天
             </h3>
@@ -150,7 +138,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="analytics-icon analytics-icon--heading"
-              src={analyticsMonthIcon}
+              src={analyticsIcons.month}
             />
             最近 30 天趋势
           </h3>
@@ -177,7 +165,7 @@ function AnalyticsDashboard({ analytics }) {
                 alt=""
                 aria-hidden="true"
                 className="analytics-icon analytics-icon--wide"
-                src={analyticsIntensityIcon}
+                src={analyticsIcons.intensity}
               />
               心情强度
             </h3>
@@ -201,7 +189,7 @@ function AnalyticsDashboard({ analytics }) {
                 alt=""
                 aria-hidden="true"
                 className="analytics-icon analytics-icon--heading"
-                src={analyticsTagsIcon}
+                src={analyticsIcons.tags}
               />
               标签 Top 5
             </h3>
@@ -232,7 +220,7 @@ function AnalyticsDashboard({ analytics }) {
                 alt=""
                 aria-hidden="true"
                 className="analytics-icon analytics-icon--heading"
-                src={analyticsFavoriteIcon}
+                src={analyticsIcons.favorite}
               />
               收藏回顾
             </h3>
@@ -268,7 +256,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="analytics-icon analytics-icon--heading"
-              src={analyticsStreakIcon}
+              src={analyticsIcons.streak}
             />
             <span>连续记录</span>
           </div>
@@ -281,7 +269,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="review-icon review-icon--wide"
-              src={reviewWeekIcon}
+              src={analyticsIcons.reviewWeek}
             />
             <span>本周回顾</span>
           </div>
@@ -293,7 +281,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="review-icon review-icon--wide"
-              src={reviewMonthIcon}
+              src={analyticsIcons.reviewMonth}
             />
             <span>本月回顾</span>
           </div>

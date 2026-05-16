@@ -1,27 +1,6 @@
 import { useState } from 'react'
-import chevronDownIcon from '../assets/ui/icons/chevron-down.png'
-import chevronUpIcon from '../assets/ui/icons/chevron-up.png'
-import filterIcon from '../assets/ui/icons/action-filter.png'
-import resetIcon from '../assets/ui/icons/action-reset.png'
-import searchIcon from '../assets/ui/icons/action-search.png'
-import sortIcon from '../assets/ui/icons/action-sort.png'
-import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
-import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
-import tagIcon from '../assets/ui/icons/action-tag.png'
-import moodAnxiousIcon from '../assets/ui/icons/mood-anxious.png'
-import moodCalmIcon from '../assets/ui/icons/mood-calm.png'
-import moodExcitedIcon from '../assets/ui/icons/mood-excited.png'
-import moodHappyIcon from '../assets/ui/icons/mood-happy.png'
-import moodTiredIcon from '../assets/ui/icons/mood-tired.png'
+import { actionIcons, moodIcons } from '../assets/uiAssets.js'
 import { EMOTION_OPTIONS } from '../utils/records.js'
-
-const emotionIcons = {
-  happy: moodHappyIcon,
-  calm: moodCalmIcon,
-  anxious: moodAnxiousIcon,
-  tired: moodTiredIcon,
-  excited: moodExcitedIcon,
-}
 
 const INTENSITY_OPTIONS = [
   { value: 'all', label: '全部' },
@@ -73,7 +52,7 @@ function FilterPanel({
             alt=""
             aria-hidden="true"
             className="ui-icon ui-icon--sm"
-            src={isMobileFilterOpen ? chevronUpIcon : chevronDownIcon}
+            src={isMobileFilterOpen ? actionIcons.chevronUp : actionIcons.chevronDown}
           />
           <span>{isMobileFilterOpen ? '收起' : '展开'}</span>
         </button>
@@ -90,7 +69,7 @@ function FilterPanel({
           onClick={onResetFilters}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={resetIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.reset} />
           重置筛选
         </button>
       ) : null}
@@ -101,7 +80,7 @@ function FilterPanel({
       >
         <label className="filter-search">
           <span className="field-label-row">
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={searchIcon} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.search} />
             关键词搜索
           </span>
           <input
@@ -114,7 +93,7 @@ function FilterPanel({
 
         <div className="filter-group">
           <span className="field-label-row">
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={filterIcon} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.filter} />
             情绪
           </span>
           <div className="segmented-control flexible-control" aria-label="情绪筛选">
@@ -136,7 +115,7 @@ function FilterPanel({
                   alt=""
                   aria-hidden="true"
                   className="mood-icon mood-icon--chip"
-                  src={emotionIcons[emotion.key]}
+                  src={moodIcons[emotion.key]}
                 />
                 {emotion.label}
               </button>
@@ -146,7 +125,7 @@ function FilterPanel({
 
         <div className="filter-group">
           <span className="field-label-row">
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={sortIcon} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.sort} />
             排序
           </span>
           <div className="segmented-control two-column-control" aria-label="排序方式">
@@ -165,7 +144,7 @@ function FilterPanel({
 
         <div className="filter-group">
           <span className="field-label-row">
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={tagIcon} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.tag} />
             强度
           </span>
           <div className="segmented-control flexible-control" aria-label="强度筛选">
@@ -192,7 +171,7 @@ function FilterPanel({
             alt=""
             aria-hidden="true"
             className="ui-icon ui-icon--sm"
-            src={safeFilters.favoriteOnly ? starFilledIcon : starEmptyIcon}
+            src={safeFilters.favoriteOnly ? actionIcons.starFilled : actionIcons.starEmpty}
           />
           只看收藏
         </button>
@@ -203,7 +182,7 @@ function FilterPanel({
           onClick={onResetFilters}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={resetIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.reset} />
           重置筛选
         </button>
       </div>

@@ -1,14 +1,4 @@
-import navDataIcon from '../assets/ui/icons/nav-data.png'
-import navGardenIcon from '../assets/ui/icons/nav-garden.png'
-import navRecordIcon from '../assets/ui/icons/nav-record.png'
-import navReviewIcon from '../assets/ui/icons/nav-review.png'
-
-const navIcons = {
-  records: navRecordIcon,
-  garden: navGardenIcon,
-  analytics: navReviewIcon,
-  data: navDataIcon,
-}
+import { navIcons } from '../assets/uiAssets.js'
 
 function MobileBottomNav({ items = [], activeItem, onChange = () => {} }) {
   return (

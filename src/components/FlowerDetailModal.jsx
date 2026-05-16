@@ -1,14 +1,11 @@
 import { useState } from 'react'
-import cancelIcon from '../assets/ui/icons/action-cancel.png'
-import checkIcon from '../assets/ui/icons/action-check.png'
-import closeIcon from '../assets/ui/icons/action-close.png'
-import deleteIcon from '../assets/ui/icons/action-delete.png'
-import editIcon from '../assets/ui/icons/action-edit.png'
-import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
-import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
-import warningIcon from '../assets/ui/icons/warning-soft.png'
+import {
+  actionIcons,
+  getEmotionAssetKey,
+  getFlowerAsset,
+  warningIcons,
+} from '../assets/uiAssets.js'
 import { getRecordView, parseTagsInput } from '../utils/records.js'
-import { getEmotionAssetKey, getFlowerAsset } from '../utils/uiAssets.js'
 
 function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFavorite }) {
   const [isEditing, setIsEditing] = useState(mode === 'edit')
@@ -25,17 +22,17 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
     return (
       <aside className="flower-detail-panel missing-detail-panel" aria-label="记录不存在">
         <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={closeIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
         </button>
 
-        <img alt="" aria-hidden="true" className="detail-hero-image" src={warningIcon} />
+        <img alt="" aria-hidden="true" className="detail-hero-image" src={warningIcons.soft} />
         <p className="eyebrow">Flower Detail</p>
         <h2>没有找到这条记录</h2>
         <p>这朵花可能已经被删除。关闭面板后，可以继续查看其他记录。</p>
 
         <div className="detail-actions">
           <button className="secondary-action" type="button" onClick={onClose}>
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={closeIcon} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
             关闭
           </button>
         </div>
@@ -67,7 +64,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
   return (
     <aside className="flower-detail-panel" aria-label="真实记录详情">
       <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
-        <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={closeIcon} />
+        <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
       </button>
 
       <img
@@ -121,11 +118,11 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
 
           <div className="detail-actions">
             <button className="primary-action" type="submit">
-              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={checkIcon} />
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.check} />
               保存修改
             </button>
             <button className="secondary-action" type="button" onClick={() => setIsEditing(false)}>
-              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={cancelIcon} />
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.cancel} />
               取消
             </button>
           </div>
@@ -150,16 +147,16 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
                 alt=""
                 aria-hidden="true"
                 className="ui-icon ui-icon--sm"
-                src={view.isFavorite ? starFilledIcon : starEmptyIcon}
+                src={view.isFavorite ? actionIcons.starFilled : actionIcons.starEmpty}
               />
               {view.isFavorite ? '取消收藏' : '收藏'}
             </button>
             <button type="button" onClick={() => setIsEditing(true)}>
-              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={editIcon} />
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.edit} />
               编辑
             </button>
             <button className="danger-action" type="button" onClick={handleDelete}>
-              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={deleteIcon} />
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.delete} />
               删除
             </button>
           </div>

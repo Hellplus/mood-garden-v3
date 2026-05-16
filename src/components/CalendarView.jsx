@@ -1,13 +1,11 @@
-import emptyCalendarImage from '../assets/ui/empty-states/empty-calendar-no-record.png'
-import actionCalendarIcon from '../assets/ui/icons/action-calendar.png'
-import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
-import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
-import calendarFlowerDotIcon from '../assets/ui/icons/calendar-flower-dot.png'
-import calendarSelectedMarkerIcon from '../assets/ui/icons/calendar-selected-marker.png'
-import calendarTodayFlowerIcon from '../assets/ui/icons/calendar-today-flower.png'
+import {
+  actionIcons,
+  calendarIcons,
+  emptyStateImages,
+  getFlowerAsset,
+} from '../assets/uiAssets.js'
 import { formatDisplayDate } from '../utils/dates.js'
 import { getRecordView } from '../utils/records.js'
-import { getFlowerAsset } from '../utils/uiAssets.js'
 
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 
@@ -51,7 +49,7 @@ function CalendarRecordCard({ record, onViewRecord, onToggleFavorite, onDeleteRe
             alt=""
             aria-hidden="true"
             className="ui-icon ui-icon--sm"
-            src={view.isFavorite ? starFilledIcon : starEmptyIcon}
+            src={view.isFavorite ? actionIcons.starFilled : actionIcons.starEmpty}
           />
           {view.isFavorite ? '取消收藏' : '收藏'}
         </button>
@@ -82,7 +80,7 @@ function CalendarView({
         <div>
           <p className="eyebrow">Calendar</p>
           <h2 className="heading-with-icon">
-            <img alt="" aria-hidden="true" className="card-icon card-icon--sm" src={actionCalendarIcon} />
+            <img alt="" aria-hidden="true" className="card-icon card-icon--sm" src={actionIcons.calendar} />
             {monthLabel}
           </h2>
         </div>
@@ -128,7 +126,7 @@ function CalendarView({
                   alt=""
                   aria-hidden="true"
                   className="calendar-day-marker calendar-today-marker"
-                  src={calendarTodayFlowerIcon}
+                  src={calendarIcons.todayFlower}
                 />
               ) : null}
               {day.isSelected ? (
@@ -136,7 +134,7 @@ function CalendarView({
                   alt=""
                   aria-hidden="true"
                   className="calendar-day-marker calendar-selected-marker"
-                  src={calendarSelectedMarkerIcon}
+                  src={calendarIcons.selectedMarker}
                 />
               ) : null}
               <strong>{day.dayNumber}</strong>
@@ -145,7 +143,7 @@ function CalendarView({
                   <span>{day.recordCount} 条记录</span>
                   <span className="calendar-mood-icons" aria-label="当天情绪">
                     {day.records.slice(0, 3).map((record) => (
-                      <img alt="" aria-hidden="true" key={record.id} src={calendarFlowerDotIcon} />
+                      <img alt="" aria-hidden="true" key={record.id} src={calendarIcons.flowerDot} />
                     ))}
                   </span>
                 </>
@@ -169,7 +167,7 @@ function CalendarView({
               alt=""
               aria-hidden="true"
               className="ui-illustration ui-illustration--sm empty-state-asset"
-              src={emptyCalendarImage}
+              src={emptyStateImages.calendarNoRecord}
             />
             <strong>这一天还没有记录</strong>
             <p>可以回到记录区补上一句，也可以让这一天安静地留白。</p>

@@ -1,12 +1,5 @@
 import { useRef } from 'react'
-import jsonBackupIcon from '../assets/ui/icons/data-json-backup.png'
-import jsonImportIcon from '../assets/ui/icons/data-json-import.png'
-import localStorageIcon from '../assets/ui/icons/data-local-storage.png'
-import mergeImportIcon from '../assets/ui/icons/data-merge-import.png'
-import nonMedicalIcon from '../assets/ui/icons/data-non-medical-note.png'
-import overwriteImportIcon from '../assets/ui/icons/data-overwrite-import.png'
-import pwaInstallIcon from '../assets/ui/icons/data-pwa-install.png'
-import txtExportIcon from '../assets/ui/icons/data-txt-export.png'
+import { dataIcons } from '../assets/uiAssets.js'
 
 function DataPanel({
   recordCount = 0,
@@ -46,21 +39,21 @@ function DataPanel({
 
         <div className="data-actions">
           <button type="button" onClick={onExportText}>
-            <img alt="" aria-hidden="true" className="data-icon" src={txtExportIcon} />
+            <img alt="" aria-hidden="true" className="data-icon" src={dataIcons.txtExport} />
             <span>
               <strong>导出日记 TXT</strong>
               <small>适合阅读和保存文字版日记。</small>
             </span>
           </button>
           <button type="button" onClick={onExportJson}>
-            <img alt="" aria-hidden="true" className="data-icon" src={jsonBackupIcon} />
+            <img alt="" aria-hidden="true" className="data-icon" src={dataIcons.jsonBackup} />
             <span>
               <strong>导出备份 JSON</strong>
               <small>适合备份，也适合以后导回花园。</small>
             </span>
           </button>
           <button type="button" onClick={() => mergeInputRef.current?.click()}>
-            <img alt="" aria-hidden="true" className="data-icon" src={mergeImportIcon} />
+            <img alt="" aria-hidden="true" className="data-icon" src={dataIcons.mergeImport} />
             <span>
               <strong>合并导入 JSON</strong>
               <small>把备份追加到当前花园，不会清空现有记录。</small>
@@ -71,7 +64,7 @@ function DataPanel({
             type="button"
             onClick={() => replaceInputRef.current?.click()}
           >
-            <img alt="" aria-hidden="true" className="data-icon" src={overwriteImportIcon} />
+            <img alt="" aria-hidden="true" className="data-icon" src={dataIcons.overwriteImport} />
             <span>
               <strong>覆盖导入 JSON</strong>
               <small>会替换当前所有记录，操作前会再次确认。</small>
@@ -103,12 +96,12 @@ function DataPanel({
 
         <div className="data-note-grid" aria-label="数据保存说明">
           <article>
-            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={localStorageIcon} />
+            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={dataIcons.localStorage} />
             <strong>本地保存</strong>
             <p>记录只保存在当前浏览器里，刷新页面后会从本机恢复。</p>
           </article>
           <article>
-            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={jsonImportIcon} />
+            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={dataIcons.jsonImport} />
             <strong>备份建议</strong>
             <p>清理浏览器数据可能会删除记录，建议定期导出 JSON 备份。</p>
           </article>
@@ -123,12 +116,12 @@ function DataPanel({
 
         <div className="data-note-grid" aria-label="应用安装说明">
           <article>
-            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={pwaInstallIcon} />
+            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={dataIcons.pwaInstall} />
             <strong>安装到主屏幕</strong>
             <p>如果浏览器提示可以安装，添加后仍然是本地保存。</p>
           </article>
           <article>
-            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={nonMedicalIcon} />
+            <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={dataIcons.nonMedicalNote} />
             <strong>非医疗建议</strong>
             <p>这里的回顾只用于个人记录，不提供心理诊断或医疗建议。</p>
           </article>

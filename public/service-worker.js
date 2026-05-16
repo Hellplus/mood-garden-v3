@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mood-garden-v3-cache-v3-0-j'
+const CACHE_NAME = 'mood-garden-v3-cache-v3-1-dx2-r-fix'
 const BASE_PATH = '/mood-garden-v3/'
 const SHELL_ASSETS = [
   BASE_PATH,

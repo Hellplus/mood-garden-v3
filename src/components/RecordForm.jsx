@@ -1,22 +1,6 @@
 import { useState } from 'react'
-import chevronDownIcon from '../assets/ui/icons/chevron-down.png'
-import chevronUpIcon from '../assets/ui/icons/chevron-up.png'
-import moodAnxiousIcon from '../assets/ui/icons/mood-anxious.png'
-import moodCalmIcon from '../assets/ui/icons/mood-calm.png'
-import moodExcitedIcon from '../assets/ui/icons/mood-excited.png'
-import moodHappyIcon from '../assets/ui/icons/mood-happy.png'
-import moodTiredIcon from '../assets/ui/icons/mood-tired.png'
-import strengthFlowerEmptyIcon from '../assets/ui/strength/strength-flower-empty.png'
-import strengthFlowerFilledIcon from '../assets/ui/strength/strength-flower-filled.png'
+import { actionIcons, moodIcons, strengthIcons } from '../assets/uiAssets.js'
 import { EMOTION_OPTIONS, parseTagsInput } from '../utils/records.js'
-
-const emotionIcons = {
-  happy: moodHappyIcon,
-  calm: moodCalmIcon,
-  anxious: moodAnxiousIcon,
-  tired: moodTiredIcon,
-  excited: moodExcitedIcon,
-}
 
 function RecordForm({ tags, onAddRecord }) {
   const [emotion, setEmotion] = useState('calm')
@@ -86,7 +70,7 @@ function RecordForm({ tags, onAddRecord }) {
                 alt=""
                 aria-hidden="true"
                 className="mood-icon mood-icon--picker"
-                src={emotionIcons[option.key]}
+                src={moodIcons[option.key]}
               />
               <span>{option.label}</span>
             </button>
@@ -117,7 +101,7 @@ function RecordForm({ tags, onAddRecord }) {
               alt=""
               aria-hidden="true"
               className="ui-icon ui-icon--sm"
-              src={showMoreOptions ? chevronUpIcon : chevronDownIcon}
+              src={showMoreOptions ? actionIcons.chevronUp : actionIcons.chevronDown}
             />
           </span>
           <small>
@@ -138,7 +122,7 @@ function RecordForm({ tags, onAddRecord }) {
                       alt=""
                       className="ui-icon ui-icon--sm strength-flower-icon"
                       key={level}
-                      src={level <= intensity ? strengthFlowerFilledIcon : strengthFlowerEmptyIcon}
+                      src={level <= intensity ? strengthIcons.filled : strengthIcons.empty}
                     />
                   ))}
                 </span>

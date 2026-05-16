@@ -1,5 +1,4 @@
-import emptyFilterNoResultImage from '../assets/ui/empty-states/empty-filter-no-result.png'
-import emptyNoRecordImage from '../assets/ui/empty-states/empty-no-record.png'
+import { emptyStateImages } from '../assets/uiAssets.js'
 import FlowerCard from './FlowerCard.jsx'
 
 function GardenView({
@@ -35,7 +34,7 @@ function GardenView({
             alt=""
             aria-hidden="true"
             className="ui-illustration ui-illustration--md empty-state-asset"
-            src={emptyNoRecordImage}
+            src={emptyStateImages.noRecord}
           />
           <strong>花园还在等第一朵花</strong>
           <p>到记录区选一个情绪，写下一句话，就可以开始照看它。</p>
@@ -48,7 +47,7 @@ function GardenView({
             alt=""
             aria-hidden="true"
             className="ui-illustration ui-illustration--md empty-state-asset"
-            src={emptyFilterNoResultImage}
+            src={emptyStateImages.filterNoResult}
           />
           <strong>没有找到符合条件的花</strong>
           <p>可以换个关键词，取消一些筛选条件，或一键重置筛选。</p>

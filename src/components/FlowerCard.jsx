@@ -1,14 +1,10 @@
-import deleteIcon from '../assets/ui/icons/action-delete.png'
-import editIcon from '../assets/ui/icons/action-edit.png'
-import moreIcon from '../assets/ui/icons/action-more.png'
-import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
-import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
-import favoriteRibbonImage from '../assets/ui/decorations/favorite-ribbon.png'
-import flowerCardCornerLeafImage from '../assets/ui/decorations/flower-card-corner-leaf.png'
-import flowerCardPaperCornerImage from '../assets/ui/decorations/flower-card-paper-corner.png'
-import recordDatePinImage from '../assets/ui/decorations/record-date-pin.png'
+import {
+  actionIcons,
+  decorationImages,
+  getEmotionAssetKey,
+  getFlowerAsset,
+} from '../assets/uiAssets.js'
 import { getRecordView } from '../utils/records.js'
-import { getEmotionAssetKey, getFlowerAsset } from '../utils/uiAssets.js'
 
 function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavorite }) {
   const view = getRecordView(record)
@@ -24,20 +20,20 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
         alt=""
         aria-hidden="true"
         className="flower-card-decoration flower-card-leaf"
-        src={flowerCardCornerLeafImage}
+        src={decorationImages.flowerCardCornerLeaf}
       />
       <img
         alt=""
         aria-hidden="true"
         className="flower-card-decoration flower-card-paper"
-        src={flowerCardPaperCornerImage}
+        src={decorationImages.flowerCardPaperCorner}
       />
       {view.isFavorite ? (
         <img
           alt=""
           aria-hidden="true"
           className="flower-card-decoration favorite-ribbon"
-          src={favoriteRibbonImage}
+          src={decorationImages.favoriteRibbon}
         />
       ) : null}
       <button className="flower-card-main" onClick={() => onView(record)} type="button">
@@ -50,7 +46,7 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
         <span className="flower-card-copy">
           <strong>{view.title}</strong>
           <small>
-            <img alt="" aria-hidden="true" className="ui-icon ui-icon--xs" src={recordDatePinImage} />
+            <img alt="" aria-hidden="true" className="ui-icon ui-icon--xs" src={decorationImages.recordDatePin} />
             {view.date} · {view.emotionLabel}
           </small>
           <span className="flower-card-meta">
@@ -75,20 +71,20 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
             alt=""
             aria-hidden="true"
             className="ui-icon ui-icon--sm"
-            src={view.isFavorite ? starFilledIcon : starEmptyIcon}
+            src={view.isFavorite ? actionIcons.starFilled : actionIcons.starEmpty}
           />
           {view.isFavorite ? '取消收藏' : '收藏'}
         </button>
         <button type="button" onClick={() => onView(record)}>
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={moreIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.more} />
           详情
         </button>
         <button type="button" onClick={() => onEdit(record)}>
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={editIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.edit} />
           编辑
         </button>
         <button className="danger-action" type="button" onClick={() => onDelete(record.id)}>
-          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={deleteIcon} />
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.delete} />
           删除
         </button>
       </div>
