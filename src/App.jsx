@@ -14,6 +14,7 @@ import TagCloud from './components/TagCloud.jsx'
 import ThemeSwitcher from './components/ThemeSwitcher.jsx'
 import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
+import { analyticsIcons } from './assets/uiAssets.js'
 import { mockHeroContent, mockTags } from './data/mockData.js'
 import useAnalytics from './hooks/useAnalytics.js'
 import useCalendar from './hooks/useCalendar.js'
@@ -39,6 +40,12 @@ const mobileNavItems = [
   { id: 'data', label: '数据' },
 ]
 
+const mobileReviewTabs = [
+  { id: 'today', label: '今日', icon: analyticsIcons.reviewToday },
+  { id: 'week', label: '本周', icon: analyticsIcons.reviewWeek },
+  { id: 'month', label: '本月', icon: analyticsIcons.reviewMonth },
+]
+
 function getMobileSectionClass(activeSection, sectionId, className = '') {
   return [className, 'mobile-section', activeSection === sectionId ? 'is-mobile-active' : '']
     .filter(Boolean)
@@ -50,6 +57,16 @@ function getMobileContainerClass(activeSection, sectionIds, className = '') {
     className,
     'mobile-container',
     sectionIds.includes(activeSection) ? 'is-mobile-container-active' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+}
+
+function getMobileReviewPaneClass(activeTab, tabId, className = '') {
+  return [
+    className,
+    'mobile-review-pane',
+    activeTab === tabId ? 'is-mobile-review-active' : '',
   ]
     .filter(Boolean)
     .join(' ')
@@ -86,6 +103,7 @@ function App() {
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [detailMode, setDetailMode] = useState('view')
   const [mobileActiveSection, setMobileActiveSection] = useState('records')
+  const [mobileReviewTab, setMobileReviewTab] = useState('today')
   const [dismissedRecordError, setDismissedRecordError] = useState('')
 
   const filteredRecords = filterRecords(records, filters)
@@ -264,11 +282,17 @@ function App() {
         <section
           className={getMobileContainerClass(
             mobileActiveSection,
-            ['garden', 'analytics'],
+            ['garden'],
             'garden-workspace',
           )}
           aria-label="花园工作区"
         >
+          <div className="mobile-page-heading mobile-garden-page-heading">
+            <p className="eyebrow">Garden</p>
+            <h1>花园</h1>
+            <p>这里收藏着你种下的心情花。</p>
+          </div>
+
           <div className="workspace-main">
             <div
               className={getMobileSectionClass(
@@ -294,7 +318,7 @@ function App() {
               className={getMobileSectionClass(
                 mobileActiveSection,
                 'analytics',
-                'calendar-panel-wrap',
+                'calendar-panel-wrap desktop-calendar-panel-wrap',
               )}
               data-mobile-section="analytics"
             >
@@ -362,7 +386,46 @@ function App() {
             )}
             data-mobile-section="analytics"
           >
-            <AnalyticsDashboard analytics={analytics} />
+            <div className="mobile-page-heading mobile-review-page-heading">
+              <p className="eyebrow">Review</p>
+              <h1>回顾</h1>
+              <p>看看最近的心情花园。</p>
+              <div className="mobile-review-tabs" role="tablist" aria-label="回顾范围">
+                {mobileReviewTabs.map((tab) => {
+                  const isActive = mobileReviewTab === tab.id
+
+                  return (
+                    <button
+                      aria-selected={isActive}
+                      className={isActive ? 'mobile-review-tab is-active' : 'mobile-review-tab'}
+                      key={tab.id}
+                      onClick={() => setMobileReviewTab(tab.id)}
+                      role="tab"
+                      type="button"
+                    >
+                      <img alt="" aria-hidden="true" className="review-tab-icon" src={tab.icon} />
+                      {tab.label}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+            <div className={getMobileReviewPaneClass(mobileReviewTab, 'month', 'mobile-review-calendar')}>
+              <CalendarView
+                days={calendar.calendarDays}
+                monthLabel={calendar.monthLabel}
+                onDeleteRecord={handleDeleteRecord}
+                onNextMonth={calendar.goToNextMonth}
+                onPrevMonth={calendar.goToPrevMonth}
+                onSelectDate={calendar.selectDate}
+                onToday={calendar.goToToday}
+                onToggleFavorite={handleToggleFavorite}
+                onViewRecord={handleViewRecord}
+                selectedDateKey={calendar.selectedDateKey}
+                selectedRecords={calendar.selectedRecords}
+              />
+            </div>
+            <AnalyticsDashboard analytics={analytics} mobileView={mobileReviewTab} />
           </div>
           <div
             className={getMobileSectionClass(mobileActiveSection, 'data', 'data-panel-wrap')}

@@ -1,8 +1,20 @@
 import { analyticsIcons, emptyStateImages, getMoodIconAsset } from '../assets/uiAssets.js'
 
-function InsightCard({ insight, icon }) {
+function getMobileReviewContentClass(activeView, views, className = '') {
+  const visibleViews = Array.isArray(views) ? views : [views]
+
+  return [
+    className,
+    'mobile-review-content',
+    visibleViews.includes(activeView) ? 'is-mobile-review-active' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+}
+
+function InsightCard({ insight, icon, className = '' }) {
   return (
-    <article className="analytics-insight-card">
+    <article className={['analytics-insight-card', className].filter(Boolean).join(' ')}>
       <div className="card-header card-header--with-icon analytics-card-header">
         <img alt="" aria-hidden="true" className="analytics-icon analytics-icon--panel" src={icon} />
         <div className="card-title-group">
@@ -15,7 +27,7 @@ function InsightCard({ insight, icon }) {
   )
 }
 
-function AnalyticsDashboard({ analytics }) {
+function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
   if (!analytics || analytics.isEmpty) {
     return (
       <section className="surface-panel analytics-dashboard">
@@ -43,7 +55,7 @@ function AnalyticsDashboard({ analytics }) {
 
   return (
     <section className="surface-panel analytics-dashboard">
-      <div className="section-heading">
+      <div className="section-heading analytics-dashboard-heading">
         <div>
           <p className="eyebrow">Analytics</p>
           <h2>数据回顾</h2>
@@ -51,7 +63,7 @@ function AnalyticsDashboard({ analytics }) {
         <span className="section-caption">基于全部记录</span>
       </div>
 
-      <div className="analytics-summary">
+      <div className={getMobileReviewContentClass(mobileView, 'today', 'analytics-summary')}>
         {analytics.summaryCards.map((card) => (
           <article className="analytics-tile" key={card.label}>
             <img
@@ -68,13 +80,25 @@ function AnalyticsDashboard({ analytics }) {
       </div>
 
       <div className="analytics-insights">
-        <InsightCard icon={analyticsIcons.today} insight={analytics.todayInsight} />
-        <InsightCard icon={analyticsIcons.week} insight={analytics.weekInsight} />
-        <InsightCard icon={analyticsIcons.month} insight={analytics.monthInsight} />
+        <InsightCard
+          className={getMobileReviewContentClass(mobileView, 'today')}
+          icon={analyticsIcons.today}
+          insight={analytics.todayInsight}
+        />
+        <InsightCard
+          className={getMobileReviewContentClass(mobileView, 'week')}
+          icon={analyticsIcons.week}
+          insight={analytics.weekInsight}
+        />
+        <InsightCard
+          className={getMobileReviewContentClass(mobileView, 'month')}
+          icon={analyticsIcons.month}
+          insight={analytics.monthInsight}
+        />
       </div>
 
       <div className="analytics-content">
-        <section className="analytics-panel">
+        <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
           <div className="panel-heading">
             <p className="eyebrow">Mood Mix</p>
             <h3 className="heading-with-icon">
@@ -105,7 +129,7 @@ function AnalyticsDashboard({ analytics }) {
           )}
         </section>
 
-        <section className="analytics-panel">
+        <section className={getMobileReviewContentClass(mobileView, 'week', 'analytics-panel')}>
           <div className="panel-heading">
             <p className="eyebrow">7 Days</p>
             <h3 className="heading-with-icon">
@@ -130,7 +154,7 @@ function AnalyticsDashboard({ analytics }) {
         </section>
       </div>
 
-      <section className="analytics-panel">
+      <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
         <div className="panel-heading">
           <p className="eyebrow">30 Days</p>
           <h3 className="heading-with-icon">
@@ -157,7 +181,13 @@ function AnalyticsDashboard({ analytics }) {
       </section>
 
       <div className="analytics-detail-grid">
-        <section className="analytics-panel">
+        <section
+          className={getMobileReviewContentClass(
+            mobileView,
+            ['today', 'month'],
+            'analytics-panel',
+          )}
+        >
           <div className="panel-heading">
             <p className="eyebrow">Intensity</p>
             <h3 className="heading-with-icon">
@@ -181,7 +211,13 @@ function AnalyticsDashboard({ analytics }) {
           </div>
         </section>
 
-        <section className="analytics-panel">
+        <section
+          className={getMobileReviewContentClass(
+            mobileView,
+            ['week', 'month'],
+            'analytics-panel',
+          )}
+        >
           <div className="panel-heading">
             <p className="eyebrow">Tags</p>
             <h3 className="heading-with-icon">
@@ -212,7 +248,7 @@ function AnalyticsDashboard({ analytics }) {
           )}
         </section>
 
-        <section className="analytics-panel">
+        <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
           <div className="panel-heading">
             <p className="eyebrow">Favorites</p>
             <h3 className="heading-with-icon">
@@ -250,7 +286,7 @@ function AnalyticsDashboard({ analytics }) {
       </div>
 
       <div className="analytics-review">
-        <article>
+        <article className={getMobileReviewContentClass(mobileView, 'week')}>
           <div className="card-header card-header--with-icon analytics-card-header">
             <img
               alt=""
@@ -263,7 +299,7 @@ function AnalyticsDashboard({ analytics }) {
           <strong>{analytics.streakDays} 天</strong>
           <p>从今天向前计算，记录只表示留下痕迹，不代表状态好坏。</p>
         </article>
-        <article>
+        <article className={getMobileReviewContentClass(mobileView, 'week')}>
           <div className="card-header card-header--with-icon analytics-card-header">
             <img
               alt=""
@@ -275,7 +311,7 @@ function AnalyticsDashboard({ analytics }) {
           </div>
           <p>{analytics.weeklySummary}</p>
         </article>
-        <article>
+        <article className={getMobileReviewContentClass(mobileView, 'month')}>
           <div className="card-header card-header--with-icon analytics-card-header">
             <img
               alt=""

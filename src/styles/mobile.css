@@ -452,6 +452,220 @@
 }
 
 @media (max-width: 760px) {
+  .app-shell {
+    padding-bottom: calc(var(--space-bottom-safe) + 12px);
+  }
+
+  .app-main {
+    gap: 16px;
+    padding-bottom: calc(var(--space-bottom-safe) + 18px);
+  }
+
+  .mobile-page-heading {
+    display: grid;
+    gap: 7px;
+    padding: 4px 2px 2px;
+  }
+
+  .mobile-page-heading h1 {
+    color: var(--color-heading);
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    line-height: 1.05;
+  }
+
+  .mobile-page-heading p:not(.eyebrow) {
+    color: var(--color-muted);
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .garden-workspace {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .mobile-garden-page-heading {
+    order: 1;
+  }
+
+  .garden-workspace .workspace-sidebar {
+    order: 2;
+    grid-template-columns: 1fr;
+  }
+
+  .garden-workspace .workspace-main {
+    order: 3;
+  }
+
+  .desktop-calendar-panel-wrap {
+    display: none !important;
+  }
+
+  .garden-view > .section-heading {
+    display: none;
+  }
+
+  .mobile-garden-search {
+    display: grid;
+  }
+
+  .desktop-filter-search {
+    display: none;
+  }
+
+  .filter-panel {
+    gap: 12px;
+  }
+
+  .filter-status {
+    padding: 10px 12px;
+  }
+
+  .filter-body {
+    border-top: 1px dashed var(--color-border);
+    padding-top: 12px;
+  }
+
+  .tag-cloud-list {
+    max-height: 52px;
+  }
+
+  .theme-switcher {
+    margin-top: 0;
+  }
+
+  .analytics-panel-wrap {
+    display: grid;
+    gap: 14px;
+  }
+
+  .mobile-review-page-heading {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card-lg);
+    padding: 16px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 250, 242, 0.72)),
+      var(--color-card-bg);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .mobile-review-tabs {
+    margin-top: 8px;
+  }
+
+  .mobile-review-tab {
+    min-width: 0;
+    padding: 8px 10px;
+  }
+
+  .review-tab-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobile-review-pane {
+    display: none;
+  }
+
+  .mobile-review-pane.is-mobile-review-active {
+    display: block;
+  }
+
+  .analytics-dashboard-heading {
+    display: none;
+  }
+
+  .analytics-dashboard .mobile-review-content:not(.is-mobile-review-active) {
+    display: none !important;
+  }
+
+  .analytics-dashboard {
+    gap: 14px;
+  }
+
+  .analytics-insights,
+  .analytics-content,
+  .analytics-detail-grid,
+  .analytics-review,
+  .analytics-summary {
+    gap: 12px;
+  }
+
+  .analytics-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendar-panel-wrap,
+  .mobile-review-calendar {
+    min-width: 0;
+  }
+
+  .calendar-view {
+    border-radius: var(--radius-card-lg);
+  }
+
+  .calendar-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .data-panel {
+    gap: 14px;
+  }
+
+  .data-page-heading {
+    display: grid;
+    gap: 8px;
+  }
+
+  .data-section {
+    border-radius: var(--radius-card-lg);
+    padding: 14px;
+  }
+
+  .data-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .data-actions {
+    gap: 10px;
+  }
+
+  .data-actions button {
+    min-height: 74px;
+    padding: 12px;
+  }
+
+  .data-note-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .data-danger-note {
+    align-items: flex-start;
+    font-size: 0.9rem;
+  }
+
+  .mobile-bottom-nav {
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 12px;
+    padding: 8px;
+    border-radius: 24px;
+  }
+
+  .mobile-nav-button {
+    min-height: 58px;
+    gap: 4px;
+  }
+
+  .mobile-nav-button.is-active {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 760px) {
   .hero-section {
     margin-bottom: 16px;
     padding: 18px;

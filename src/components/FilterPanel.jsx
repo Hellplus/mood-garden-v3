@@ -63,6 +63,19 @@ function FilterPanel({
         <span>筛选只影响当前花园显示</span>
       </div>
 
+      <label className="filter-search mobile-garden-search">
+        <span className="field-label-row">
+          <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.search} />
+          搜索花朵、心情或标签
+        </span>
+        <input
+          onChange={(event) => onFilterChange('searchQuery', event.target.value)}
+          placeholder="搜索花朵、心情或标签"
+          type="search"
+          value={safeFilters.searchQuery}
+        />
+      </label>
+
       {!isMobileFilterOpen && hasActiveFilters ? (
         <button
           className="filter-reset mobile-filter-reset"
@@ -78,7 +91,7 @@ function FilterPanel({
         className={isMobileFilterOpen ? 'filter-body is-open' : 'filter-body'}
         id="garden-filter-body"
       >
-        <label className="filter-search">
+        <label className="filter-search desktop-filter-search">
           <span className="field-label-row">
             <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.search} />
             关键词搜索
