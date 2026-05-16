@@ -20,10 +20,46 @@ function registerServiceWorker() {
 
   window.addEventListener('load', () => {
     const serviceWorkerUrl = `${import.meta.env.BASE_URL}service-worker.js`
+    const hadController = Boolean(navigator.serviceWorker.controller)
+    let hasReloadedForUpdate = false
 
-    navigator.serviceWorker.register(serviceWorkerUrl).catch((error) => {
-      console.warn('Mood Garden service worker registration failed.', error)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!hadController || hasReloadedForUpdate) {
+        return
+      }
+
+      hasReloadedForUpdate = true
+      window.location.reload()
     })
+
+    navigator.serviceWorker
+      .register(serviceWorkerUrl)
+      .then((registration) => {
+        registration.update().catch((error) => {
+          console.warn('Mood Garden service worker update check failed.', error)
+        })
+
+        if (registration.waiting) {
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+        }
+
+        registration.addEventListener('updatefound', () => {
+          const nextWorker = registration.installing
+
+          if (!nextWorker) {
+            return
+          }
+
+          nextWorker.addEventListener('statechange', () => {
+            if (nextWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              nextWorker.postMessage({ type: 'SKIP_WAITING' })
+            }
+          })
+        })
+      })
+      .catch((error) => {
+        console.warn('Mood Garden service worker registration failed.', error)
+      })
   })
 }
 

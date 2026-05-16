@@ -1,4 +1,5 @@
-const CACHE_NAME = 'mood-garden-v3-cache-v3-1-dx2-r-fix'
+const CACHE_PREFIX = 'mood-garden-v3-cache-'
+const CACHE_NAME = 'mood-garden-v3-cache-v3-1-dx2-r-fix2'
 const BASE_PATH = '/mood-garden-v3/'
 const SHELL_ASSETS = [
   BASE_PATH,
@@ -24,7 +25,7 @@ self.addEventListener('activate', (event) => {
       .then((cacheNames) =>
         Promise.all(
           cacheNames
-            .filter((cacheName) => cacheName !== CACHE_NAME)
+            .filter((cacheName) => cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME)
             .map((cacheName) => caches.delete(cacheName)),
         ),
       )
@@ -32,26 +33,19 @@ self.addEventListener('activate', (event) => {
   )
 })
 
-async function cacheFirst(request) {
-  const cachedResponse = await caches.match(request)
-
-  if (cachedResponse) {
-    return cachedResponse
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting()
   }
+})
 
-  const networkResponse = await fetch(request)
-
-  if (networkResponse.ok) {
-    const cache = await caches.open(CACHE_NAME)
-    cache.put(request, networkResponse.clone())
-  }
-
-  return networkResponse
+function fetchFresh(request) {
+  return fetch(new Request(request, { cache: 'reload' }))
 }
 
 async function networkFirst(request) {
   try {
-    const networkResponse = await fetch(request)
+    const networkResponse = await fetchFresh(request)
 
     if (networkResponse.ok) {
       const cache = await caches.open(CACHE_NAME)
@@ -92,6 +86,6 @@ self.addEventListener('fetch', (event) => {
     requestUrl.pathname.endsWith('manifest.webmanifest') ||
     requestUrl.pathname.endsWith('favicon.svg')
   ) {
-    event.respondWith(cacheFirst(request))
+    event.respondWith(networkFirst(request))
   }
 })

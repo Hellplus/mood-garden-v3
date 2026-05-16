@@ -1,5 +1,12 @@
 # 更新日志
 
+## V3.1-DX.2-R-FIX.2
+
+- 更新 service worker 缓存版本为 `mood-garden-v3-cache-v3-1-dx2-r-fix2`。
+- 将 `/mood-garden-v3/assets/` 等构建资源请求改为 network-first，网络失败时再回退缓存，避免手机端长期命中旧 JS、CSS 或 PNG。
+- 增加 `SKIP_WAITING` message 支持，并在注册逻辑中主动检查更新、激活 waiting worker、在已有 controller 更新后刷新一次页面。
+- 未修改 UI 组件结构、业务功能、records localStorage 主结构或 CRUD / 筛选 / 日历 / 分析 / 导入导出核心逻辑。
+
 ## V3.1-DX.2-R-FIX
 
 - 新增统一 UI 素材入口 `src/assets/uiAssets.js`，让情绪、花朵、导航、操作、Toast、空状态、数据、分析、新手引导和装饰素材都通过 ES import 进入 Vite 构建。
