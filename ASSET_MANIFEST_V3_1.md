@@ -278,6 +278,43 @@ corner-flower.svg
 - 不做复杂水彩背景；
 - 不影响阅读和性能。
 
+## 第二批 UI 素材清单（V3.1-DX.2-B）
+
+第二批素材统一放在 `src/assets/ui/icons/`，用于补齐反馈状态、数据管理、新手引导、确认提示和日历标记。它们不是临时占位图，而是后续 UI 接入时的正式素材。
+
+| 文件 | 用途 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- |
+| `toast-success.png` | 成功反馈，例如保存、导出、导入完成 | `Toast` | `02-component-style-board.png` |
+| `toast-error.png` | 错误反馈，例如导入失败、文件格式错误 | `Toast` | `02-component-style-board.png`、`03-empty-state-system.png` |
+| `toast-info.png` | 信息提示，例如本地保存、PWA 说明 | `Toast` | `02-component-style-board.png`、`08-mobile-data-page.png` |
+| `data-txt-export.png` | TXT 日记导出入口图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-json-backup.png` | JSON 备份导出入口图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-json-import.png` | JSON 文件导入入口图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-merge-import.png` | 合并导入说明或按钮图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-overwrite-import.png` | 覆盖导入说明或按钮图标 | `DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `data-local-storage.png` | 本地浏览器保存说明图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-pwa-install.png` | 添加到主屏幕 / PWA 说明图标 | `DataPanel` | `08-mobile-data-page.png` |
+| `data-non-medical-note.png` | 非医疗建议说明图标 | `DataPanel`、说明卡片 | `08-mobile-data-page.png` |
+| `onboarding-mood.png` | 新手引导第一步：选择情绪 | `OnboardingModal` | `02-component-style-board.png`、`05-mobile-record-page.png` |
+| `onboarding-write.png` | 新手引导第二步：写下一句话 | `OnboardingModal` | `02-component-style-board.png`、`05-mobile-record-page.png` |
+| `onboarding-plant.png` | 新手引导第三步：种下一朵花 | `OnboardingModal` | `02-component-style-board.png`、`05-mobile-record-page.png` |
+| `warning-soft.png` | 柔和警告提示，例如覆盖导入前提醒 | 确认弹窗、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `delete-confirm-flower.png` | 删除确认中的花朵提示图 | 删除确认弹窗、`FlowerDetailModal` | `09-mobile-detail-modal.png` |
+| `calendar-flower-dot.png` | 日历中有记录日期的小花点 | `CalendarView` | `04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+| `calendar-today-flower.png` | 今日日期标记 | `CalendarView` | `04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+| `calendar-selected-marker.png` | 当前选中日期标记 | `CalendarView` | `04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+
+### 第二批素材接入规则
+
+1. `Toast` 必须优先使用 `toast-success.png`、`toast-error.png`、`toast-info.png` 区分成功、错误和信息提示。
+2. `DataPanel` 必须优先使用 `data-*` 图标展示 TXT 导出、JSON 备份、JSON 导入、合并导入、覆盖导入、本地保存、PWA 安装和非医疗说明。
+3. `OnboardingModal` 必须优先使用 `onboarding-mood.png`、`onboarding-write.png`、`onboarding-plant.png` 对应三步引导。
+4. 删除确认、覆盖导入确认等高风险提示，必须优先使用 `warning-soft.png` 或 `delete-confirm-flower.png`。
+5. `CalendarView` 的有记录日期、今日日期、选中日期标记，必须优先使用 `calendar-*` 素材。
+6. 已存在正式 PNG 素材时，Codex 只能接入、排版或通过 CSS 调整尺寸和间距，不得用 emoji 或临时 SVG 替代。
+7. 如果某个场景缺少正式素材，应先在验收或方案中说明缺口，不得自行重新设计新的图标风格。
+8. 接入第二批素材时不得改变业务逻辑、records localStorage 主结构、导入导出格式或核心计算逻辑。
+
 ## 12. 必须使用 SVG 的素材
 
 以下素材必须优先使用 SVG：
@@ -298,6 +335,8 @@ Toast 状态图标
 - 体积小；
 - 可通过 CSS 变量控制颜色；
 - 更适合不同分辨率和移动端。
+
+第二批素材中已提供正式 PNG 的 `toast-*`、`data-*`、`onboarding-*`、`warning-soft.png`、`delete-confirm-flower.png` 和 `calendar-*` 文件，后续接入时应优先使用这些正式素材，不再临时改画同类 SVG。
 
 ## 13. 可以用 CSS 简化的素材
 
@@ -336,6 +375,8 @@ Toast 状态图标
 
 emoji 可以在早期占位中出现，但 V3.1 UI 素材库落地后，正式 UI 应使用统一 SVG / CSS 素材，避免不同系统渲染不一致。
 
+第二批素材中的 `toast-*`、`data-*`、`onboarding-*`、`warning-soft.png`、`delete-confirm-flower.png` 和 `calendar-*` 都属于正式素材，不允许在已有素材存在时改用 emoji、临时 SVG 或浏览器符号替代。
+
 ## 15. Codex 后续使用素材规则
 
 Codex 后续实现 UI 时必须遵守：
@@ -349,7 +390,9 @@ Codex 后续实现 UI 时必须遵守：
 7. 不得修改 records localStorage 主结构；
 8. 不得为了使用素材改动核心业务逻辑；
 9. 新增素材必须命名清楚，放入对应目录；
-10. 新增素材后必须更新本清单或目录 README。
+10. 新增素材后必须更新本清单或目录 README；
+11. `Toast`、`DataPanel`、`OnboardingModal`、删除确认 / 覆盖导入确认、`CalendarView` 已有第二批正式素材时，必须优先使用本清单指定文件；
+12. 不得用 emoji、临时 SVG 或自行绘制的新风格图标替代已经存在的正式素材。
 
 ## 16. 验收标准
 
