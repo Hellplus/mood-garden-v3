@@ -393,4 +393,60 @@
     width: 68px;
     max-height: 38px;
   }
+
+  .flower-visual--card {
+    width: 82px;
+    height: 96px;
+    margin: 0 auto 10px;
+  }
+
+  .flower-visual--today {
+    width: 104px;
+    height: 116px;
+    margin: 10px auto 12px;
+  }
+
+  .flower-visual--card {
+    width: 96px;
+    height: 104px;
+  }
+
+  .flower-visual--today {
+    width: 108px;
+    height: 118px;
+  }
+
+  .flower-visual--happy,
+  .flower-visual--calm {
+    --flower-asset-height: 92px;
+    --flower-asset-max-width: 78px;
+  }
+
+  .flower-visual--anxious {
+    --flower-asset-height: 88px;
+    --flower-asset-max-width: 88px;
+  }
+
+  .flower-visual--tired {
+    --flower-asset-height: 86px;
+    --flower-asset-max-width: 88px;
+  }
+
+  .flower-visual--excited {
+    --flower-asset-height: 90px;
+    --flower-asset-max-width: 86px;
+  }
+
+  .flower-visual--today.flower-visual--happy,
+  .flower-visual--today.flower-visual--calm {
+    --flower-asset-height: 102px;
+    --flower-asset-max-width: 86px;
+  }
+
+  .flower-visual--today.flower-visual--anxious,
+  .flower-visual--today.flower-visual--tired,
+  .flower-visual--today.flower-visual--excited {
+    --flower-asset-height: 96px;
+    --flower-asset-max-width: 96px;
+  }
 }

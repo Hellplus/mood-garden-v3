@@ -2963,3 +2963,93 @@ select {
   max-width: 100%;
   overflow: hidden;
 }
+
+/* V3.1-DX.2-R.1-B.3 flower scale correction: keep formal flower assets readable without covering card content. */
+.flower-visual--card {
+  width: 88px;
+  height: 104px;
+  margin: 2px auto 10px;
+}
+
+.flower-visual--today {
+  width: 118px;
+  height: 132px;
+  margin: 12px auto 14px;
+}
+
+.today-status-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* V3.1-DX.2-R.1-B.4 flower asset visual normalization. */
+.flower-visual--card {
+  width: 104px;
+  height: 112px;
+  margin: 0 auto 12px;
+}
+
+.flower-visual--today {
+  width: 116px;
+  height: 126px;
+  margin: 10px auto 14px;
+}
+
+.flower-visual--modal,
+.detail-hero-image {
+  width: 176px;
+  max-height: 194px;
+}
+
+.flower-visual--card .flower-asset,
+.flower-visual--today .flower-asset {
+  width: auto;
+  height: var(--flower-asset-height, 96px);
+  max-width: var(--flower-asset-max-width, 94px);
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.flower-visual--modal.detail-hero-image {
+  height: auto;
+  max-width: min(176px, 58vw);
+  object-fit: contain;
+}
+
+.flower-visual--happy {
+  --flower-asset-height: 98px;
+  --flower-asset-max-width: 82px;
+}
+
+.flower-visual--calm {
+  --flower-asset-height: 99px;
+  --flower-asset-max-width: 84px;
+}
+
+.flower-visual--anxious {
+  --flower-asset-height: 94px;
+  --flower-asset-max-width: 92px;
+}
+
+.flower-visual--tired {
+  --flower-asset-height: 92px;
+  --flower-asset-max-width: 92px;
+}
+
+.flower-visual--excited {
+  --flower-asset-height: 96px;
+  --flower-asset-max-width: 90px;
+}
+
+.flower-visual--today.flower-visual--happy,
+.flower-visual--today.flower-visual--calm {
+  --flower-asset-height: 112px;
+  --flower-asset-max-width: 94px;
+}
+
+.flower-visual--today.flower-visual--anxious,
+.flower-visual--today.flower-visual--tired,
+.flower-visual--today.flower-visual--excited {
+  --flower-asset-height: 106px;
+  --flower-asset-max-width: 104px;
+}

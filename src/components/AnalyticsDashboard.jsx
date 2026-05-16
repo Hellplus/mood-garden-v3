@@ -150,7 +150,7 @@ function AnalyticsDashboard({ analytics }) {
               alt=""
               aria-hidden="true"
               className="analytics-icon analytics-icon--heading"
-              src={analyticsTrendIcon}
+              src={analyticsMonthIcon}
             />
             最近 30 天趋势
           </h3>

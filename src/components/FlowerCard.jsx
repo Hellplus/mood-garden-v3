@@ -1,8 +1,3 @@
-import flowerAnxiousImage from '../assets/ui/flowers/flower-anxious.png'
-import flowerCalmImage from '../assets/ui/flowers/flower-calm.png'
-import flowerExcitedImage from '../assets/ui/flowers/flower-excited.png'
-import flowerHappyImage from '../assets/ui/flowers/flower-happy.png'
-import flowerTiredImage from '../assets/ui/flowers/flower-tired.png'
 import deleteIcon from '../assets/ui/icons/action-delete.png'
 import editIcon from '../assets/ui/icons/action-edit.png'
 import moreIcon from '../assets/ui/icons/action-more.png'
@@ -13,18 +8,12 @@ import flowerCardCornerLeafImage from '../assets/ui/decorations/flower-card-corn
 import flowerCardPaperCornerImage from '../assets/ui/decorations/flower-card-paper-corner.png'
 import recordDatePinImage from '../assets/ui/decorations/record-date-pin.png'
 import { getRecordView } from '../utils/records.js'
-
-const flowerImages = {
-  happy: flowerHappyImage,
-  calm: flowerCalmImage,
-  anxious: flowerAnxiousImage,
-  tired: flowerTiredImage,
-  excited: flowerExcitedImage,
-}
+import { getEmotionAssetKey, getFlowerAsset } from '../utils/uiAssets.js'
 
 function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavorite }) {
   const view = getRecordView(record)
-  const flowerImage = flowerImages[record?.emotion] || flowerCalmImage
+  const flowerKey = getEmotionAssetKey(record)
+  const flowerImage = getFlowerAsset(record)
 
   return (
     <article
@@ -52,7 +41,10 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
         />
       ) : null}
       <button className="flower-card-main" onClick={() => onView(record)} type="button">
-        <span className="flower-visual flower-visual--card" aria-hidden="true">
+        <span
+          className={`flower-visual flower-visual--card flower-visual--${flowerKey}`}
+          aria-hidden="true"
+        >
           <img className="flower-asset" src={flowerImage} alt="" />
         </span>
         <span className="flower-card-copy">

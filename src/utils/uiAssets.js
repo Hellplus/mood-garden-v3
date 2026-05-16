@@ -20,8 +20,8 @@ export const moodIconAssets = {
 
 export const flowerAssets = {
   happy: flowerHappyImage,
-  calm: flowerCalmImage,
-  anxious: flowerAnxiousImage,
+  calm: flowerAnxiousImage,
+  anxious: flowerCalmImage,
   tired: flowerTiredImage,
   excited: flowerExcitedImage,
 }

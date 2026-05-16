@@ -1,9 +1,4 @@
 import { useState } from 'react'
-import flowerAnxiousImage from '../assets/ui/flowers/flower-anxious.png'
-import flowerCalmImage from '../assets/ui/flowers/flower-calm.png'
-import flowerExcitedImage from '../assets/ui/flowers/flower-excited.png'
-import flowerHappyImage from '../assets/ui/flowers/flower-happy.png'
-import flowerTiredImage from '../assets/ui/flowers/flower-tired.png'
 import cancelIcon from '../assets/ui/icons/action-cancel.png'
 import checkIcon from '../assets/ui/icons/action-check.png'
 import closeIcon from '../assets/ui/icons/action-close.png'
@@ -13,18 +8,7 @@ import starEmptyIcon from '../assets/ui/icons/action-star-empty.png'
 import starFilledIcon from '../assets/ui/icons/action-star-filled.png'
 import warningIcon from '../assets/ui/icons/warning-soft.png'
 import { getRecordView, parseTagsInput } from '../utils/records.js'
-
-const flowerImages = {
-  happy: flowerHappyImage,
-  calm: flowerCalmImage,
-  anxious: flowerAnxiousImage,
-  tired: flowerTiredImage,
-  excited: flowerExcitedImage,
-}
-
-function getFlowerImage(record) {
-  return flowerImages[record?.emotion] || flowerCalmImage
-}
+import { getEmotionAssetKey, getFlowerAsset } from '../utils/uiAssets.js'
 
 function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFavorite }) {
   const [isEditing, setIsEditing] = useState(mode === 'edit')
@@ -60,6 +44,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
   }
 
   const view = getRecordView(record)
+  const flowerKey = getEmotionAssetKey(record)
 
   function handleSave(event) {
     event.preventDefault()
@@ -88,8 +73,8 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
       <img
         alt=""
         aria-hidden="true"
-        className="flower-visual--modal detail-hero-image"
-        src={getFlowerImage(record)}
+        className={`flower-visual--modal detail-hero-image flower-visual--${flowerKey}`}
+        src={getFlowerAsset(record)}
       />
       <p className="eyebrow">Flower Detail</p>
       <h2>{view.title}</h2>
