@@ -53,6 +53,7 @@
 .primary-action,
 .secondary-action,
 .text-action,
+.icon-button,
 .toast-close,
 .mobile-nav-button {
   transition:
@@ -79,6 +80,7 @@
 .detail-actions button:hover,
 .secondary-action:hover,
 .text-action:hover,
+.icon-button:hover,
 .primary-action:hover {
   transform: translateY(var(--motion-hover-lift));
 }

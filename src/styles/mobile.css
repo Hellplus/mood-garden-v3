@@ -171,9 +171,14 @@
   .data-actions button,
   .filter-toggle,
   .filter-reset,
+  .choice-chip,
+  .tag-chip,
+  .tag-cloud-item,
+  .segmented-control button,
+  .icon-button,
   .text-action,
   .secondary-action {
-    min-height: 42px;
+    min-height: 44px;
   }
 
   .mood-bar-row {
@@ -213,6 +218,17 @@
   .toast {
     top: calc(16px + env(safe-area-inset-top));
     bottom: auto;
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+
+  .empty-state {
+    min-height: 168px;
+    padding: var(--space-card-padding-sm);
+  }
+
+  .compact-empty {
+    min-height: 138px;
   }
 
   .mobile-bottom-nav {

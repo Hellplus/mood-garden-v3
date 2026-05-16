@@ -117,6 +117,39 @@
   --color-gold: var(--color-accent-yellow);
   --radius-panel: var(--radius-card);
   --radius-control: var(--radius-button);
+
+  --component-card-bg: var(--color-card-soft);
+  --component-card-border: var(--color-border);
+  --component-card-hover-border: var(--color-border-strong);
+  --component-card-shadow: var(--shadow-subtle);
+  --component-card-hover-shadow: var(--shadow-soft);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-hover-bg: var(--color-primary-hover);
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: color-mix(in srgb, var(--color-card) 88%, var(--color-primary-soft));
+  --button-secondary-text: var(--color-primary-hover);
+  --button-text-bg: transparent;
+  --button-text-hover-bg: var(--color-primary-soft);
+  --button-danger-bg: var(--color-danger-soft);
+  --button-danger-border: color-mix(in srgb, var(--color-danger) 34%, var(--color-border));
+  --button-danger-text: color-mix(in srgb, var(--color-danger) 78%, var(--color-text));
+  --button-disabled-bg: color-mix(in srgb, var(--color-bg-soft) 70%, var(--color-card));
+  --button-disabled-text: var(--color-text-subtle);
+  --input-border: var(--color-border);
+  --input-hover-border: var(--color-border-strong);
+  --input-focus-border: var(--color-primary);
+  --chip-bg: color-mix(in srgb, var(--color-card) 76%, var(--color-bg-soft));
+  --chip-hover-bg: color-mix(in srgb, var(--color-primary-soft) 58%, var(--color-card));
+  --chip-selected-bg: var(--color-primary-soft);
+  --chip-selected-text: var(--color-primary-hover);
+  --empty-state-bg: color-mix(in srgb, var(--color-card) 72%, var(--color-bg-soft));
+  --empty-state-icon-bg: var(--color-primary-soft);
+  --toast-success-bg: var(--color-success-soft);
+  --toast-error-bg: var(--color-danger-soft);
+  --toast-info-bg: var(--color-info-soft);
+  --toast-success-border: var(--color-success);
+  --toast-error-border: var(--color-danger);
+  --toast-info-border: var(--color-info);
 }
 
 [data-theme='dark'] {

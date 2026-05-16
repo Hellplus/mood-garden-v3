@@ -14,6 +14,8 @@ V3.1-D 做了一轮 UI 视觉抛光，统一按钮、卡片、空状态、Toast�
 
 V3.1-DX.1 根据设计系统文档落地底层设计 token 与基础样式：三套主题基础色、五种情绪色、字体、间距、圆角、阴影、focus-visible 和减少动态效果支持，未修改业务逻辑。
 
+V3.1-DX.2 继续按 UI 实现规范统一原子组件和基础 UI：按钮、表单、chip、基础卡片、Toast 和 EmptyState 视觉更一致，仍未调整页面结构或业务逻辑。
+
 ## 线上访问
 
 GitHub Pages 地址：
@@ -39,6 +41,7 @@ https://hellplus.github.io/mood-garden-v3/
 - V3.1-C 移动端信息架构优化，回顾区整合日历和分析，花园筛选移动端折叠
 - V3.1-D UI 视觉抛光与交互一致性优化
 - V3.1-DX.1 设计 token 与基础样式落地，补充主题、字体、间距、圆角、阴影、focus 和 reduced motion 基础变量
+- V3.1-DX.2 原子组件和基础 UI 统一，覆盖按钮、表单、chip、card、Toast 和 EmptyState 基础样式
 
 ## 数据存储
 

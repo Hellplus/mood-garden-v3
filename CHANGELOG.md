@@ -1,5 +1,15 @@
 # 更新日志
 
+## V3.1-DX.2
+
+- 按 `UI_IMPLEMENTATION_SPEC_V3_1.md` 和 02 UI 组件样式板统一原子组件基础视觉。
+- 统一主按钮、次按钮、文本按钮、图标按钮和危险按钮的基础样式、hover、active、focus 和 disabled 状态。
+- 统一 input、textarea、select、label、helper text 和提示文案的基础视觉。
+- 统一情绪 chip、标签 chip、筛选 chip、segmented control 和标签云按钮的基础样式。
+- 统一 surface panel、tile、分析卡、日历记录卡和数据说明卡的圆角、边框、背景和阴影。
+- 抛光 Toast success / error / info 与 EmptyState 的基础卡片、文字层级和留白。
+- 未新增业务功能，未改变 records localStorage 主结构，未修改 CRUD、筛选、日历、分析或导入导出的核心逻辑。
+
 ## V3.1-DX.1
 
 - 根据 `DESIGN_SYSTEM_V3_1.md` 落地底层设计 token，补充 light / dark / cozy 三套主题基础变量。

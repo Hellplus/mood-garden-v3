@@ -35,11 +35,29 @@ button {
   cursor: pointer;
 }
 
+button,
+input,
+textarea,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 button:disabled,
 input:disabled,
 textarea:disabled,
 select:disabled {
   cursor: not-allowed;
+}
+
+::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 1;
+}
+
+::selection {
+  background: var(--color-primary-soft);
+  color: var(--color-heading);
 }
 
 :where(
