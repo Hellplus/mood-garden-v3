@@ -317,6 +317,225 @@
 
 ---
 
+### 3.14 第四批 UI 平面设计素材（DX.5-R0.5 正式清单）
+
+第四批素材位于以下目录：
+
+- `src/assets/ui/backgrounds/`
+- `src/assets/ui/entries/`
+- `src/assets/ui/cards/`
+- `src/assets/ui/modals/`
+- `src/assets/ui/data/`
+- `src/assets/ui/review/`
+- `src/assets/ui/detail/`
+
+这些目录用于补齐 UI 参考图中明确存在但当前尚未完全落地的页面级平面设计元素。01-09 UI 图不是普通参考图，而是元素蓝图和视觉验收标准；背景装饰、入口插画、卡片装饰、弹窗插画、空状态 CTA 都属于蓝图元素，不是可随意省略的装饰。后续 DX.5-R1 / DX.5-R2 / DX.5-R3 不是“可选参考”，而是必须优先检查这些目录中是否存在正式素材。
+
+#### 3.14.1 背景与页面装饰
+
+路径：`src/assets/ui/backgrounds/`
+
+用途：
+- 移动端记录页顶部植物 / 窗边背景；
+- 移动端花园页顶部植物氛围；
+- 移动端回顾页手账氛围；
+- 移动端数据页本地备份氛围；
+- 页面柔和底纹和窗边植物横向装饰。
+
+接入规则：
+- DX.5-R1 调整移动端四页缺失元素时，必须先检查 `backgrounds/` 是否有对应正式素材。
+- 背景素材只能增强页面层级和花园感，不能遮挡文字、按钮或表单。
+- 页面渐变、留白和卡片背景仍由 CSS 实现，不能把整页 UI 做成一张背景图。
+
+#### 3.14.2 记录页轻量入口卡
+
+路径：`src/assets/ui/entries/`
+
+用途：
+- `entry-garden-card.png` / `entry-garden-small.png`：记录页“花园”入口卡；
+- `entry-review-card.png` / `entry-review-small.png`：记录页“回顾”入口卡；
+- `entry-data-card.png` / `entry-data-small.png`：记录页“数据”入口卡。
+
+接入规则：
+- 如果 DX.5-R1 按最新 R0 审计恢复 05 图中的轻量入口卡，必须优先使用 `entries/` 中的正式素材。
+- 入口卡只能切换到已有移动端 tab，不得新增路由、业务功能或新的数据流。
+- 如果入口素材缺失，必须先报告缺失，不能用 emoji 或临时 SVG 代替。
+
+#### 3.14.3 卡片平面装饰
+
+路径：`src/assets/ui/cards/`
+
+用途：
+- 今日状态卡角落装饰；
+- 最近记录卡手账装饰；
+- 花卡片纸面纹理或角落装饰；
+- 筛选摘要轻量装饰。
+
+接入规则：
+- 卡片装饰只作为视觉辅助，不得影响卡片信息层级。
+- 卡片圆角、边框、阴影、hover、padding 必须继续由 CSS token 实现。
+- 如果已有 `decorations/` 中的素材足够表达，则不强制重复新增 `cards/` 素材。
+
+#### 3.14.4 弹窗与确认类平面素材
+
+路径：`src/assets/ui/modals/`
+
+用途：
+- 覆盖导入确认；
+- 删除确认；
+- 普通柔和确认提示。
+
+接入规则：
+- DX.5-R3 实现覆盖导入确认弹窗时，必须优先使用 `modals/` 或既有 `warning-soft.png` / `delete-confirm-flower.png`。
+- Modal 外壳、遮罩层、bottom sheet 圆角、阴影和入场动画仍由 CSS 实现。
+- Toast 不得替代危险操作确认弹窗。
+
+#### 3.14.5 数据页平面素材
+
+路径：`src/assets/ui/data/`
+
+用途：
+- 备份与导出；
+- 恢复数据；
+- 当前浏览器本地保存；
+- 换设备不会自动同步；
+- 定期 JSON 备份；
+- 添加到主屏幕但不云同步；
+- 非医疗建议；
+- 覆盖导入确认。
+
+接入规则：
+- DX.5-R1 / DX.5-R3 调整数据页时，必须先检查 `data/` 是否有对应正式素材。
+- 数据页素材不得暗示账号、云同步、后端保存或医疗建议。
+- 如果素材缺失，必须报告缺口，不能自由替代。
+
+#### 3.14.6 回顾页平面素材
+
+路径：`src/assets/ui/review/`
+
+用途：
+- 今日轻量日历区；
+- 本周回顾卡；
+- 本月回顾卡；
+- 底部鼓励卡片。
+
+接入规则：
+- DX.5-R1 补齐回顾页缺失元素时，必须优先使用 `review/` 中的正式素材。
+- 回顾页素材只能服务生活化回顾，不得医疗化或诊断化。
+- 今日 / 本周 / 本月 tab 的真实切换逻辑不得因为素材接入而改变。
+
+#### 3.14.7 详情页平面素材
+
+路径：`src/assets/ui/detail/`
+
+用途：
+- 详情 bottom sheet 顶部装饰；
+- 补充日记纸张区；
+- 详情删除确认。
+
+接入规则：
+- DX.5-R3 调整详情弹窗时，必须优先使用 `detail/` 中的正式素材。
+- 详情弹窗查看态 / 编辑态 / 删除确认状态机不得因为素材接入而改变。
+- bottom sheet 外壳、遮罩、sticky 操作区仍由 CSS 实现。
+
+#### 3.14.8 DX.5-R0.5 第四批正式素材映射
+
+后续接入第四批素材时，必须按下表检查文件、页面、组件和验收图。不能因为 CSS 可以做出相近氛围，就省略 UI 蓝图中明确存在的背景、插画或平面装饰。
+
+##### backgrounds
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `backgrounds/mobile-record-top-garden.png` | 移动端记录页顶部花园氛围背景 | 记录页 / `App.jsx` 移动端记录 tab、`HeroSection` | `05-mobile-record-page.png` |
+| `backgrounds/mobile-garden-top-window.png` | 移动端花园页顶部窗边植物背景 | 花园页 / `GardenView`、移动端花园 heading | `06-mobile-garden-page.png` |
+| `backgrounds/mobile-review-top-leaves.png` | 移动端回顾页顶部叶片手账背景 | 回顾页 / `AnalyticsDashboard`、`CalendarView`、移动端回顾 heading | `07-mobile-review-page.png` |
+| `backgrounds/mobile-data-top-plant.png` | 移动端数据页顶部植物和本地保存背景 | 数据页 / `DataPanel`、移动端数据 heading | `08-mobile-data-page.png` |
+| `backgrounds/desktop-hero-garden-bg.png` | 桌面端 Hero 花园背景 | 桌面首页 / `HeroSection` | `01-final-visual-direction.png` |
+| `backgrounds/desktop-soft-page-corner.png` | 桌面端页面角落柔和装饰 | 桌面全局页面 / `App.jsx`、`HeroSection` | `01-final-visual-direction.png` |
+| `backgrounds/card-soft-bloom-corner.png` | 通用卡片柔和花朵角落装饰 | 记录卡、花卡、数据卡、回顾卡 / 多组件 | `02-component-style-board.png` |
+| `backgrounds/bottom-nav-soft-bg.png` | 移动端底部导航柔和背景底片 | 移动端底部导航 / `MobileBottomNav` | `05-mobile-record-page.png`、`06-mobile-garden-page.png`、`07-mobile-review-page.png`、`08-mobile-data-page.png` |
+
+##### entries
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `entries/entry-garden-card.png` | 记录页“花园”轻量入口卡主插画 | 记录页 / 移动端入口卡、`App.jsx` | `05-mobile-record-page.png` |
+| `entries/entry-review-card.png` | 记录页“回顾”轻量入口卡主插画 | 记录页 / 移动端入口卡、`App.jsx` | `05-mobile-record-page.png` |
+| `entries/entry-data-card.png` | 记录页“数据”轻量入口卡主插画 | 记录页 / 移动端入口卡、`App.jsx` | `05-mobile-record-page.png` |
+| `entries/entry-garden-small.png` | “花园”入口小图标 / 辅助视觉 | 记录页 / 轻量入口卡、导航提示 | `05-mobile-record-page.png` |
+| `entries/entry-review-small.png` | “回顾”入口小图标 / 辅助视觉 | 记录页 / 轻量入口卡、导航提示 | `05-mobile-record-page.png` |
+| `entries/entry-data-small.png` | “数据”入口小图标 / 辅助视觉 | 记录页 / 轻量入口卡、导航提示 | `05-mobile-record-page.png` |
+
+##### cards
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `cards/recent-view-all-arrow.png` | 最近记录“查看全部”或进入详情方向箭头 | 记录页 / `RecentRecords` | `05-mobile-record-page.png` |
+| `cards/recent-more-dots.png` | 最近记录更多提示点状装饰 | 记录页 / `RecentRecords` | `05-mobile-record-page.png` |
+| `cards/recent-strength-flower-row.png` | 最近记录中的小花强度行装饰 | 记录页 / `RecentRecords` | `05-mobile-record-page.png`、`04-emotion-icon-system.png` |
+| `cards/flower-card-date-chip-bg.png` | 花卡片日期 chip 背景贴纸 | 花园页 / `FlowerCard` | `06-mobile-garden-page.png` |
+| `cards/flower-card-detail-arrow.png` | 花卡详情入口箭头 | 花园页 / `FlowerCard` | `06-mobile-garden-page.png` |
+| `cards/flower-card-more-button-bg.png` | 花卡更多操作按钮背景 | 花园页 / `FlowerCard` | `06-mobile-garden-page.png`、`02-component-style-board.png` |
+| `cards/flower-card-favorite-corner.png` | 花卡收藏角标 / 星星角落装饰 | 花园页 / `FlowerCard` | `06-mobile-garden-page.png`、`04-emotion-icon-system.png` |
+
+##### data
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `data/data-delete-all.png` | 删除全部数据入口图标 / 危险操作视觉 | 数据页 / `DataPanel` 危险操作区 | `08-mobile-data-page.png` |
+| `data/data-delete-all-warning.png` | 删除全部数据警告说明插画 | 数据页 / `DataPanel` 危险操作区、确认弹窗 | `08-mobile-data-page.png` |
+| `data/data-cover-import-confirm.png` | 覆盖导入确认插画 | 数据页 / `DataPanel` 覆盖导入确认 | `08-mobile-data-page.png` |
+| `data/data-merge-recommended-badge.png` | 合并导入推荐徽章 | 数据页 / `DataPanel` 恢复数据分组 | `08-mobile-data-page.png` |
+| `data/data-danger-operation-badge.png` | 危险操作徽章 | 数据页 / `DataPanel` 危险操作区 | `08-mobile-data-page.png` |
+| `data/data-pwa-guide.png` | PWA 添加到主屏幕说明插画 | 数据页 / `DataPanel` PWA 说明 | `08-mobile-data-page.png` |
+| `data/data-device-no-sync.png` | 换设备不会自动同步说明插画 | 数据页 / `DataPanel` 本地保存说明 | `08-mobile-data-page.png` |
+| `data/data-regular-backup.png` | 定期 JSON 备份建议插画 | 数据页 / `DataPanel` 本地保存说明、备份提醒 | `08-mobile-data-page.png` |
+| `data/data-choose-file.png` | 选择 JSON 文件插画 | 数据页 / `DataPanel` 恢复数据分组 | `08-mobile-data-page.png` |
+
+##### review
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `review/review-today-calendar-card.png` | 今日 tab 轻量日历卡背景 / 插画 | 回顾页 / `AnalyticsDashboard`、`CalendarView` | `07-mobile-review-page.png` |
+| `review/review-encouragement-calendar.png` | 回顾页底部鼓励卡片日历插画 | 回顾页 / `AnalyticsDashboard` 鼓励 CTA | `07-mobile-review-page.png` |
+| `review/review-go-record-sprout.png` | “去记录”按钮附近的小芽提示 | 回顾页 / `AnalyticsDashboard` 去记录 CTA | `07-mobile-review-page.png` |
+| `review/review-bottom-leaf-line.png` | 回顾页底部叶线装饰 | 回顾页 / `AnalyticsDashboard` 底部区域 | `07-mobile-review-page.png` |
+| `review/review-today-mini-garden.png` | 今日回顾迷你花园插画 | 回顾页 / 今日 tab | `07-mobile-review-page.png` |
+| `review/review-week-growth.png` | 本周成长 / 趋势卡插画 | 回顾页 / 本周 tab | `07-mobile-review-page.png` |
+| `review/review-month-bouquet.png` | 本月花束 / 月度回顾插画 | 回顾页 / 本月 tab | `07-mobile-review-page.png` |
+
+##### detail
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `detail/detail-bottom-sheet-handle.png` | 详情 bottom sheet 顶部把手视觉素材 | 详情弹窗 / `FlowerDetailModal` | `09-mobile-detail-modal.png` |
+| `detail/detail-note-paper.png` | 补充日记纸张区平面装饰 | 详情弹窗 / `FlowerDetailModal` | `09-mobile-detail-modal.png` |
+| `detail/detail-note-corner-leaf.png` | 补充日记纸张角落叶片 | 详情弹窗 / `FlowerDetailModal` | `09-mobile-detail-modal.png` |
+| `detail/detail-favorite-badge.png` | 详情页收藏徽章 | 详情弹窗 / `FlowerDetailModal` | `09-mobile-detail-modal.png`、`04-emotion-icon-system.png` |
+| `detail/detail-strength-flower-row.png` | 详情页心情强度小花行 | 详情弹窗 / `FlowerDetailModal` | `09-mobile-detail-modal.png`、`04-emotion-icon-system.png` |
+| `detail/detail-delete-confirm.png` | 详情删除确认弹窗插画 | 详情弹窗 / `FlowerDetailModal` 删除确认 | `09-mobile-detail-modal.png` |
+| `detail/detail-overlay-flower.png` | 详情弹窗遮罩层柔和花朵装饰 | 详情弹窗 / `FlowerDetailModal` overlay | `09-mobile-detail-modal.png` |
+| `detail/detail-tag-plus.png` | 详情标签添加 / 标签区域提示素材 | 详情弹窗 / `FlowerDetailModal` 标签区 | `09-mobile-detail-modal.png` |
+
+##### empty-states CTA
+
+| 素材 | 用途 | 对应页面 / 组件 | 验收图 |
+| --- | --- | --- | --- |
+| `empty-states/empty-cta-record.png` | 空状态“去记录” CTA 插画 | `GardenView`、`CalendarView`、`AnalyticsDashboard` 空状态 | `03-empty-state-system.png` |
+| `empty-states/empty-cta-filter-reset.png` | 筛选无结果“重置筛选” CTA 插画 | `GardenView`、`FilterPanel` 空状态 | `03-empty-state-system.png`、`06-mobile-garden-page.png` |
+| `empty-states/empty-cta-backup.png` | 备份提醒 CTA 插画 | `DataPanel` 备份提示 | `03-empty-state-system.png`、`08-mobile-data-page.png` |
+| `empty-states/empty-cta-add-tag.png` | 无标签“添加标签” CTA 插画 | `TagCloud`、`RecordForm` 标签空状态 | `03-empty-state-system.png` |
+| `empty-states/empty-cta-favorite.png` | 无收藏“轻点星星收藏” CTA 插画 | `AnalyticsDashboard` 收藏回顾、`FlowerCard` 收藏提示 | `03-empty-state-system.png`、`04-emotion-icon-system.png` |
+
+#### 3.14.9 缺失素材处理
+
+1. 后续 DX.5-R1 / DX.5-R2 / DX.5-R3 如果需要第四批素材但文件缺失，Codex 必须先报告缺失文件。
+2. 不允许用 emoji、临时 SVG、随机 CSS 图形、浏览器默认图标或外部图片替代正式素材。
+3. 不允许为了绕过素材缺失而自行重新设计页面。
+4. 背景装饰是 UI 蓝图元素，不是可以默认省略的装饰；如果蓝图中存在对应背景或装饰，DX.5-R1 / DX.5-R2 / DX.5-R3 必须优先检查并接入正式素材。
+5. UI 图不是普通参考图，而是元素蓝图和视觉验收标准；实现和验收必须逐项核对图中明确存在的页面元素。
+6. 新素材补齐后，必须同步更新 `ASSET_MANIFEST_V3_1.md` 和本文件。
+
 ## 4. 交给 CSS 实现的视觉
 
 以下内容不应做成图片素材，应由 CSS token、组件 className 和基础样式实现：
