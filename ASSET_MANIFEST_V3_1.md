@@ -497,6 +497,107 @@ corner-flower.svg
 5. 背景装饰属于 UI 蓝图元素，不能因为“只是装饰”而在 DX.5-R 阶段默认省略。
 6. 01-09 UI 图不是普通参考图，而是元素蓝图和视觉验收标准；实现和验收必须逐项核对图中明确存在的页面元素。
 
+## 11.2 第五批 UI 平面设计素材清单（V3.1-DX.5-R0.6）
+
+### 第五批素材目录
+
+第五批素材用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐，覆盖纸感、分割装饰、引导提示、图表装饰、反馈状态、状态徽章和背景纹理类蓝图元素。本批素材只服务于现有 UI，不修改 React 组件，不修改 CSS，不修改业务逻辑。
+
+```text
+src/assets/ui/paper/
+src/assets/ui/guides/
+src/assets/ui/chart-decorations/
+src/assets/ui/feedback/
+src/assets/ui/badges/
+src/assets/ui/patterns/
+```
+
+### paper / 纸感与分割装饰
+
+| 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- | --- |
+| `paper/paper-soft-card-bg.png` | 柔和纸张卡片底纹，增强手账纸感 | 记录页、详情弹窗、回顾页 | `RecordForm`、`FlowerDetailModal`、`AnalyticsDashboard` | `02-component-style-board.png`、`05-mobile-record-page.png`、`09-mobile-detail-modal.png` |
+| `paper/paper-note-line.png` | 补充日记横线纸纹 | 详情弹窗 | `FlowerDetailModal` | `09-mobile-detail-modal.png` |
+| `paper/paper-dashed-divider.png` | 柔和虚线分割装饰 | 记录页、数据页、详情弹窗 | `RecordForm`、`DataPanel`、`FlowerDetailModal` | `02-component-style-board.png`、`08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `paper/paper-tape-green.png` | 绿色纸胶带装饰 | 回顾卡、详情纸张、空状态卡 | `AnalyticsDashboard`、`FlowerDetailModal`、空状态区域 | `03-empty-state-system.png`、`07-mobile-review-page.png`、`09-mobile-detail-modal.png` |
+| `paper/paper-tape-pink.png` | 粉色纸胶带装饰 | 记录页、收藏提示、详情纸张 | `RecordForm`、`FlowerCard`、`FlowerDetailModal` | `02-component-style-board.png`、`05-mobile-record-page.png`、`09-mobile-detail-modal.png` |
+| `paper/paper-tape-yellow.png` | 浅黄纸胶带装饰 | 数据说明卡、回顾鼓励卡 | `DataPanel`、`AnalyticsDashboard` | `07-mobile-review-page.png`、`08-mobile-data-page.png` |
+| `paper/paper-corner-fold.png` | 卡片折角纸感装饰 | 花卡片、最近记录、数据卡 | `FlowerCard`、`RecentRecords`、`DataPanel` | `02-component-style-board.png`、`05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `paper/paper-hole-binding.png` | 手账装订孔装饰 | 回顾日历、详情补充日记 | `CalendarView`、`FlowerDetailModal` | `07-mobile-review-page.png`、`09-mobile-detail-modal.png` |
+| `paper/paper-section-underline.png` | 标题下划线与区块分割 | 记录、花园、回顾、数据页标题 | `App.jsx` 页面 heading、`DataPanel`、`AnalyticsDashboard` | `05-mobile-record-page.png`、`06-mobile-garden-page.png`、`07-mobile-review-page.png`、`08-mobile-data-page.png` |
+| `paper/paper-soft-shadow-edge.png` | 柔和纸边阴影装饰 | 卡片、弹窗、bottom sheet | 通用卡片、`FlowerDetailModal` | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
+
+### patterns / 背景纹理目录
+
+`patterns/` 属于背景纹理与轻量花园底纹目录。根据当前口径，DX.5-R0.6 不要求具体 `patterns/` 文件，后续如重新需要背景纹理素材，必须先补齐正式文件并更新本清单。背景纹理、纸感和分割装饰属于 UI 蓝图元素的一部分，不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代正式素材。
+
+### guides / 引导与提示装饰
+
+| 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- | --- |
+| `guides/guide-step-dot-active.png` | 新手引导当前步骤点 | 新手引导 | `OnboardingModal` | `02-component-style-board.png` |
+| `guides/guide-step-dot-inactive.png` | 新手引导未激活步骤点 | 新手引导 | `OnboardingModal` | `02-component-style-board.png` |
+| `guides/guide-arrow-soft.png` | 柔和方向箭头，引导查看详情或入口跳转 | 记录页、花园页、回顾页 | `RecentRecords`、`FlowerCard`、入口卡 | `05-mobile-record-page.png`、`06-mobile-garden-page.png`、`07-mobile-review-page.png` |
+| `guides/guide-pointer-leaf.png` | 叶片指示装饰，用于轻提示 | 记录页、空状态、数据页 | `RecordForm`、空状态区域、`DataPanel` | `03-empty-state-system.png`、`05-mobile-record-page.png`、`08-mobile-data-page.png` |
+| `guides/guide-swipe-hint.png` | 滑动提示插画 | 移动端 bottom sheet、回顾分段 | `FlowerDetailModal`、`AnalyticsDashboard` | `07-mobile-review-page.png`、`09-mobile-detail-modal.png` |
+| `guides/guide-tap-hint.png` | 点击提示插画 | 记录页、花卡片、空状态 CTA | `RecordForm`、`FlowerCard`、空状态区域 | `03-empty-state-system.png`、`05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `guides/guide-collapse-hint.png.png` | 展开 / 收起提示插画；当前文件名以实际文件为准 | 记录更多选项、筛选折叠 | `RecordForm`、`FilterPanel` | `05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `guides/guide-scroll-hint.png` | 滚动提示插画 | 长内容弹层、数据页 | `FlowerDetailModal`、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `guides/guide-small-sparkle.png` | 小闪光点装饰，用于轻量强调 | 记录页、Toast、空状态、回顾鼓励卡 | `RecordForm`、`Toast`、`AnalyticsDashboard` | `03-empty-state-system.png`、`05-mobile-record-page.png`、`07-mobile-review-page.png` |
+
+### chart-decorations / 图表温柔化装饰
+
+| 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- | --- |
+| `chart-decorations/chart-leaf-axis.png` | 图表坐标轴叶片装饰 | 回顾页 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-flower-point.png` | 趋势点小花标记 | 回顾页、日历 | `AnalyticsDashboard`、`CalendarView` | `04-emotion-icon-system.png`、`07-mobile-review-page.png` |
+| `chart-decorations/chart-soft-line-end.png` | 趋势线末端柔和收尾 | 回顾页 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-ring-center-flower.png` | 环形图中心小花装饰 | 回顾页数据分布 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-empty-grid-plant.png` | 图表数据不足时的植物插画 | 回顾页空状态 | `AnalyticsDashboard` | `03-empty-state-system.png`、`07-mobile-review-page.png` |
+| `chart-decorations/chart-week-marker.png` | 本周数据标记 | 回顾页本周 tab | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-month-marker.png` | 本月数据标记 | 回顾页本月 tab | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-trend-smile.png` | 趋势鼓励插画 | 回顾页趋势卡、鼓励 CTA | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+| `chart-decorations/chart-tag-bubble-bg.png` | 标签统计气泡背景 | 回顾页标签 Top 5 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
+
+### feedback / 反馈状态插画
+
+| 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- | --- |
+| `feedback/feedback-success-flower.png` | 成功反馈插画 | Toast、保存成功、导出成功 | `Toast`、`DataPanel`、`FlowerDetailModal` | `02-component-style-board.png`、`08-mobile-data-page.png` |
+| `feedback/feedback-error-flower.png` | 错误反馈插画 | Toast、导入失败 | `Toast`、`DataPanel` | `03-empty-state-system.png`、`08-mobile-data-page.png` |
+| `feedback/feedback-info-note.png` | 信息提示插画 | Toast、数据说明、新手提示 | `Toast`、`DataPanel`、`OnboardingModal` | `02-component-style-board.png`、`08-mobile-data-page.png` |
+| `feedback/feedback-loading-flower.png` | 加载中花朵插画 | 轻量加载状态 | `Toast`、后续 loading state | `02-component-style-board.png` |
+| `feedback/feedback-saving-sprout.png` | 保存中 / 种花中反馈 | 记录提交、详情保存 | `RecordForm`、`FlowerDetailModal` | `05-mobile-record-page.png`、`09-mobile-detail-modal.png` |
+| `feedback/feedback-importing-box.png` | 导入中反馈插画 | 数据页导入流程 | `DataPanel` | `08-mobile-data-page.png` |
+| `feedback/feedback-exporting-file.png` | 导出中反馈插画 | 数据页导出流程 | `DataPanel` | `08-mobile-data-page.png` |
+| `feedback/feedback-dialog-corner-leaf.png` | Dialog 角落叶片装饰 | 删除确认、覆盖导入确认 | `FlowerDetailModal`、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `feedback/feedback-dialog-soft-shadow.png` | Dialog 柔和阴影边缘 | 删除确认、覆盖导入确认 | `FlowerDetailModal`、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `feedback/feedback-toast-sparkle.png` | Toast 小闪光装饰 | Toast | `Toast` | `02-component-style-board.png` |
+
+### badges / 状态徽章
+
+| 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
+| --- | --- | --- | --- | --- |
+| `badges/badge-today.png` | 今日徽章 | 花园页、日历、最近记录 | `FlowerCard`、`CalendarView`、`RecentRecords` | `05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+| `badges/badge-recommended.png` | 推荐徽章 | 数据页合并导入、回顾鼓励 | `DataPanel`、`AnalyticsDashboard` | `08-mobile-data-page.png` |
+| `badges/badge-danger-soft.png` | 柔和危险操作徽章 | 覆盖导入、删除确认、危险区 | `DataPanel`、`FlowerDetailModal` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
+| `badges/badge-favorite.png` | 已收藏徽章 | 花卡片、详情弹窗、收藏回顾 | `FlowerCard`、`FlowerDetailModal`、`AnalyticsDashboard` | `04-emotion-icon-system.png`、`06-mobile-garden-page.png`、`09-mobile-detail-modal.png` |
+| `badges/badge-local-only.png` | 本地保存徽章 | 数据页本地保存说明 | `DataPanel` | `08-mobile-data-page.png` |
+| `badges/badge-no-sync.png` | 不自动同步徽章 | 数据页本地保存说明、PWA 说明 | `DataPanel` | `08-mobile-data-page.png` |
+| `badges/badge-backup-reminder.png` | 备份提醒徽章 | 数据页备份提醒 | `DataPanel` | `08-mobile-data-page.png` |
+| `badges/badge-new-record.png` | 新记录徽章 | 记录页、最近记录 | `RecordForm`、`RecentRecords` | `05-mobile-record-page.png` |
+| `badges/badge-selected.png` | 选中状态徽章 | 情绪选择、筛选、标签、花卡片 | `RecordForm`、`FilterPanel`、`FlowerCard` | `02-component-style-board.png`、`04-emotion-icon-system.png` |
+| `badges/badge-more.png` | 更多操作徽章 | 花卡片、最近记录、移动端入口卡 | `FlowerCard`、`RecentRecords`、入口卡 | `05-mobile-record-page.png`、`06-mobile-garden-page.png` |
+
+### 第五批素材接入规则
+
+1. DX.5-R1 / DX.5-R2 / DX.5-R3 后续实现时，必须优先使用第五批目录中的正式素材。
+2. 如果第五批素材缺失，Codex 必须停止当前 UI 接入并报告缺失文件，不能用 emoji、临时 SVG、随机 CSS 图形、浏览器默认符号或外部图片替代。
+3. 背景纹理、纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
+4. 第五批素材只服务于现有 UI 的平面设计完整性，不得新增业务功能、记录字段、同步能力、账号能力或新的分析含义。
+5. CSS 仍负责布局、圆角、阴影、按钮、输入框、chip 和基础容器；第五批素材只负责纸张、引导、图表装饰、反馈插画、徽章和轻量纹理。
+6. `patterns/` 目录当前按用户确认不要求具体文件；若后续重新需要背景纹理文件，必须先补齐正式素材并更新本清单。
+
 ## 12. 必须使用 SVG 的素材
 
 以下素材必须优先使用 SVG：
@@ -540,6 +641,8 @@ Modal overlay
 
 CSS 简化必须保持克制，不能变成新的视觉风格。
 
+如果第五批已经提供纸感、分割装饰、反馈状态、徽章或背景纹理类正式素材，后续实现必须优先使用正式素材；CSS 只能承担布局、基础容器和状态样式，不能用临时 CSS 图形伪造这些蓝图元素。
+
 ## 14. 不允许用 emoji 代替的素材
 
 以下素材不允许用 emoji 作为最终实现：
@@ -563,6 +666,8 @@ emoji 可以在早期占位中出现，但 V3.1 UI 素材库落地后，正式 U
 
 第三批素材中的 `theme-*`、`chevron-*`、`action-*`、`analytics-*`、`review-*` 和花卡片 / 记录页装饰素材也属于正式素材，不允许在已有素材存在时改用 emoji、临时 SVG、随机 CSS 图形或浏览器默认符号替代。
 
+第四批和第五批平面设计素材目录中的背景、入口卡、卡片装饰、数据页插画、回顾页插画、详情页插画、空状态 CTA、纸张、引导、图表装饰、反馈、徽章和纹理也属于正式素材范围。已有正式文件时，不允许改用 emoji、临时 SVG、随机 CSS 图形、浏览器默认符号或外部图片替代；文件尚未补齐时，必须先报告素材缺口。
+
 ## 15. Codex 后续使用素材规则
 
 Codex 后续实现 UI 时必须遵守：
@@ -581,6 +686,7 @@ Codex 后续实现 UI 时必须遵守：
 12. `ThemeSwitcher`、展开 / 收起、基础操作、`FlowerCard`、`RecordForm`、`AnalyticsDashboard`、`CalendarView` 已有第三批正式素材时，必须优先使用本清单指定文件；
 13. 不得用 emoji、临时 SVG、随机 CSS 图形或自行绘制的新风格图标替代已经存在的正式素材；
 14. 如果后续组件需要图标而素材缺失，必须先报告缺失素材，不能自由替代。
+15. 第五批 `paper/`、`guides/`、`chart-decorations/`、`feedback/`、`badges/`、`patterns/` 目录用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐；在正式素材补齐前，不得用临时 CSS 图形、emoji 或随机 SVG 绕过清单。
 
 ## 16. 验收标准
 
