@@ -3476,6 +3476,47 @@ select {
   gap: 4px;
 }
 
+.data-action-card {
+  position: relative;
+}
+
+.data-action-card strong {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+
+.data-action-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+  background: color-mix(in srgb, var(--color-accent-soft) 72%, var(--color-card-bg));
+  color: var(--color-accent-deep);
+  font-size: 0.74rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.danger-action .data-action-badge {
+  background: color-mix(in srgb, var(--color-danger-soft) 78%, var(--color-card-bg));
+  color: var(--color-danger);
+}
+
+.data-action-badge img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.data-action-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
 .data-section--danger {
   border-color: color-mix(in srgb, var(--color-danger) 30%, var(--color-border));
   background:
@@ -3724,6 +3765,22 @@ select {
   background: color-mix(in srgb, var(--color-info-soft) 44%, var(--color-card-bg));
 }
 
+.data-guide-toggle {
+  justify-self: start;
+  margin-top: 8px;
+}
+
+.data-guide-note {
+  display: block;
+  margin-top: 8px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 9px 10px;
+  background: color-mix(in srgb, var(--color-info-soft) 42%, var(--color-card-bg));
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
 .data-import-help span {
   display: grid;
   gap: 3px;
@@ -3844,6 +3901,73 @@ select {
   place-items: end center;
   padding: 24px;
   background: rgba(44, 39, 33, 0.24);
+}
+
+.confirm-dialog-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 38;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(44, 39, 33, 0.28);
+  backdrop-filter: blur(4px);
+}
+
+.confirm-dialog {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  width: min(520px, 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-modal);
+  padding: 20px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 250, 242, 0.88)),
+    var(--color-card-bg);
+  box-shadow: var(--shadow-modal);
+}
+
+.confirm-dialog--danger {
+  border-color: color-mix(in srgb, var(--color-danger) 28%, var(--color-border));
+}
+
+.confirm-dialog-asset {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+}
+
+.confirm-dialog-copy {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+
+.confirm-dialog-copy h3 {
+  color: var(--color-heading);
+  font-size: 1.16rem;
+}
+
+.confirm-dialog-copy p {
+  color: var(--color-muted);
+  line-height: 1.58;
+}
+
+.confirm-dialog-note {
+  border: 1px solid color-mix(in srgb, var(--color-danger) 22%, var(--color-border));
+  border-radius: var(--radius-control);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--color-danger-soft) 46%, var(--color-card-bg));
+  color: var(--color-danger) !important;
+  font-weight: 800;
+}
+
+.confirm-dialog-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .delete-confirm-dialog {

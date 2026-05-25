@@ -1,15 +1,62 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { dataIcons, emptyStateImages, warningIcons } from '../assets/uiAssets.js'
+import dataChooseFileImage from '../assets/ui/data/data-choose-file.png'
+import dataCoverImportConfirmImage from '../assets/ui/data/data-cover-import-confirm.png'
+import dataDangerOperationBadgeImage from '../assets/ui/data/data-danger-operation-badge.png'
+import dataDeleteAllImage from '../assets/ui/data/data-delete-all.png'
+import dataDeleteAllWarningImage from '../assets/ui/data/data-delete-all-warning.png'
+import dataDeviceNoSyncImage from '../assets/ui/data/data-device-no-sync.png'
+import dataMergeRecommendedBadgeImage from '../assets/ui/data/data-merge-recommended-badge.png'
+import dataPwaGuideImage from '../assets/ui/data/data-pwa-guide.png'
+import dataRegularBackupImage from '../assets/ui/data/data-regular-backup.png'
+import ConfirmDialog from './ConfirmDialog.jsx'
 
-function DataActionButton({ icon, title, description, onClick, variant = '' }) {
+function DataActionButton({
+  badgeIcon,
+  badgeLabel,
+  disabled = false,
+  icon,
+  title,
+  description,
+  onClick,
+  variant = '',
+}) {
   return (
-    <button className={variant} type="button" onClick={onClick}>
+    <button
+      className={['data-action-card', variant].filter(Boolean).join(' ')}
+      disabled={disabled}
+      type="button"
+      onClick={onClick}
+    >
       <img alt="" aria-hidden="true" className="data-icon" src={icon} />
       <span>
-        <strong>{title}</strong>
+        <strong>
+          {title}
+          {badgeIcon ? (
+            <em className="data-action-badge">
+              <img alt="" aria-hidden="true" src={badgeIcon} />
+              {badgeLabel}
+            </em>
+          ) : null}
+        </strong>
         <small>{description}</small>
       </span>
     </button>
+  )
+}
+
+function DataNoteCard({ icon, title, description }) {
+  return (
+    <article>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="data-icon data-icon--note"
+        src={icon}
+      />
+      <strong>{title}</strong>
+      <p>{description}</p>
+    </article>
   )
 }
 
@@ -19,18 +66,84 @@ function DataPanel({
   onExportJson = () => {},
   onImportMerge = () => {},
   onImportReplace = () => {},
+  onClearRecords,
 }) {
-  const mergeInputRef = useRef(null)
-  const replaceInputRef = useRef(null)
+  const fileInputRef = useRef(null)
+  const [fileAction, setFileAction] = useState('select')
+  const [selectedImportFile, setSelectedImportFile] = useState(null)
+  const [pendingReplaceFile, setPendingReplaceFile] = useState(null)
+  const [isReplaceConfirmOpen, setIsReplaceConfirmOpen] = useState(false)
+  const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false)
+  const [isPwaGuideOpen, setIsPwaGuideOpen] = useState(false)
+  const canClearRecords = typeof onClearRecords === 'function'
 
-  function handleFileChange(event, handler) {
+  function openFilePicker(action = 'select') {
+    setFileAction(action)
+    fileInputRef.current?.click()
+  }
+
+  function handleFileChange(event) {
     const file = event.target.files?.[0]
 
     if (file) {
-      handler(file)
+      setSelectedImportFile(file)
+
+      if (fileAction === 'merge') {
+        onImportMerge(file)
+        setSelectedImportFile(null)
+      }
+
+      if (fileAction === 'replace') {
+        setPendingReplaceFile(file)
+        setIsReplaceConfirmOpen(true)
+      }
     }
 
+    setFileAction('select')
     event.target.value = ''
+  }
+
+  function handleMergeImport() {
+    if (!selectedImportFile) {
+      openFilePicker('merge')
+      return
+    }
+
+    onImportMerge(selectedImportFile)
+    setSelectedImportFile(null)
+  }
+
+  function handleReplaceImport() {
+    if (!selectedImportFile) {
+      openFilePicker('replace')
+      return
+    }
+
+    setPendingReplaceFile(selectedImportFile)
+    setIsReplaceConfirmOpen(true)
+  }
+
+  function handleCancelReplace() {
+    setIsReplaceConfirmOpen(false)
+    setPendingReplaceFile(null)
+  }
+
+  function handleConfirmReplace() {
+    if (pendingReplaceFile) {
+      onImportReplace(pendingReplaceFile)
+    }
+
+    setIsReplaceConfirmOpen(false)
+    setPendingReplaceFile(null)
+    setSelectedImportFile(null)
+  }
+
+  function handleConfirmClear() {
+    if (canClearRecords) {
+      onClearRecords()
+    }
+
+    setIsClearConfirmOpen(false)
   }
 
   return (
@@ -68,21 +181,32 @@ function DataPanel({
       <section className="data-section data-section--restore" aria-labelledby="restore-title">
         <div className="data-section-heading">
           <h3 id="restore-title">二、恢复数据</h3>
-          <p>导入前会先检查 JSON 文件，并用记录 normalizer 整理旧数据。</p>
+          <p>先选择备份文件，再决定合并或覆盖。导入前会检查 JSON 文件。</p>
         </div>
 
         <div className="data-actions">
           <DataActionButton
-            description="从备份文件中选择 JSON。"
-            icon={dataIcons.jsonImport}
-            onClick={() => mergeInputRef.current?.click()}
+            description={selectedImportFile ? `已选择：${selectedImportFile.name}` : '从手机或其他设备选择备份文件。'}
+            icon={dataChooseFileImage}
+            onClick={() => openFilePicker('select')}
             title="选择 JSON 文件"
           />
           <DataActionButton
             description="把备份追加到当前花园，不会清空已有记录。"
             icon={dataIcons.mergeImport}
-            onClick={() => mergeInputRef.current?.click()}
-            title="合并导入 JSON"
+            badgeIcon={dataMergeRecommendedBadgeImage}
+            badgeLabel="推荐"
+            onClick={handleMergeImport}
+            title="合并导入"
+          />
+          <DataActionButton
+            description="会用备份文件替换当前记录，建议先导出当前 JSON 备份。"
+            icon={dataIcons.overwriteImport}
+            badgeIcon={dataDangerOperationBadgeImage}
+            badgeLabel="危险操作"
+            onClick={handleReplaceImport}
+            title="覆盖导入"
+            variant="danger-action"
           />
         </div>
         <div className="data-import-help">
@@ -102,15 +226,8 @@ function DataPanel({
       <input
         accept="application/json,.json"
         className="file-input"
-        onChange={(event) => handleFileChange(event, onImportMerge)}
-        ref={mergeInputRef}
-        type="file"
-      />
-      <input
-        accept="application/json,.json"
-        className="file-input"
-        onChange={(event) => handleFileChange(event, onImportReplace)}
-        ref={replaceInputRef}
+        onChange={handleFileChange}
+        ref={fileInputRef}
         type="file"
       />
 
@@ -121,36 +238,21 @@ function DataPanel({
         </div>
 
         <div className="data-note-grid" aria-label="数据保存说明">
-          <article>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="data-icon data-icon--note"
-              src={dataIcons.localStorage}
-            />
-            <strong>记录只保存在当前浏览器</strong>
-            <p>你的所有心情花都保存在本地设备，刷新页面后会从本机恢复。</p>
-          </article>
-          <article>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="data-icon data-icon--note"
-              src={dataIcons.pwaInstall}
-            />
-            <strong>换设备不会自动同步</strong>
-            <p>添加到主屏幕只是更方便打开，不会把记录同步到其他手机或电脑。</p>
-          </article>
-          <article>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="data-icon data-icon--note"
-              src={dataIcons.jsonBackup}
-            />
-            <strong>建议定期导出 JSON 备份</strong>
-            <p>清理浏览器数据可能会删除记录，定期备份会更安心。</p>
-          </article>
+          <DataNoteCard
+            description="你的心情花保存在本地设备，刷新页面后会从本机恢复。"
+            icon={dataIcons.localStorage}
+            title="记录只保存在当前浏览器"
+          />
+          <DataNoteCard
+            description="更换手机或浏览器后，记录不会自己同步过去。"
+            icon={dataDeviceNoSyncImage}
+            title="换设备不会自动同步"
+          />
+          <DataNoteCard
+            description="隔一段时间导出 JSON 备份，就能更安心地保存花园。"
+            icon={dataRegularBackupImage}
+            title="建议定期导出 JSON 备份"
+          />
         </div>
         <div className="empty-state backup-reminder-state">
           <img
@@ -179,10 +281,16 @@ function DataPanel({
               alt=""
               aria-hidden="true"
               className="data-icon data-icon--note"
-              src={dataIcons.pwaInstall}
+              src={dataPwaGuideImage}
             />
             <strong>像 App 一样打开</strong>
-            <p>如果浏览器提示可以安装，添加后仍然只保存在本设备。</p>
+            <p>添加到主屏幕后更方便打开，但不会自动同步，也不代表账号登录。</p>
+            <button className="text-action data-guide-toggle" type="button" onClick={() => setIsPwaGuideOpen((value) => !value)}>
+              查看教程 ›
+            </button>
+            {isPwaGuideOpen ? (
+              <small className="data-guide-note">在浏览器菜单中选择“添加到主屏幕”或“安装应用”。记录仍只保存在当前设备。</small>
+            ) : null}
           </article>
         </div>
       </section>
@@ -209,23 +317,51 @@ function DataPanel({
       <section className="data-section data-section--danger" aria-labelledby="danger-data-title">
         <div className="data-section-heading">
           <h3 id="danger-data-title">六、危险操作区域</h3>
-          <p>覆盖导入会替换当前所有记录，操作前建议先导出当前花园。</p>
+          <p>这些操作不可直接执行，必须先确认。操作前建议先导出当前花园。</p>
         </div>
 
         <div className="data-actions">
-          <DataActionButton
-            description="会替换当前所有记录，操作前会再次确认。"
-            icon={dataIcons.overwriteImport}
-            onClick={() => replaceInputRef.current?.click()}
-            title="覆盖导入 JSON"
-            variant="danger-action"
-          />
+          {canClearRecords ? (
+            <DataActionButton
+              description={recordCount > 0 ? '此操作无法撤销，所有记录会被永久删除。' : '当前没有可删除的记录。'}
+              disabled={recordCount === 0}
+              icon={dataDeleteAllImage}
+              onClick={() => setIsClearConfirmOpen(true)}
+              title="删除所有数据"
+              variant="danger-action"
+            />
+          ) : null}
         </div>
         <div className="data-danger-note">
           <img alt="" aria-hidden="true" className="data-icon data-icon--note" src={warningIcons.soft} />
-          <span>建议先导出当前备份，以防数据丢失。</span>
+          <span>{canClearRecords ? '删除前请先导出当前备份，以防数据丢失。' : '当前版本未开放清空全部记录入口。'}</span>
         </div>
       </section>
+
+      <ConfirmDialog
+        cancelLabel="取消"
+        confirmLabel="确认覆盖"
+        description="此操作会替换当前所有记录，覆盖后无法撤销。"
+        image={dataCoverImportConfirmImage}
+        isOpen={isReplaceConfirmOpen}
+        note="建议先导出当前 JSON 备份，以防数据丢失。"
+        title="确认覆盖导入？"
+        variant="danger"
+        onCancel={handleCancelReplace}
+        onConfirm={handleConfirmReplace}
+      />
+      <ConfirmDialog
+        cancelLabel="取消"
+        confirmLabel="确认删除"
+        description="此操作会清空当前浏览器里的所有心情记录，删除后无法撤销。"
+        image={dataDeleteAllWarningImage}
+        isOpen={isClearConfirmOpen}
+        note="建议先导出 JSON 备份，再进行删除。"
+        title="删除所有数据？"
+        variant="danger"
+        onCancel={() => setIsClearConfirmOpen(false)}
+        onConfirm={handleConfirmClear}
+      />
     </section>
   )
 }

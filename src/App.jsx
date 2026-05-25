@@ -140,6 +140,7 @@ function App() {
     records,
     error,
     addRecord,
+    clearRecords,
     updateRecord,
     deleteRecord,
     toggleFavorite,
@@ -319,16 +320,6 @@ function App() {
   }
 
   async function handleImportReplace(file) {
-    const confirmed =
-      typeof window !== 'undefined'
-        ? window.confirm('覆盖导入会替换当前所有记录，确定继续吗？')
-        : false
-
-    if (!confirmed) {
-      showToast('已取消覆盖导入。', 'info')
-      return
-    }
-
     const importedRecords = await getImportedRecords(file)
 
     if (!importedRecords) {
@@ -338,6 +329,12 @@ function App() {
     replaceRecords(importedRecords)
     setSelectedRecord(null)
     showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`, 'success')
+  }
+
+  function handleClearRecords() {
+    clearRecords()
+    setSelectedRecord(null)
+    showToast('所有记录已清空。', 'info')
   }
 
   function handleGoToRecord() {
@@ -544,6 +541,7 @@ function App() {
             data-mobile-section="data"
           >
             <DataPanel
+              onClearRecords={handleClearRecords}
               onExportJson={handleExportJson}
               onExportText={handleExportText}
               onImportMerge={handleImportMerge}
