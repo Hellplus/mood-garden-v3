@@ -1,10 +1,11 @@
 import { getRecordView } from '../utils/records.js'
 import { decorationImages, getEmotionAssetKey, getFlowerAsset, strengthIcons } from '../assets/uiAssets.js'
 
-function TodayStatusCard({ record }) {
+function TodayStatusCard({ record, todayRecordCount = record ? 1 : 0 }) {
   const view = record ? getRecordView(record) : null
   const flowerKey = getEmotionAssetKey(record)
   const flowerImage = getFlowerAsset(record)
+  const todayFlowerCount = todayRecordCount
 
   return (
     <article className="surface-panel today-status">
@@ -15,7 +16,6 @@ function TodayStatusCard({ record }) {
         src={decorationImages.leafSprig}
       />
       <div className="panel-heading">
-        <p className="eyebrow">Today</p>
         <h2>今日状态</h2>
       </div>
 
@@ -33,6 +33,10 @@ function TodayStatusCard({ record }) {
             <strong>{view.intensityText}</strong>
             <span>情绪强度</span>
           </div>
+
+          <p className="today-status-count">
+            记录 {todayRecordCount} 条 · 种了 {todayFlowerCount} 朵花
+          </p>
 
           <div className="today-strength-flowers" aria-label={`情绪强度 ${view.intensityText}`}>
             {[1, 2, 3, 4, 5].map((level) => (
@@ -56,6 +60,7 @@ function TodayStatusCard({ record }) {
         <div className="today-empty">
           <p className="status-label">今天还没有记录</p>
           <strong>0 / 5</strong>
+          <p className="today-status-count">记录 0 条 · 种了 0 朵花</p>
           <span>选一个情绪，写下一句话，第一朵花就会出现。</span>
         </div>
       )}

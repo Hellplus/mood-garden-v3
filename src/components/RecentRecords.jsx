@@ -5,7 +5,6 @@ function RecentRecords({ records, onViewRecord }) {
   return (
     <section className="surface-panel recent-records">
       <div className="panel-heading">
-        <p className="eyebrow">Recent</p>
         <h2>最近记录</h2>
       </div>
 

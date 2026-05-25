@@ -4,7 +4,6 @@ function TagCloud({ tags = [], selectedTag = '', onSelectTag = () => {} }) {
   return (
     <section className="surface-panel tag-cloud">
       <div className="panel-heading">
-        <p className="eyebrow">Tags</p>
         <h2>标签云</h2>
       </div>
 

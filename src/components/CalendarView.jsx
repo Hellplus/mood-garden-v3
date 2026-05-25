@@ -73,12 +73,12 @@ function CalendarView({
   onViewRecord = () => {},
   onToggleFavorite = () => {},
   onDeleteRecord = () => {},
+  onGoToRecord,
 }) {
   return (
     <section className="surface-panel calendar-view">
       <div className="section-heading calendar-heading">
         <div>
-          <p className="eyebrow">Calendar</p>
           <h2 className="heading-with-icon">
             <img alt="" aria-hidden="true" className="card-icon card-icon--sm" src={actionIcons.calendar} />
             {monthLabel}
@@ -157,7 +157,6 @@ function CalendarView({
 
       <div className="calendar-selected-panel">
         <div className="panel-heading">
-          <p className="eyebrow">Selected Day</p>
           <h3>{formatSelectedDate(selectedDateKey)}</h3>
         </div>
 
@@ -171,6 +170,11 @@ function CalendarView({
             />
             <strong>这一天还没有记录</strong>
             <p>可以回到记录区补上一句，也可以让这一天安静地留白。</p>
+            {onGoToRecord ? (
+              <button className="secondary-action" type="button" onClick={onGoToRecord}>
+                去记录
+              </button>
+            ) : null}
           </div>
         ) : (
           <div className="calendar-record-list">

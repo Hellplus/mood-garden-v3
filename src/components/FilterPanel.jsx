@@ -38,7 +38,6 @@ function FilterPanel({
     <section className="surface-panel filter-panel">
       <div className="panel-heading filter-heading">
         <div>
-          <p className="eyebrow">Filter</p>
           <h2>筛选与排序</h2>
         </div>
         <button

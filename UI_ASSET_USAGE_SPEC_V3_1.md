@@ -540,7 +540,7 @@
 
 #### 3.15.1 目录目的
 
-第五批素材用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐，覆盖纸感、分割装饰、引导提示、图表柔化、反馈状态、状态徽章和背景纹理类蓝图元素。本轮只更新素材接入规范，不接入组件，不修改 CSS，不新增业务功能。
+第五批素材用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐，覆盖纸感、分割装饰、引导提示、图表柔化、反馈状态和状态徽章类蓝图元素。本轮只更新素材接入规范，不接入组件，不修改 CSS，不新增业务功能。
 
 ```text
 src/assets/ui/paper/
@@ -548,7 +548,6 @@ src/assets/ui/guides/
 src/assets/ui/chart-decorations/
 src/assets/ui/feedback/
 src/assets/ui/badges/
-src/assets/ui/patterns/
 ```
 
 #### 3.15.2 paper / 纸感与分割装饰
@@ -566,11 +565,7 @@ src/assets/ui/patterns/
 | `paper/paper-section-underline.png` | 标题下划线与区块分割 | 记录、花园、回顾、数据页标题 | `App.jsx` 页面 heading、`DataPanel`、`AnalyticsDashboard` | `05-mobile-record-page.png`、`06-mobile-garden-page.png`、`07-mobile-review-page.png`、`08-mobile-data-page.png` |
 | `paper/paper-soft-shadow-edge.png` | 柔和纸边阴影装饰 | 卡片、弹窗、bottom sheet | 通用卡片、`FlowerDetailModal` | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
 
-#### 3.15.3 patterns / 背景纹理目录
-
-`patterns/` 属于背景纹理与轻量花园底纹目录。根据当前口径，DX.5-R0.6 不要求具体 `patterns/` 文件，后续如重新需要背景纹理素材，必须先补齐正式文件并更新 `ASSET_MANIFEST_V3_1.md` 和本文件。背景纹理、纸感和分割装饰属于 UI 蓝图元素的一部分，不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代正式素材。
-
-#### 3.15.4 guides / 引导与提示装饰
+#### 3.15.3 guides / 引导与提示装饰
 
 | 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
 | --- | --- | --- | --- | --- |
@@ -584,7 +579,7 @@ src/assets/ui/patterns/
 | `guides/guide-scroll-hint.png` | 滚动提示插画 | 长内容弹层、数据页 | `FlowerDetailModal`、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
 | `guides/guide-small-sparkle.png` | 小闪光点装饰，用于轻量强调 | 记录页、Toast、空状态、回顾鼓励卡 | `RecordForm`、`Toast`、`AnalyticsDashboard` | `03-empty-state-system.png`、`05-mobile-record-page.png`、`07-mobile-review-page.png` |
 
-#### 3.15.5 chart-decorations / 图表温柔化装饰
+#### 3.15.4 chart-decorations / 图表温柔化装饰
 
 | 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
 | --- | --- | --- | --- | --- |
@@ -598,7 +593,7 @@ src/assets/ui/patterns/
 | `chart-decorations/chart-trend-smile.png` | 趋势鼓励插画 | 回顾页趋势卡、鼓励 CTA | `AnalyticsDashboard` | `07-mobile-review-page.png` |
 | `chart-decorations/chart-tag-bubble-bg.png` | 标签统计气泡背景 | 回顾页标签 Top 5 | `AnalyticsDashboard` | `07-mobile-review-page.png` |
 
-#### 3.15.6 feedback / 反馈状态插画
+#### 3.15.5 feedback / 反馈状态插画
 
 | 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
 | --- | --- | --- | --- | --- |
@@ -613,7 +608,7 @@ src/assets/ui/patterns/
 | `feedback/feedback-dialog-soft-shadow.png` | Dialog 柔和阴影边缘 | 删除确认、覆盖导入确认 | `FlowerDetailModal`、`DataPanel` | `08-mobile-data-page.png`、`09-mobile-detail-modal.png` |
 | `feedback/feedback-toast-sparkle.png` | Toast 小闪光装饰 | Toast | `Toast` | `02-component-style-board.png` |
 
-#### 3.15.7 badges / 状态徽章
+#### 3.15.6 badges / 状态徽章
 
 | 素材 | 用途 | 对应页面 | 对应组件 | 参考 UI 图 |
 | --- | --- | --- | --- | --- |
@@ -628,15 +623,15 @@ src/assets/ui/patterns/
 | `badges/badge-selected.png` | 选中状态徽章 | 情绪选择、筛选、标签、花卡片 | `RecordForm`、`FilterPanel`、`FlowerCard` | `02-component-style-board.png`、`04-emotion-icon-system.png` |
 | `badges/badge-more.png` | 更多操作徽章 | 花卡片、最近记录、移动端入口卡 | `FlowerCard`、`RecentRecords`、入口卡 | `05-mobile-record-page.png`、`06-mobile-garden-page.png` |
 
-#### 3.15.8 第五批素材使用边界
+#### 3.15.7 第五批素材使用边界
 
 1. 第五批素材只补齐 UI 平面设计完整性，不改变 records localStorage 主结构、CRUD、筛选、搜索、排序、日历、分析、导入导出或主题 key。
-2. CSS 仍负责布局、按钮、卡片、输入框、chip、圆角、阴影和基础背景；第五批素材只负责纸张、引导、图表装饰、反馈、徽章和轻量纹理。
+2. CSS 仍负责布局、按钮、卡片、输入框、chip、圆角、阴影、基础背景、柔和渐变和色块；第五批素材只负责纸张、引导、图表装饰、反馈和徽章。
 3. DX.5-R1 / DX.5-R2 / DX.5-R3 后续实现时，必须优先使用第五批目录中的正式素材。
 4. Codex 后续不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代第五批正式素材。
 5. 后续如果组件需要第五批目录中的素材但文件尚未存在，必须停止当前 UI 接入并报告缺失素材，不能临时替代。
-6. 背景纹理、纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
-7. `patterns/` 目录当前按用户确认不要求具体文件；若后续重新需要背景纹理文件，必须先补齐正式素材并更新 `ASSET_MANIFEST_V3_1.md` 和本文件。
+6. 纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
+7. 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/` 素材，以及 CSS 的柔和渐变和色块。
 
 ## 4. 交给 CSS 实现的视觉
 
@@ -658,7 +653,8 @@ src/assets/ui/patterns/
 - CSS 负责结构、状态和基础质感；
 - PNG / SVG 素材只负责图标、花朵、插画、装饰和语义视觉；
 - 不允许用图片模拟按钮、卡片、输入框或布局容器。
-- 如果第五批已经提供纸感、分割装饰、反馈状态、徽章或背景纹理类正式素材，后续实现必须优先使用正式素材；CSS 不能用临时图形伪造这些 UI 蓝图元素。
+- 如果第五批已经提供纸感、分割装饰、反馈状态或徽章类正式素材，后续实现必须优先使用正式素材；CSS 不能用临时图形伪造这些 UI 蓝图元素。
+- 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/` 素材，以及 CSS 的柔和渐变和色块。
 
 ---
 
@@ -671,7 +667,8 @@ src/assets/ui/patterns/
 5. 不得引入外部图标库或第三方 UI 库。
 6. 不得用随机 CSS 图形伪造正式素材。
 7. 如确认需要新增素材，必须先更新 `ASSET_MANIFEST_V3_1.md` 或提交明确素材补充清单，再进入接入。
-8. 第五批 `paper/`、`guides/`、`chart-decorations/`、`feedback/`、`badges/`、`patterns/` 目录中的素材尚未补齐前，不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代。
+8. 第五批 `paper/`、`guides/`、`chart-decorations/`、`feedback/`、`badges/` 目录中的素材尚未补齐前，不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代。
+9. 页面背景不依赖 `src/assets/ui/patterns/`；后续 Codex 不得引用 `patterns/` 目录，也不得把它作为 DX.5-R 的正式素材依赖。
 
 ---
 
@@ -731,7 +728,7 @@ UI 参考图目录：`pic/ui-reference/`
 
 - FlowerDetailModal、删除确认、Toast、OnboardingModal、九类 EmptyState 完整接入正式素材；
 - 删除确认和危险操作视觉清楚但克制；
-- DX.5-R1 / DX.5-R2 / DX.5-R3 可按第五批目录逐步补齐纸张、引导、图表装饰、反馈、徽章和纹理类正式素材；
+- DX.5-R1 / DX.5-R2 / DX.5-R3 可按第五批目录逐步补齐纸张、引导、图表装饰、反馈和徽章类正式素材；
 - 保持 aria、focus-visible 和移动端可用性。
 
 ---

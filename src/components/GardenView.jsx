@@ -11,6 +11,7 @@ function GardenView({
   onDeleteRecord,
   onToggleFavorite,
   onResetFilters,
+  onGoToRecord,
 }) {
   const hasNoRecords = totalCount === 0
   const hasNoMatches = totalCount > 0 && records.length === 0
@@ -19,7 +20,6 @@ function GardenView({
     <section className="garden-view">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Garden</p>
           <h2>我的情绪花园</h2>
           <p className="section-intro">每一条记录都会在这里长成一朵小花。</p>
         </div>
@@ -39,6 +39,11 @@ function GardenView({
           />
           <strong>花园还在等第一朵花</strong>
           <p>到记录区选一个情绪，写下一句话，就可以开始照看它。</p>
+          {onGoToRecord ? (
+            <button className="secondary-action" type="button" onClick={onGoToRecord}>
+              去记录
+            </button>
+          ) : null}
         </div>
       ) : null}
 

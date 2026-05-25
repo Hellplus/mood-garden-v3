@@ -25,6 +25,7 @@
 .surface-panel,
 .garden-view,
 .flower-detail-panel,
+.delete-confirm-dialog,
 .toast,
 .onboarding-card {
   animation: gentleRise var(--motion-duration-base) var(--motion-ease-standard) both;

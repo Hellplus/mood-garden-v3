@@ -10,7 +10,6 @@ function ThemeSwitcher({
     <section className="surface-panel theme-switcher">
       <div className="panel-heading">
         <div>
-          <p className="eyebrow">Theme</p>
           <h2>主题外观</h2>
         </div>
         <button className="text-action" type="button" onClick={onOpenOnboarding}>

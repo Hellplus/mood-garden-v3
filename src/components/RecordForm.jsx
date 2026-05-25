@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { actionIcons, decorationImages, moodIcons, strengthIcons } from '../assets/uiAssets.js'
 import { EMOTION_OPTIONS, parseTagsInput } from '../utils/records.js'
 
-function RecordForm({ tags, onAddRecord }) {
+const NOTE_MAX_LENGTH = 200
+
+function RecordForm({ tags, onAddRecord, formRef, noteInputRef }) {
   const [emotion, setEmotion] = useState('calm')
   const [note, setNote] = useState('')
   const [intensity, setIntensity] = useState(3)
@@ -50,7 +52,7 @@ function RecordForm({ tags, onAddRecord }) {
   }
 
   return (
-    <form className="surface-panel record-form" onSubmit={handleSubmit}>
+    <form className="surface-panel record-form" ref={formRef} onSubmit={handleSubmit}>
       <img
         alt=""
         aria-hidden="true"
@@ -59,7 +61,6 @@ function RecordForm({ tags, onAddRecord }) {
       />
       <div className="panel-heading">
         <div className="card-title-group">
-          <p className="eyebrow">Record</p>
           <h2>写一朵今天的花</h2>
         </div>
         <img
@@ -96,13 +97,29 @@ function RecordForm({ tags, onAddRecord }) {
         </div>
       </fieldset>
 
-      <label className="form-field">
-        写一句心情
+      <label className="form-field record-note-field">
+        <span className="field-label-row">
+          写一句心情
+          <span
+            className={note.length >= NOTE_MAX_LENGTH ? 'textarea-counter is-full' : 'textarea-counter'}
+          >
+            {note.length}/{NOTE_MAX_LENGTH}
+          </span>
+        </span>
         <textarea
+          maxLength={NOTE_MAX_LENGTH}
           onChange={(event) => setNote(event.target.value)}
           placeholder="今天发生了什么？一句话也很好。"
+          ref={noteInputRef}
           value={note}
         />
+        {note.length >= NOTE_MAX_LENGTH ? (
+          <small className="field-helper field-helper--warning">
+            已经写满 200 字，可以先种下这一朵花。
+          </small>
+        ) : (
+          <small className="field-helper">一句话就很好，不需要写得很完整。</small>
+        )}
       </label>
 
       <div className="record-more">

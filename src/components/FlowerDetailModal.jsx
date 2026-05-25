@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   actionIcons,
   getEmotionAssetKey,
@@ -9,10 +9,52 @@ import { getRecordView, parseTagsInput } from '../utils/records.js'
 
 function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFavorite }) {
   const [isEditing, setIsEditing] = useState(mode === 'edit')
+  const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false)
   const [note, setNote] = useState(record?.note || '')
   const [detailNote, setDetailNote] = useState(record?.detailNote || '')
   const [intensity, setIntensity] = useState(record?.intensity || 3)
   const [tagsText, setTagsText] = useState(Array.isArray(record?.tags) ? record.tags.join(' ') : '')
+  const panelRef = useRef(null)
+  const previousFocusRef = useRef(null)
+  const deleteConfirmOpenRef = useRef(false)
+  const titleId = `flower-detail-title-${record?.id || 'missing'}`
+  const confirmTitleId = `flower-delete-title-${record?.id || 'missing'}`
+
+  useEffect(() => {
+    deleteConfirmOpenRef.current = isDeleteConfirmOpen
+  }, [isDeleteConfirmOpen])
+
+  useEffect(() => {
+    if (!record) {
+      return undefined
+    }
+
+    previousFocusRef.current = document.activeElement
+    panelRef.current?.focus()
+
+    function handleKeyDown(event) {
+      if (event.key !== 'Escape') {
+        return
+      }
+
+      if (deleteConfirmOpenRef.current) {
+        setIsDeleteConfirmOpen(false)
+        return
+      }
+
+      onClose()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+
+      if (previousFocusRef.current instanceof HTMLElement) {
+        previousFocusRef.current.focus()
+      }
+    }
+  }, [onClose, record])
 
   if (!record) {
     return null
@@ -20,14 +62,20 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
 
   if (!record.id) {
     return (
-      <aside className="flower-detail-panel missing-detail-panel" aria-label="记录不存在">
+      <aside
+        aria-labelledby={titleId}
+        aria-modal="true"
+        className="flower-detail-panel missing-detail-panel"
+        ref={panelRef}
+        role="dialog"
+        tabIndex="-1"
+      >
         <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
           <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
         </button>
 
         <img alt="" aria-hidden="true" className="detail-hero-image" src={warningIcons.soft} />
-        <p className="eyebrow">Flower Detail</p>
-        <h2>没有找到这条记录</h2>
+        <h2 id={titleId}>没有找到这条记录</h2>
         <p>这朵花可能已经被删除。关闭面板后，可以继续查看其他记录。</p>
 
         <div className="detail-actions">
@@ -62,7 +110,15 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
   }
 
   return (
-    <aside className="flower-detail-panel" aria-label="真实记录详情">
+    <>
+    <aside
+      aria-labelledby={titleId}
+      aria-modal="true"
+      className={isEditing ? 'flower-detail-panel is-editing' : 'flower-detail-panel'}
+      ref={panelRef}
+      role="dialog"
+      tabIndex="-1"
+    >
       <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
         <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
       </button>
@@ -73,8 +129,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
         className={`flower-visual--modal detail-hero-image flower-visual--${flowerKey}`}
         src={getFlowerAsset(record)}
       />
-      <p className="eyebrow">Flower Detail</p>
-      <h2>{view.title}</h2>
+      <h2 id={titleId}>{view.title}</h2>
       <p className="detail-mood">
         {view.date} · {view.emotionLabel} · {view.intensityText}
       </p>
@@ -155,7 +210,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
               <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.edit} />
               编辑
             </button>
-            <button className="danger-action" type="button" onClick={handleDelete}>
+            <button className="danger-action" type="button" onClick={() => setIsDeleteConfirmOpen(true)}>
               <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.delete} />
               删除
             </button>
@@ -163,6 +218,37 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
         </>
       )}
     </aside>
+    {isDeleteConfirmOpen ? (
+      <div className="delete-dialog-layer" role="presentation">
+        <section
+          aria-labelledby={confirmTitleId}
+          aria-modal="true"
+          className="delete-confirm-dialog"
+          role="alertdialog"
+        >
+          <img
+            alt=""
+            aria-hidden="true"
+            className="delete-confirm-asset"
+            src={warningIcons.deleteConfirmFlower}
+          />
+          <div>
+            <h3 id={confirmTitleId}>确认删除这条心情记录？</h3>
+            <p>删除后将无法恢复，但不会影响其他记录。</p>
+          </div>
+          <div className="delete-confirm-actions">
+            <button className="secondary-action" type="button" onClick={() => setIsDeleteConfirmOpen(false)}>
+              取消
+            </button>
+            <button className="danger-action" type="button" onClick={handleDelete}>
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.delete} />
+              确认删除
+            </button>
+          </div>
+        </section>
+      </div>
+    ) : null}
+    </>
   )
 }
 

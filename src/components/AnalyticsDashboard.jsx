@@ -1,4 +1,5 @@
 import { analyticsIcons, emptyStateImages, getMoodIconAsset } from '../assets/uiAssets.js'
+import { getRecordView } from '../utils/records.js'
 
 function getMobileReviewContentClass(activeView, views, className = '') {
   const visibleViews = Array.isArray(views) ? views : [views]
@@ -27,13 +28,86 @@ function InsightCard({ insight, icon, className = '' }) {
   )
 }
 
-function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
+function TodayReviewPanel({ records = [], onGoToRecord = () => {} }) {
+  const todayLabel = new Intl.DateTimeFormat('zh-CN', {
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+  }).format(new Date())
+
+  return (
+    <section className="analytics-panel today-review-panel">
+      <div className="panel-heading">
+        <h3 className="heading-with-icon">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="review-icon review-icon--wide"
+            src={analyticsIcons.reviewToday}
+          />
+          今日小日历
+        </h3>
+      </div>
+
+      <div className="today-review-card">
+        <div className="today-review-date">
+          <strong>{todayLabel}</strong>
+          <span>{records.length} 条记录</span>
+        </div>
+
+        {records.length > 0 ? (
+          <div className="today-review-list">
+            {records.slice(0, 2).map((record) => {
+              const view = getRecordView(record)
+
+              return (
+                <article key={record.id}>
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    className="mood-icon mood-icon--recent"
+                    src={getMoodIconAsset(record)}
+                  />
+                  <span>
+                    <strong>{view.emotionLabel}</strong>
+                    <small>{view.note}</small>
+                  </span>
+                </article>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="empty-state compact-empty today-review-empty">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="ui-illustration ui-illustration--sm empty-state-asset"
+              src={emptyStateImages.todayNoFlower}
+            />
+            <strong>今天还没有种花</strong>
+            <p>选一个此刻的心情，给今天留一朵小花。</p>
+          </div>
+        )}
+
+        <button className="secondary-action" type="button" onClick={onGoToRecord}>
+          去记录
+        </button>
+      </div>
+    </section>
+  )
+}
+
+function AnalyticsDashboard({
+  analytics,
+  mobileView = 'today',
+  todayRecords = [],
+  onGoToRecord = () => {},
+}) {
   if (!analytics || analytics.isEmpty) {
     return (
       <section className="surface-panel analytics-dashboard">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Analytics</p>
             <h2>数据回顾</h2>
           </div>
           <span className="section-caption">全部记录</span>
@@ -48,6 +122,9 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
           />
           <strong>记录还不够形成回顾</strong>
           <p>写下第一条心情后，这里会慢慢出现总览、趋势和温柔回顾。</p>
+          <button className="secondary-action" type="button" onClick={onGoToRecord}>
+            去记录
+          </button>
         </div>
       </section>
     )
@@ -57,7 +134,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
     <section className="surface-panel analytics-dashboard">
       <div className="section-heading analytics-dashboard-heading">
         <div>
-          <p className="eyebrow">Analytics</p>
           <h2>数据回顾</h2>
         </div>
         <span className="section-caption">基于全部记录</span>
@@ -77,6 +153,10 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
             <small>{card.hint}</small>
           </article>
         ))}
+      </div>
+
+      <div className={getMobileReviewContentClass(mobileView, 'today')}>
+        <TodayReviewPanel records={todayRecords} onGoToRecord={onGoToRecord} />
       </div>
 
       <div className="analytics-insights">
@@ -100,7 +180,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
       <div className="analytics-content">
         <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
           <div className="panel-heading">
-            <p className="eyebrow">Mood Mix</p>
             <h3 className="heading-with-icon">
               <img
                 alt=""
@@ -131,7 +210,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
 
         <section className={getMobileReviewContentClass(mobileView, 'week', 'analytics-panel')}>
           <div className="panel-heading">
-            <p className="eyebrow">7 Days</p>
             <h3 className="heading-with-icon">
               <img
                 alt=""
@@ -156,7 +234,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
 
       <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
         <div className="panel-heading">
-          <p className="eyebrow">30 Days</p>
           <h3 className="heading-with-icon">
             <img
               alt=""
@@ -189,7 +266,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
           )}
         >
           <div className="panel-heading">
-            <p className="eyebrow">Intensity</p>
             <h3 className="heading-with-icon">
               <img
                 alt=""
@@ -219,7 +295,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
           )}
         >
           <div className="panel-heading">
-            <p className="eyebrow">Tags</p>
             <h3 className="heading-with-icon">
               <img
                 alt=""
@@ -250,7 +325,6 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
 
         <section className={getMobileReviewContentClass(mobileView, 'month', 'analytics-panel')}>
           <div className="panel-heading">
-            <p className="eyebrow">Favorites</p>
             <h3 className="heading-with-icon">
               <img
                 alt=""
@@ -281,7 +355,18 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
                 </article>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <div className="empty-state compact-empty">
+              <img
+                alt=""
+                aria-hidden="true"
+                className="ui-illustration ui-illustration--sm empty-state-asset"
+                src={emptyStateImages.noFavorites}
+              />
+              <strong>还没有收藏的瞬间</strong>
+              <p>遇到想保留的心情，可以轻轻点一下星星。</p>
+            </div>
+          )}
         </section>
       </div>
 
@@ -324,6 +409,22 @@ function AnalyticsDashboard({ analytics, mobileView = 'today' }) {
           <p>{analytics.monthlySummary}</p>
         </article>
       </div>
+
+      <article
+        className={getMobileReviewContentClass(
+          mobileView,
+          ['today', 'week', 'month'],
+          'analytics-encouragement',
+        )}
+      >
+        <div>
+          <strong>再多记录几天，趋势会更清楚</strong>
+          <p>不用急着分析自己，先把每一天轻轻留下来。</p>
+        </div>
+        <button className="primary-action" type="button" onClick={onGoToRecord}>
+          去记录
+        </button>
+      </article>
     </section>
   )
 }

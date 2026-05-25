@@ -805,4 +805,75 @@
     flex: 1 1 42%;
     justify-content: center;
   }
+
+  .analytics-encouragement {
+    display: grid;
+    gap: 12px;
+  }
+
+  .analytics-encouragement .primary-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .today-review-date {
+    display: grid;
+    gap: 4px;
+  }
+
+  .data-import-help {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .backup-reminder-state {
+    padding: 14px;
+  }
+
+  .flower-detail-panel {
+    right: 10px;
+    bottom: calc(74px + env(safe-area-inset-bottom));
+    left: 10px;
+    width: auto;
+    max-height: min(82vh, calc(100vh - 104px));
+    border-radius: 28px 28px 22px 22px;
+    padding: 20px 16px 16px;
+  }
+
+  .flower-detail-panel::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 5px;
+    margin: 0 auto 12px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-muted) 34%, transparent);
+  }
+
+  .detail-actions {
+    bottom: -16px;
+    margin-right: -16px;
+    margin-left: -16px;
+    padding: 12px 16px 4px;
+  }
+
+  .detail-actions button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .delete-dialog-layer {
+    align-items: end;
+    padding: 16px 12px calc(82px + env(safe-area-inset-bottom));
+  }
+
+  .delete-confirm-dialog {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .delete-confirm-actions {
+    width: 100%;
+  }
 }

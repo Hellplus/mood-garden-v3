@@ -33,7 +33,6 @@ function OnboardingModal({
           className="ui-illustration ui-illustration--sm onboarding-brand-asset"
           src={decorationImages.brandFlower}
         />
-        <p className="eyebrow">开始使用</p>
         <h2 id="onboarding-title">先写一句今天的心情</h2>
         <p id="onboarding-description">
           不需要写很长。选一个接近今天的情绪，留下一句话，再把它种成一朵花。

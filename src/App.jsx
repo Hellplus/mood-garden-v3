@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import AnalyticsDashboard from './components/AnalyticsDashboard.jsx'
 import CalendarView from './components/CalendarView.jsx'
 import DataPanel from './components/DataPanel.jsx'
@@ -31,6 +31,7 @@ import {
   parseImportPayload,
   readFileAsText,
 } from './utils/importExport.js'
+import { formatDateKey, getTodayKey } from './utils/dates.js'
 import { filterRecords, getFilterSummary, getTagCounts, sortRecords } from './utils/records.js'
 
 const mobileNavItems = [
@@ -105,9 +106,22 @@ function App() {
   const [mobileActiveSection, setMobileActiveSection] = useState('records')
   const [mobileReviewTab, setMobileReviewTab] = useState('today')
   const [dismissedRecordError, setDismissedRecordError] = useState('')
+  const recordSectionRef = useRef(null)
+  const recordFormRef = useRef(null)
+  const recordNoteInputRef = useRef(null)
 
   const filteredRecords = filterRecords(records, filters)
   const recentRecords = sortRecords(records, 'newest').slice(0, 3)
+  const todayKey = getTodayKey()
+  const todayRecords = sortRecords(
+    records.filter((record) => {
+      const createdAt = Number(record.createdAt)
+      const dateSource = Number.isFinite(createdAt) ? createdAt : record.date
+
+      return formatDateKey(dateSource) === todayKey
+    }),
+    'newest',
+  )
   const tagCounts = getTagCounts(records)
   const filterSummary = getFilterSummary({
     totalCount: records.length,
@@ -264,6 +278,27 @@ function App() {
     showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`, 'success')
   }
 
+  function handleGoToRecord() {
+    setMobileActiveSection('records')
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.setTimeout(() => {
+      const target = recordFormRef.current || recordSectionRef.current
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+      window.setTimeout(() => {
+        try {
+          recordNoteInputRef.current?.focus({ preventScroll: true })
+        } catch {
+          recordNoteInputRef.current?.focus()
+        }
+      }, 220)
+    }, 0)
+  }
+
   return (
     <div className="app-shell" data-theme={theme}>
       <HeroSection content={mockHeroContent} />
@@ -273,9 +308,15 @@ function App() {
           className={getMobileSectionClass(mobileActiveSection, 'records', 'daily-grid')}
           aria-label="今日情绪记录"
           data-mobile-section="records"
+          ref={recordSectionRef}
         >
-          <TodayStatusCard record={recentRecords[0]} />
-          <RecordForm tags={mockTags.slice(0, 5)} onAddRecord={handleAddRecord} />
+          <TodayStatusCard record={todayRecords[0]} todayRecordCount={todayRecords.length} />
+          <RecordForm
+            formRef={recordFormRef}
+            noteInputRef={recordNoteInputRef}
+            tags={mockTags.slice(0, 5)}
+            onAddRecord={handleAddRecord}
+          />
           <RecentRecords records={recentRecords} onViewRecord={handleViewRecord} />
         </section>
 
@@ -288,7 +329,6 @@ function App() {
           aria-label="花园工作区"
         >
           <div className="mobile-page-heading mobile-garden-page-heading">
-            <p className="eyebrow">Garden</p>
             <h1>花园</h1>
             <p>这里收藏着你种下的心情花。</p>
           </div>
@@ -306,6 +346,7 @@ function App() {
                 hasActiveFilters={hasActiveFilters}
                 onDeleteRecord={handleDeleteRecord}
                 onEditRecord={handleEditRecord}
+                onGoToRecord={handleGoToRecord}
                 onResetFilters={resetFilters}
                 onToggleFavorite={handleToggleFavorite}
                 onViewRecord={handleViewRecord}
@@ -326,6 +367,7 @@ function App() {
                 days={calendar.calendarDays}
                 monthLabel={calendar.monthLabel}
                 onDeleteRecord={handleDeleteRecord}
+                onGoToRecord={handleGoToRecord}
                 onNextMonth={calendar.goToNextMonth}
                 onPrevMonth={calendar.goToPrevMonth}
                 onSelectDate={calendar.selectDate}
@@ -387,7 +429,6 @@ function App() {
             data-mobile-section="analytics"
           >
             <div className="mobile-page-heading mobile-review-page-heading">
-              <p className="eyebrow">Review</p>
               <h1>回顾</h1>
               <p>看看最近的心情花园。</p>
               <div className="mobile-review-tabs" role="tablist" aria-label="回顾范围">
@@ -415,6 +456,7 @@ function App() {
                 days={calendar.calendarDays}
                 monthLabel={calendar.monthLabel}
                 onDeleteRecord={handleDeleteRecord}
+                onGoToRecord={handleGoToRecord}
                 onNextMonth={calendar.goToNextMonth}
                 onPrevMonth={calendar.goToPrevMonth}
                 onSelectDate={calendar.selectDate}
@@ -425,7 +467,12 @@ function App() {
                 selectedRecords={calendar.selectedRecords}
               />
             </div>
-            <AnalyticsDashboard analytics={analytics} mobileView={mobileReviewTab} />
+            <AnalyticsDashboard
+              analytics={analytics}
+              mobileView={mobileReviewTab}
+              onGoToRecord={handleGoToRecord}
+              todayRecords={todayRecords}
+            />
           </div>
           <div
             className={getMobileSectionClass(mobileActiveSection, 'data', 'data-panel-wrap')}

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { dataIcons, warningIcons } from '../assets/uiAssets.js'
+import { dataIcons, emptyStateImages, warningIcons } from '../assets/uiAssets.js'
 
 function DataActionButton({ icon, title, description, onClick, variant = '' }) {
   return (
@@ -37,7 +37,6 @@ function DataPanel({
     <section className="surface-panel data-panel">
       <div className="section-heading data-page-heading">
         <div>
-          <p className="eyebrow">Data</p>
           <h2>数据</h2>
           <p className="section-intro">管理你的花园备份与本地记录。</p>
         </div>
@@ -46,7 +45,6 @@ function DataPanel({
 
       <section className="data-section data-section--export" aria-labelledby="export-title">
         <div className="data-section-heading">
-          <p className="eyebrow">Backup</p>
           <h3 id="export-title">一、备份与导出</h3>
           <p>导出始终基于全部记录，不受当前筛选条件影响。</p>
         </div>
@@ -69,7 +67,6 @@ function DataPanel({
 
       <section className="data-section data-section--restore" aria-labelledby="restore-title">
         <div className="data-section-heading">
-          <p className="eyebrow">Restore</p>
           <h3 id="restore-title">二、恢复数据</h3>
           <p>导入前会先检查 JSON 文件，并用记录 normalizer 整理旧数据。</p>
         </div>
@@ -87,6 +84,18 @@ function DataPanel({
             onClick={() => mergeInputRef.current?.click()}
             title="合并导入 JSON"
           />
+        </div>
+        <div className="data-import-help">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-illustration ui-illustration--sm empty-state-asset"
+            src={emptyStateImages.importError}
+          />
+          <span>
+            <strong>这份文件没有被认出来时</strong>
+            <small>请确认它是 Mood Garden 的 JSON 备份文件，再重新选择。</small>
+          </span>
         </div>
       </section>
 
@@ -107,7 +116,6 @@ function DataPanel({
 
       <section className="data-section data-section--local" aria-labelledby="local-data-title">
         <div className="data-section-heading">
-          <p className="eyebrow">Local</p>
           <h3 id="local-data-title">三、本地保存说明</h3>
           <p>记录只保存在当前浏览器里，换设备不会自动同步。</p>
         </div>
@@ -128,17 +136,39 @@ function DataPanel({
               alt=""
               aria-hidden="true"
               className="data-icon data-icon--note"
+              src={dataIcons.pwaInstall}
+            />
+            <strong>换设备不会自动同步</strong>
+            <p>添加到主屏幕只是更方便打开，不会把记录同步到其他手机或电脑。</p>
+          </article>
+          <article>
+            <img
+              alt=""
+              aria-hidden="true"
+              className="data-icon data-icon--note"
               src={dataIcons.jsonBackup}
             />
             <strong>建议定期导出 JSON 备份</strong>
             <p>清理浏览器数据可能会删除记录，定期备份会更安心。</p>
           </article>
         </div>
+        <div className="empty-state backup-reminder-state">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="ui-illustration ui-illustration--sm empty-state-asset"
+            src={emptyStateImages.backupReminder}
+          />
+          <strong>记得备份你的花园</strong>
+          <p>记录只保存在当前浏览器，定期导出 JSON 会更安心。</p>
+          <button className="secondary-action" type="button" onClick={onExportJson}>
+            导出备份
+          </button>
+        </div>
       </section>
 
       <section className="data-section data-section--pwa" aria-labelledby="pwa-title">
         <div className="data-section-heading">
-          <p className="eyebrow">PWA</p>
           <h3 id="pwa-title">四、添加到主屏幕</h3>
           <p>添加到主屏幕只是方便打开，不代表账号登录或云同步。</p>
         </div>
@@ -159,7 +189,6 @@ function DataPanel({
 
       <section className="data-section data-section--note" aria-labelledby="non-medical-title">
         <div className="data-section-heading">
-          <p className="eyebrow">Note</p>
           <h3 id="non-medical-title">五、非医疗建议说明</h3>
         </div>
 
@@ -179,7 +208,6 @@ function DataPanel({
 
       <section className="data-section data-section--danger" aria-labelledby="danger-data-title">
         <div className="data-section-heading">
-          <p className="eyebrow">Careful</p>
           <h3 id="danger-data-title">六、危险操作区域</h3>
           <p>覆盖导入会替换当前所有记录，操作前建议先导出当前花园。</p>
         </div>

@@ -501,7 +501,7 @@ corner-flower.svg
 
 ### 第五批素材目录
 
-第五批素材用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐，覆盖纸感、分割装饰、引导提示、图表装饰、反馈状态、状态徽章和背景纹理类蓝图元素。本批素材只服务于现有 UI，不修改 React 组件，不修改 CSS，不修改业务逻辑。
+第五批素材用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐，覆盖纸感、分割装饰、引导提示、图表装饰、反馈状态和状态徽章类蓝图元素。本批素材只服务于现有 UI，不修改 React 组件，不修改 CSS，不修改业务逻辑。
 
 ```text
 src/assets/ui/paper/
@@ -509,7 +509,6 @@ src/assets/ui/guides/
 src/assets/ui/chart-decorations/
 src/assets/ui/feedback/
 src/assets/ui/badges/
-src/assets/ui/patterns/
 ```
 
 ### paper / 纸感与分割装饰
@@ -526,10 +525,6 @@ src/assets/ui/patterns/
 | `paper/paper-hole-binding.png` | 手账装订孔装饰 | 回顾日历、详情补充日记 | `CalendarView`、`FlowerDetailModal` | `07-mobile-review-page.png`、`09-mobile-detail-modal.png` |
 | `paper/paper-section-underline.png` | 标题下划线与区块分割 | 记录、花园、回顾、数据页标题 | `App.jsx` 页面 heading、`DataPanel`、`AnalyticsDashboard` | `05-mobile-record-page.png`、`06-mobile-garden-page.png`、`07-mobile-review-page.png`、`08-mobile-data-page.png` |
 | `paper/paper-soft-shadow-edge.png` | 柔和纸边阴影装饰 | 卡片、弹窗、bottom sheet | 通用卡片、`FlowerDetailModal` | `02-component-style-board.png`、`09-mobile-detail-modal.png` |
-
-### patterns / 背景纹理目录
-
-`patterns/` 属于背景纹理与轻量花园底纹目录。根据当前口径，DX.5-R0.6 不要求具体 `patterns/` 文件，后续如重新需要背景纹理素材，必须先补齐正式文件并更新本清单。背景纹理、纸感和分割装饰属于 UI 蓝图元素的一部分，不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代正式素材。
 
 ### guides / 引导与提示装饰
 
@@ -593,10 +588,10 @@ src/assets/ui/patterns/
 
 1. DX.5-R1 / DX.5-R2 / DX.5-R3 后续实现时，必须优先使用第五批目录中的正式素材。
 2. 如果第五批素材缺失，Codex 必须停止当前 UI 接入并报告缺失文件，不能用 emoji、临时 SVG、随机 CSS 图形、浏览器默认符号或外部图片替代。
-3. 背景纹理、纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
+3. 纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
 4. 第五批素材只服务于现有 UI 的平面设计完整性，不得新增业务功能、记录字段、同步能力、账号能力或新的分析含义。
-5. CSS 仍负责布局、圆角、阴影、按钮、输入框、chip 和基础容器；第五批素材只负责纸张、引导、图表装饰、反馈插画、徽章和轻量纹理。
-6. `patterns/` 目录当前按用户确认不要求具体文件；若后续重新需要背景纹理文件，必须先补齐正式素材并更新本清单。
+5. CSS 仍负责布局、圆角、阴影、按钮、输入框、chip、基础容器、柔和渐变和色块背景；第五批素材只负责纸张、引导、图表装饰、反馈插画和徽章。
+6. 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/` 素材，以及 CSS 的柔和渐变和色块。
 
 ## 12. 必须使用 SVG 的素材
 
@@ -641,7 +636,7 @@ Modal overlay
 
 CSS 简化必须保持克制，不能变成新的视觉风格。
 
-如果第五批已经提供纸感、分割装饰、反馈状态、徽章或背景纹理类正式素材，后续实现必须优先使用正式素材；CSS 只能承担布局、基础容器和状态样式，不能用临时 CSS 图形伪造这些蓝图元素。
+如果第五批已经提供纸感、分割装饰、反馈状态或徽章类正式素材，后续实现必须优先使用正式素材；CSS 只能承担布局、基础容器、状态样式、柔和渐变和色块背景，不能用临时 CSS 图形伪造这些蓝图元素。页面背景不依赖第五批 `patterns/` 纹理素材，后续 Codex 不得引用 `src/assets/ui/patterns/`。
 
 ## 14. 不允许用 emoji 代替的素材
 
@@ -666,7 +661,7 @@ emoji 可以在早期占位中出现，但 V3.1 UI 素材库落地后，正式 U
 
 第三批素材中的 `theme-*`、`chevron-*`、`action-*`、`analytics-*`、`review-*` 和花卡片 / 记录页装饰素材也属于正式素材，不允许在已有素材存在时改用 emoji、临时 SVG、随机 CSS 图形或浏览器默认符号替代。
 
-第四批和第五批平面设计素材目录中的背景、入口卡、卡片装饰、数据页插画、回顾页插画、详情页插画、空状态 CTA、纸张、引导、图表装饰、反馈、徽章和纹理也属于正式素材范围。已有正式文件时，不允许改用 emoji、临时 SVG、随机 CSS 图形、浏览器默认符号或外部图片替代；文件尚未补齐时，必须先报告素材缺口。
+第四批和第五批平面设计素材目录中的背景、入口卡、卡片装饰、数据页插画、回顾页插画、详情页插画、空状态 CTA、纸张、引导、图表装饰、反馈和徽章也属于正式素材范围。已有正式文件时，不允许改用 emoji、临时 SVG、随机 CSS 图形、浏览器默认符号或外部图片替代；文件尚未补齐时，必须先报告素材缺口。
 
 ## 15. Codex 后续使用素材规则
 
@@ -686,7 +681,8 @@ Codex 后续实现 UI 时必须遵守：
 12. `ThemeSwitcher`、展开 / 收起、基础操作、`FlowerCard`、`RecordForm`、`AnalyticsDashboard`、`CalendarView` 已有第三批正式素材时，必须优先使用本清单指定文件；
 13. 不得用 emoji、临时 SVG、随机 CSS 图形或自行绘制的新风格图标替代已经存在的正式素材；
 14. 如果后续组件需要图标而素材缺失，必须先报告缺失素材，不能自由替代。
-15. 第五批 `paper/`、`guides/`、`chart-decorations/`、`feedback/`、`badges/`、`patterns/` 目录用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐；在正式素材补齐前，不得用临时 CSS 图形、emoji 或随机 SVG 绕过清单。
+15. 第五批 `paper/`、`guides/`、`chart-decorations/`、`feedback/`、`badges/` 目录用于 DX.5-R1 / DX.5-R2 / DX.5-R3 的平面设计完整性补齐；在正式素材补齐前，不得用临时 CSS 图形、emoji 或随机 SVG 绕过清单。
+16. 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，也不得将 `patterns/` 作为 DX.5-R 的正式素材依赖。
 
 ## 16. 验收标准
 

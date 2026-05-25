@@ -1,14 +1,10 @@
 export const mockHeroContent = {
-  eyebrow: 'Mood Garden V3.0',
+  eyebrow: 'Mood Garden 情绪花园',
   title: '把今天的心情，种成一座小花园',
   greeting: '晚上好，今天也为自己留一点柔软的空间。',
   description:
-    '这是 V3.0 稳定版：记录保存在本地浏览器中，花园、日历、分析和备份都会围绕你的真实记录工作。',
-  metrics: [
-    { label: '数据位置', value: '本地', hint: 'localStorage 保存' },
-    { label: '记录能力', value: '完整', hint: '新增、编辑、导入导出' },
-    { label: '发布准备', value: '就绪', hint: 'PWA 与 GitHub Pages' },
-  ],
+    '记录保存在当前浏览器中，花园、日历、回顾和备份都会围绕你的真实记录工作。',
+  metrics: [],
 }
 
 export const mockRecords = [
