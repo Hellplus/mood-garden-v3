@@ -1,4 +1,9 @@
 import { emptyStateImages } from '../assets/uiAssets.js'
+import cardSoftBloomCornerImage from '../assets/ui/backgrounds/card-soft-bloom-corner.png'
+import mobileGardenTopWindowImage from '../assets/ui/backgrounds/mobile-garden-top-window.png'
+import heroGardenCornerImage from '../assets/ui/decorations/hero-garden-corner.png'
+import leafSprigImage from '../assets/ui/decorations/leaf-sprig.png'
+import softWindowPlantImage from '../assets/ui/decorations/soft-window-plant.png'
 import FlowerCard from './FlowerCard.jsx'
 
 function GardenView({
@@ -18,6 +23,34 @@ function GardenView({
 
   return (
     <section className="garden-view">
+      <div className="garden-blueprint-decor" aria-hidden="true">
+        <img
+          className="garden-blueprint-decor__window"
+          src={mobileGardenTopWindowImage}
+          alt=""
+        />
+        <img
+          className="garden-blueprint-decor__plant"
+          src={softWindowPlantImage}
+          alt=""
+        />
+        <img
+          className="garden-blueprint-decor__corner"
+          src={heroGardenCornerImage}
+          alt=""
+        />
+        <img
+          className="garden-blueprint-decor__leaf"
+          src={leafSprigImage}
+          alt=""
+        />
+        <img
+          className="garden-blueprint-decor__bloom"
+          src={cardSoftBloomCornerImage}
+          alt=""
+        />
+      </div>
+
       <div className="section-heading">
         <div>
           <h2>我的情绪花园</h2>

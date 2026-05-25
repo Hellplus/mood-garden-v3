@@ -1,5 +1,11 @@
 import { analyticsIcons, emptyStateImages, getMoodIconAsset } from '../assets/uiAssets.js'
+import reviewBottomLeafLineImage from '../assets/ui/review/review-bottom-leaf-line.png'
+import reviewEncouragementCalendarImage from '../assets/ui/review/review-encouragement-calendar.png'
+import reviewGoRecordSproutImage from '../assets/ui/review/review-go-record-sprout.png'
+import reviewTodayCalendarCardImage from '../assets/ui/review/review-today-calendar-card.png'
 import { getRecordView } from '../utils/records.js'
+
+const todayCalendarWeekDays = ['一', '二', '三', '四', '五', '六', '日']
 
 function getMobileReviewContentClass(activeView, views, className = '') {
   const visibleViews = Array.isArray(views) ? views : [views]
@@ -28,7 +34,70 @@ function InsightCard({ insight, icon, className = '' }) {
   )
 }
 
-function TodayReviewPanel({ records = [], onGoToRecord = () => {} }) {
+function TodayCalendarPreview({ days = [], monthLabel = '' }) {
+  return (
+    <div className="today-calendar-preview" aria-label={`${monthLabel}月历预览`}>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="today-calendar-preview__asset"
+        src={reviewTodayCalendarCardImage}
+      />
+      <div className="today-calendar-preview__header">
+        <span>{monthLabel}</span>
+        <img
+          alt=""
+          aria-hidden="true"
+          className="today-calendar-preview__badge"
+          src={reviewEncouragementCalendarImage}
+        />
+      </div>
+      <div className="today-calendar-preview__weekdays" aria-hidden="true">
+        {todayCalendarWeekDays.map((day) => (
+          <span key={day}>{day}</span>
+        ))}
+      </div>
+      <div className="today-calendar-preview__grid">
+        {days.map((day) =>
+          day.isBlank ? (
+            <span
+              aria-hidden="true"
+              className="today-calendar-preview__day is-blank"
+              key={day.id}
+            ></span>
+          ) : (
+            <span
+              aria-label={`${day.dayNumber}日${day.recordCount ? `，${day.recordCount}条记录` : '，未记录'}`}
+              className={[
+                'today-calendar-preview__day',
+                day.hasRecords ? 'has-records' : '',
+                day.isToday ? 'is-today' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              key={day.id}
+            >
+              {day.dayNumber}
+            </span>
+          ),
+        )}
+      </div>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="today-calendar-preview__leaf-line"
+        src={reviewBottomLeafLineImage}
+      />
+    </div>
+  )
+}
+
+function TodayReviewPanel({
+  calendarDays = [],
+  calendarMonthLabel = '',
+  records = [],
+  onGoToRecord = () => {},
+}) {
   const todayLabel = new Intl.DateTimeFormat('zh-CN', {
     month: 'long',
     day: 'numeric',
@@ -54,6 +123,8 @@ function TodayReviewPanel({ records = [], onGoToRecord = () => {} }) {
           <strong>{todayLabel}</strong>
           <span>{records.length} 条记录</span>
         </div>
+
+        <TodayCalendarPreview days={calendarDays} monthLabel={calendarMonthLabel} />
 
         {records.length > 0 ? (
           <div className="today-review-list">
@@ -90,6 +161,12 @@ function TodayReviewPanel({ records = [], onGoToRecord = () => {} }) {
         )}
 
         <button className="secondary-action" type="button" onClick={onGoToRecord}>
+          <img
+            alt=""
+            aria-hidden="true"
+            className="review-go-record-sprout"
+            src={reviewGoRecordSproutImage}
+          />
           去记录
         </button>
       </div>
@@ -99,6 +176,8 @@ function TodayReviewPanel({ records = [], onGoToRecord = () => {} }) {
 
 function AnalyticsDashboard({
   analytics,
+  calendarDays = [],
+  calendarMonthLabel = '',
   mobileView = 'today',
   todayRecords = [],
   onGoToRecord = () => {},
@@ -156,7 +235,12 @@ function AnalyticsDashboard({
       </div>
 
       <div className={getMobileReviewContentClass(mobileView, 'today')}>
-        <TodayReviewPanel records={todayRecords} onGoToRecord={onGoToRecord} />
+        <TodayReviewPanel
+          calendarDays={calendarDays}
+          calendarMonthLabel={calendarMonthLabel}
+          records={todayRecords}
+          onGoToRecord={onGoToRecord}
+        />
       </div>
 
       <div className="analytics-insights">

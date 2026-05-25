@@ -5,7 +5,62 @@ import {
   getFlowerAsset,
   warningIcons,
 } from '../assets/uiAssets.js'
+import detailBottomSheetHandleImage from '../assets/ui/detail/detail-bottom-sheet-handle.png'
+import detailOverlayFlowerImage from '../assets/ui/detail/detail-overlay-flower.png'
+import detailStrengthFlowerRowImage from '../assets/ui/detail/detail-strength-flower-row.png'
+import strengthFlowerEmptyImage from '../assets/ui/strength/strength-flower-empty.png'
+import strengthFlowerFilledImage from '../assets/ui/strength/strength-flower-filled.png'
 import { getRecordView, parseTagsInput } from '../utils/records.js'
+
+function DetailBackdrop({ onClose }) {
+  return (
+    <div className="flower-detail-backdrop" role="presentation" onClick={onClose}>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="flower-detail-backdrop__asset"
+        src={detailOverlayFlowerImage}
+      />
+    </div>
+  )
+}
+
+function DetailSheetHandle() {
+  return (
+    <img
+      alt=""
+      aria-hidden="true"
+      className="detail-bottom-sheet-handle"
+      src={detailBottomSheetHandleImage}
+    />
+  )
+}
+
+function DetailStrengthRow({ intensity }) {
+  const safeIntensity = Math.min(5, Math.max(1, Number(intensity) || 3))
+
+  return (
+    <div className="detail-strength-row" aria-label={`情绪强度 ${safeIntensity} / 5`}>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="detail-strength-row__asset"
+        src={detailStrengthFlowerRowImage}
+      />
+      <span className="detail-strength-row__flowers" aria-hidden="true">
+        {Array.from({ length: 5 }, (_, index) => (
+          <img
+            alt=""
+            className="detail-strength-row__flower"
+            key={index}
+            src={index < safeIntensity ? strengthFlowerFilledImage : strengthFlowerEmptyImage}
+          />
+        ))}
+      </span>
+      <strong>强度 {safeIntensity} / 5</strong>
+    </div>
+  )
+}
 
 function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFavorite }) {
   const [isEditing, setIsEditing] = useState(mode === 'edit')
@@ -62,6 +117,8 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
 
   if (!record.id) {
     return (
+      <>
+      <DetailBackdrop onClose={onClose} />
       <aside
         aria-labelledby={titleId}
         aria-modal="true"
@@ -70,6 +127,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
         role="dialog"
         tabIndex="-1"
       >
+        <DetailSheetHandle />
         <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
           <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
         </button>
@@ -85,6 +143,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
           </button>
         </div>
       </aside>
+      </>
     )
   }
 
@@ -111,6 +170,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
 
   return (
     <>
+    <DetailBackdrop onClose={onClose} />
     <aside
       aria-labelledby={titleId}
       aria-modal="true"
@@ -119,6 +179,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
       role="dialog"
       tabIndex="-1"
     >
+      <DetailSheetHandle />
       <button className="icon-button" type="button" onClick={onClose} aria-label="关闭详情">
         <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={actionIcons.close} />
       </button>
@@ -187,6 +248,7 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
           <p>{view.note}</p>
           <p className="flower-quote">{view.quote}</p>
           {view.detailNote ? <p className="detail-extra">{view.detailNote}</p> : null}
+          <DetailStrengthRow intensity={view.intensity} />
 
           <div className="detail-tags">
             {view.tags.length > 0 ? (

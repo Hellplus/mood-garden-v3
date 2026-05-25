@@ -15,6 +15,12 @@ import ThemeSwitcher from './components/ThemeSwitcher.jsx'
 import TodayStatusCard from './components/TodayStatusCard.jsx'
 import Toast from './components/Toast.jsx'
 import { analyticsIcons } from './assets/uiAssets.js'
+import entryDataCardImage from './assets/ui/entries/entry-data-card.png'
+import entryDataSmallImage from './assets/ui/entries/entry-data-small.png'
+import entryGardenCardImage from './assets/ui/entries/entry-garden-card.png'
+import entryGardenSmallImage from './assets/ui/entries/entry-garden-small.png'
+import entryReviewCardImage from './assets/ui/entries/entry-review-card.png'
+import entryReviewSmallImage from './assets/ui/entries/entry-review-small.png'
 import { mockHeroContent, mockTags } from './data/mockData.js'
 import useAnalytics from './hooks/useAnalytics.js'
 import useCalendar from './hooks/useCalendar.js'
@@ -47,6 +53,30 @@ const mobileReviewTabs = [
   { id: 'month', label: '本月', icon: analyticsIcons.reviewMonth },
 ]
 
+const mobileEntryCards = [
+  {
+    id: 'garden',
+    label: '花园',
+    hint: '看看今天长出的花',
+    cardImage: entryGardenCardImage,
+    smallImage: entryGardenSmallImage,
+  },
+  {
+    id: 'analytics',
+    label: '回顾',
+    hint: '翻一翻近期心情',
+    cardImage: entryReviewCardImage,
+    smallImage: entryReviewSmallImage,
+  },
+  {
+    id: 'data',
+    label: '数据',
+    hint: '照看本地记录',
+    cardImage: entryDataCardImage,
+    smallImage: entryDataSmallImage,
+  },
+]
+
 function getMobileSectionClass(activeSection, sectionId, className = '') {
   return [className, 'mobile-section', activeSection === sectionId ? 'is-mobile-active' : '']
     .filter(Boolean)
@@ -71,6 +101,38 @@ function getMobileReviewPaneClass(activeTab, tabId, className = '') {
   ]
     .filter(Boolean)
     .join(' ')
+}
+
+function MobileRecordEntryCards({ onNavigate }) {
+  return (
+    <nav className="mobile-record-entry-cards" aria-label="记录页轻量入口">
+      {mobileEntryCards.map((item) => (
+        <button
+          className={`mobile-record-entry-card mobile-record-entry-card--${item.id}`}
+          key={item.id}
+          onClick={() => onNavigate(item.id)}
+          type="button"
+        >
+          <img
+            alt=""
+            aria-hidden="true"
+            className="mobile-record-entry-card-bg"
+            src={item.cardImage}
+          />
+          <span className="mobile-record-entry-copy">
+            <strong>{item.label}</strong>
+            <small>{item.hint}</small>
+          </span>
+          <img
+            alt=""
+            aria-hidden="true"
+            className="mobile-record-entry-small"
+            src={item.smallImage}
+          />
+        </button>
+      ))}
+    </nav>
+  )
 }
 
 function App() {
@@ -318,6 +380,7 @@ function App() {
             onAddRecord={handleAddRecord}
           />
           <RecentRecords records={recentRecords} onViewRecord={handleViewRecord} />
+          <MobileRecordEntryCards onNavigate={setMobileActiveSection} />
         </section>
 
         <section
@@ -469,6 +532,8 @@ function App() {
             </div>
             <AnalyticsDashboard
               analytics={analytics}
+              calendarDays={calendar.calendarDays}
+              calendarMonthLabel={calendar.monthLabel}
               mobileView={mobileReviewTab}
               onGoToRecord={handleGoToRecord}
               todayRecords={todayRecords}

@@ -570,11 +570,21 @@ button:disabled {
 }
 
 .garden-view {
+  position: relative;
   padding: 22px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-panel);
   background: var(--color-garden-bg);
   box-shadow: var(--shadow-soft);
+}
+
+.garden-blueprint-decor {
+  display: none;
+}
+
+.garden-view > :not(.garden-blueprint-decor) {
+  position: relative;
+  z-index: 1;
 }
 
 .garden-summary {
@@ -3186,6 +3196,10 @@ select {
   grid-area: recent;
 }
 
+.mobile-record-entry-cards {
+  display: none;
+}
+
 .record-form-decoration {
   position: absolute;
   pointer-events: none;
@@ -3521,14 +3535,115 @@ select {
 }
 
 .today-review-card {
+  position: relative;
   display: grid;
   gap: 12px;
+  overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   padding: 14px;
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--color-accent-soft) 44%, transparent), transparent),
     var(--color-card-bg);
+}
+
+.today-calendar-preview {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 24%, var(--color-border));
+  border-radius: var(--radius-card-sm);
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 253, 248, 0.92)),
+    var(--color-card-bg);
+}
+
+.today-calendar-preview__asset,
+.today-calendar-preview__leaf-line {
+  position: absolute;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.today-calendar-preview__asset {
+  right: -22px;
+  top: -22px;
+  width: 132px;
+  opacity: 0.2;
+}
+
+.today-calendar-preview__leaf-line {
+  right: 10px;
+  bottom: 4px;
+  width: 126px;
+  opacity: 0.42;
+}
+
+.today-calendar-preview__header,
+.today-calendar-preview__weekdays,
+.today-calendar-preview__grid {
+  position: relative;
+  z-index: 1;
+}
+
+.today-calendar-preview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--color-heading);
+  font-weight: 900;
+}
+
+.today-calendar-preview__badge {
+  width: 46px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.today-calendar-preview__weekdays,
+.today-calendar-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.today-calendar-preview__weekdays {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.today-calendar-preview__day {
+  display: grid;
+  place-items: center;
+  min-height: 28px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-card-bg) 72%, var(--color-bg-soft));
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.today-calendar-preview__day.is-blank {
+  background: transparent;
+}
+
+.today-calendar-preview__day.has-records {
+  border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent-soft) 72%, var(--color-card-bg));
+  color: var(--color-accent-deep);
+}
+
+.today-calendar-preview__day.is-today {
+  border-color: var(--color-accent);
+  background: var(--color-card-bg);
+  color: var(--color-heading);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 22%, transparent);
 }
 
 .today-review-date {
@@ -3630,7 +3745,78 @@ select {
 }
 
 .flower-detail-panel {
+  z-index: 32;
   outline: none;
+}
+
+.flower-detail-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(51, 45, 36, 0.18), rgba(51, 45, 36, 0.28)),
+    rgba(255, 250, 242, 0.34);
+  backdrop-filter: blur(4px);
+}
+
+.flower-detail-backdrop__asset {
+  position: absolute;
+  right: clamp(18px, 8vw, 92px);
+  bottom: clamp(88px, 14vh, 148px);
+  width: min(220px, 42vw);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.detail-bottom-sheet-handle {
+  display: none;
+}
+
+.detail-strength-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 14px;
+  border: 1px dashed color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+  border-radius: var(--radius-control);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--color-accent-soft) 46%, var(--color-card-bg));
+}
+
+.detail-strength-row__asset {
+  position: absolute;
+  right: -10px;
+  bottom: -16px;
+  width: 118px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.detail-strength-row__flowers,
+.detail-strength-row strong {
+  position: relative;
+  z-index: 1;
+}
+
+.detail-strength-row__flowers {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.detail-strength-row__flower {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.detail-strength-row strong {
+  color: var(--color-accent-deep);
+  font-size: 0.9rem;
 }
 
 .flower-detail-panel.is-editing {
