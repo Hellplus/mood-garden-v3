@@ -16,7 +16,6 @@ const SORT_OPTIONS = [
 
 function FilterPanel({
   filters = {},
-  summary,
   totalCount = 0,
   filteredCount = 0,
   hasActiveFilters = false,
@@ -33,6 +32,10 @@ function FilterPanel({
     sortOrder: 'newest',
     ...filters,
   }
+  const sortLabel = safeFilters.sortOrder === 'oldest' ? '最早优先' : '最新优先'
+  const filterSummaryText = hasActiveFilters
+    ? `筛选后的花 · ${sortLabel}`
+    : `全部记录 · ${sortLabel}`
 
   return (
     <section className="surface-panel filter-panel">
@@ -58,8 +61,8 @@ function FilterPanel({
       </div>
 
       <div className="filter-status" role="status">
-        <strong>{summary || `当前显示 ${filteredCount} / ${totalCount} 条`}</strong>
-        <span>筛选只影响当前花园显示</span>
+        <strong>{filterSummaryText}</strong>
+        <span>{hasActiveFilters ? `${filteredCount} / ${totalCount} 朵心情花` : `${totalCount} 朵心情花`}</span>
       </div>
 
       <label className="filter-search mobile-garden-search">

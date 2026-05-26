@@ -53,12 +53,12 @@ function GardenView({
 
       <div className="section-heading">
         <div>
-          <h2>我的情绪花园</h2>
-          <p className="section-intro">每一条记录都会在这里长成一朵小花。</p>
+          <h2>情绪花园</h2>
+          <p className="section-intro">这里收藏着你种下的心情花。</p>
         </div>
         <div className="garden-summary">
           <span>{hasActiveFilters ? `${records.length} / ${totalCount} 朵` : `${totalCount} 朵`}</span>
-          <span>{hasActiveFilters ? '筛选结果' : '全部记录'}</span>
+          <span>{hasActiveFilters ? '筛选后的花' : '全部心情花'}</span>
         </div>
       </div>
 
@@ -88,8 +88,8 @@ function GardenView({
             className="ui-illustration ui-illustration--md empty-state-asset"
             src={emptyStateImages.filterNoResult}
           />
-          <strong>没有找到符合条件的花</strong>
-          <p>可以换个关键词，取消一些筛选条件，或一键重置筛选。</p>
+          <strong>还没找到这类花</strong>
+          <p>换个关键词，或轻轻清掉筛选条件再看看。</p>
           {onResetFilters ? (
             <button className="secondary-action" type="button" onClick={onResetFilters}>
               重置筛选

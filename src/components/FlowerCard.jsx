@@ -5,6 +5,9 @@ import {
   getFlowerAsset,
   strengthIcons,
 } from '../assets/uiAssets.js'
+import favoriteBadgeImage from '../assets/ui/badges/badge-favorite.png'
+import flowerCardDateChipBgImage from '../assets/ui/cards/flower-card-date-chip-bg.png'
+import flowerCardFavoriteCornerImage from '../assets/ui/cards/flower-card-favorite-corner.png'
 import { getRecordView } from '../utils/records.js'
 
 function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavorite }) {
@@ -37,6 +40,12 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
           src={decorationImages.favoriteRibbon}
         />
       ) : null}
+      {view.isFavorite ? (
+        <span className="flower-card-favorite-badge" aria-label="已收藏">
+          <img alt="" aria-hidden="true" src={favoriteBadgeImage} />
+          已收藏
+        </span>
+      ) : null}
       <button className="flower-card-main" onClick={() => onView(record)} type="button">
         <span
           className={`flower-visual flower-visual--card flower-visual--${flowerKey}`}
@@ -46,7 +55,13 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
         </span>
         <span className="flower-card-copy">
           <strong>{view.title}</strong>
-          <small>
+          <small className="flower-date-chip">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="flower-date-chip-bg"
+              src={flowerCardDateChipBgImage}
+            />
             <img alt="" aria-hidden="true" className="ui-icon ui-icon--xs" src={decorationImages.recordDatePin} />
             {view.date} · {view.emotionLabel}
           </small>
@@ -65,7 +80,6 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
               </span>
               强度 {view.intensityText}
             </em>
-            {view.isFavorite ? <em>已收藏</em> : null}
           </span>
           <span className="flower-note">{view.note}</span>
           {view.tags.length > 0 ? (
@@ -77,6 +91,14 @@ function FlowerCard({ record, isSelected, onView, onEdit, onDelete, onToggleFavo
           ) : null}
         </span>
       </button>
+      {view.isFavorite ? (
+        <img
+          alt=""
+          aria-hidden="true"
+          className="flower-card-favorite-corner"
+          src={flowerCardFavoriteCornerImage}
+        />
+      ) : null}
 
       <div className="flower-card-actions" aria-label="记录操作">
         <button type="button" onClick={() => onToggleFavorite(record.id)}>

@@ -61,7 +61,7 @@ function RecordForm({ tags, onAddRecord, formRef, noteInputRef }) {
       />
       <div className="panel-heading">
         <div className="card-title-group">
-          <h2>写一朵今天的花</h2>
+          <h2>今天想记录什么？</h2>
         </div>
         <img
           alt=""
@@ -106,13 +106,21 @@ function RecordForm({ tags, onAddRecord, formRef, noteInputRef }) {
             {note.length}/{NOTE_MAX_LENGTH}
           </span>
         </span>
-        <textarea
-          maxLength={NOTE_MAX_LENGTH}
-          onChange={(event) => setNote(event.target.value)}
-          placeholder="今天发生了什么？一句话也很好。"
-          ref={noteInputRef}
-          value={note}
-        />
+        <span className="record-textarea-shell">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="record-textarea-pencil"
+            src={decorationImages.recordPencilNote}
+          />
+          <textarea
+            maxLength={NOTE_MAX_LENGTH}
+            onChange={(event) => setNote(event.target.value)}
+            placeholder="今天发生了什么？一句话也很好。"
+            ref={noteInputRef}
+            value={note}
+          />
+        </span>
         {note.length >= NOTE_MAX_LENGTH ? (
           <small className="field-helper field-helper--warning">
             已经写满 200 字，可以先种下这一朵花。

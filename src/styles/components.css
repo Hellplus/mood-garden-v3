@@ -4009,3 +4009,289 @@ select {
 .toast {
   z-index: 42;
 }
+
+/* V3.1-DX.5-R3 typography and journal tone pass. */
+.brand-row {
+  font-weight: 700;
+}
+
+.eyebrow {
+  font-size: 0.84rem;
+  font-weight: 650;
+  text-transform: none;
+}
+
+.hero-copy-stack h1 {
+  font-size: clamp(3rem, 6.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.hero-greeting,
+.panel-heading h2,
+.section-heading h2,
+.flower-detail-panel h2,
+.onboarding-card h2 {
+  font-weight: 700;
+}
+
+.section-heading h2,
+.panel-heading h2 {
+  letter-spacing: 0;
+}
+
+.section-intro,
+.hero-copy,
+.data-section p,
+.data-note-grid p,
+.confirm-dialog-copy p,
+.delete-confirm-dialog p,
+.flower-detail-panel p:not(.eyebrow),
+.onboarding-card p:not(.eyebrow) {
+  line-height: var(--line-height-body);
+}
+
+.primary-action,
+.secondary-action,
+.text-action,
+.danger-action,
+.filter-collapse-toggle,
+.filter-toggle,
+.filter-reset,
+.calendar-controls button,
+.calendar-record-actions button,
+.flower-card-actions button,
+.detail-actions button,
+.record-more-toggle,
+.data-actions button,
+.mobile-review-tab {
+  font-weight: 700;
+}
+
+.choice-chip,
+.tag-chip,
+.tag-cloud-item,
+.segmented-control button,
+.theme-swatch,
+.filter-status,
+.flower-card-meta em,
+.detail-tags span {
+  font-weight: 600;
+}
+
+.choice-chip.is-selected,
+.tag-chip.is-selected {
+  font-weight: 700;
+}
+
+.field-helper,
+.textarea-counter,
+.data-actions button small,
+.record-more-toggle small,
+.section-caption,
+.toast-message {
+  font-size: 0.84rem;
+}
+
+.record-textarea-shell {
+  position: relative;
+  display: block;
+}
+
+.record-textarea-shell textarea {
+  width: 100%;
+  padding-left: 52px;
+}
+
+.record-textarea-pencil {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.today-status .panel-heading {
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+
+.today-status-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-card) 82%, var(--color-bg-soft));
+}
+
+.today-status-arrow img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.flower-date-chip {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  width: fit-content;
+  min-height: 28px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.flower-date-chip > :not(.flower-date-chip-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.flower-date-chip-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.flower-card-favorite-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  border: 1px solid color-mix(in srgb, var(--color-accent-yellow) 58%, var(--color-border));
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--color-card) 86%, var(--color-accent-yellow));
+  color: color-mix(in srgb, var(--color-heading) 74%, var(--mood-happy));
+  font-size: 0.84rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-subtle);
+}
+
+.flower-card-favorite-badge img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.flower-card-favorite-corner {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 0;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  opacity: 0.46;
+  pointer-events: none;
+}
+
+.detail-favorite-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--color-accent-yellow) 58%, var(--color-border));
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  background: color-mix(in srgb, var(--color-card) 84%, var(--color-accent-yellow));
+  color: color-mix(in srgb, var(--color-heading) 76%, var(--mood-happy));
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.detail-favorite-badge img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.detail-note-section {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-accent-yellow) 34%, var(--color-border));
+  border-radius: var(--radius-card-sm);
+  padding: 14px 16px;
+  color: var(--color-text);
+}
+
+.detail-note-paper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.68;
+  pointer-events: none;
+}
+
+.detail-note-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-heading);
+  font-size: 0.96rem;
+}
+
+.detail-note-heading img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.detail-note-heading strong {
+  font-weight: 700;
+}
+
+.detail-note-section p {
+  color: var(--color-text);
+}
+
+.data-section h3,
+.analytics-panel h3,
+.confirm-dialog-copy h3,
+.delete-confirm-dialog h3 {
+  font-weight: 700;
+}
+
+.data-action-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.today-calendar-preview__weekdays,
+.today-calendar-preview__day {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.data-danger-note,
+.confirm-dialog-note {
+  font-weight: 700;
+}

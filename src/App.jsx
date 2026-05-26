@@ -204,17 +204,17 @@ function App() {
 
   function handleThemeChange(nextTheme) {
     setTheme(nextTheme)
-    showToast('主题外观已更新。', 'info')
+    showToast('花园外观已换好。', 'info')
   }
 
   function handleCloseOnboarding() {
     closeOnboarding()
-    showToast('新手引导已收起，可以在主题外观里重新查看。', 'info')
+    showToast('引导已收起，需要时可以再打开。', 'info')
   }
 
   function handleCompleteOnboarding() {
     completeOnboarding()
-    showToast('准备好了，慢慢照看你的心情花园。', 'success')
+    showToast('慢慢来，从一句话开始。', 'success')
   }
 
   function handleAddRecord(input) {
@@ -238,7 +238,7 @@ function App() {
     const updatedRecord = updateRecord(id, patch)
     setSelectedRecord(updatedRecord)
     setDetailMode('view')
-    showToast('这朵花的记录已经更新。', 'success')
+    showToast('这朵花已经更新。', 'success')
   }
 
   function handleDeleteRecord(id) {
@@ -248,7 +248,7 @@ function App() {
       setSelectedRecord(null)
     }
 
-    showToast('这条记录已经从花园中移除。', 'info')
+    showToast('这朵花已移出花园。', 'info')
   }
 
   function handleToggleFavorite(id) {
@@ -262,7 +262,7 @@ function App() {
       })
     }
 
-    showToast('收藏状态已更新。', 'info')
+    showToast('收藏已更新。', 'info')
   }
 
   async function getImportedRecords(file) {
@@ -271,13 +271,13 @@ function App() {
       const result = parseImportPayload(content)
 
       if (!result.ok) {
-        showToast(result.message, 'error')
+        showToast('没有读懂这份备份文件，请重新选择。', 'error')
         return null
       }
 
       return result.records
-    } catch (importError) {
-      showToast(importError?.message || '读取文件失败，请确认是 JSON 备份。', 'error')
+    } catch {
+      showToast('没有读懂这份备份文件，请重新选择。', 'error')
       return null
     }
   }
@@ -290,7 +290,7 @@ function App() {
     )
 
     showToast(
-      exported ? '已导出 TXT 日记。' : '当前环境暂时无法下载文件。',
+      exported ? '文字日记已导出。' : '这次没能下载文件，请稍后再试。',
       exported ? 'success' : 'error',
     )
   }
@@ -303,7 +303,7 @@ function App() {
     )
 
     showToast(
-      exported ? '已导出 JSON 备份。' : '当前环境暂时无法下载文件。',
+      exported ? '花园备份已导出。' : '这次没能下载文件，请稍后再试。',
       exported ? 'success' : 'error',
     )
   }
@@ -316,7 +316,7 @@ function App() {
     }
 
     mergeRecords(importedRecords)
-    showToast(`已合并导入 ${importedRecords.length} 条记录。`, 'success')
+    showToast(`已把 ${importedRecords.length} 条记录带回花园。`, 'success')
   }
 
   async function handleImportReplace(file) {
@@ -328,13 +328,13 @@ function App() {
 
     replaceRecords(importedRecords)
     setSelectedRecord(null)
-    showToast(`已用 ${importedRecords.length} 条记录替换当前花园。`, 'success')
+    showToast(`已用备份中的 ${importedRecords.length} 条记录整理花园。`, 'success')
   }
 
   function handleClearRecords() {
     clearRecords()
     setSelectedRecord(null)
-    showToast('所有记录已清空。', 'info')
+    showToast('花园记录已清空。', 'info')
   }
 
   function handleGoToRecord() {

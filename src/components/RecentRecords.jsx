@@ -16,8 +16,8 @@ function RecentRecords({ records, onViewRecord }) {
             className="ui-illustration ui-illustration--sm empty-state-asset"
             src={emptyStateImages.noRecord}
           />
-          <strong>还没有最近记录</strong>
-          <p>完成第一条记录后，这里会显示最近的心情花，方便你回看。</p>
+          <strong>还没有新的心情花</strong>
+          <p>种下第一朵花后，这里会留下最近的心情片段。</p>
         </div>
       ) : (
         <div className="record-list">

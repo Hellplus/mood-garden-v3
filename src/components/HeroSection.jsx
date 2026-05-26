@@ -1,6 +1,8 @@
 import { decorationImages } from '../assets/uiAssets.js'
 
 function HeroSection({ content }) {
+  const metrics = content?.metrics || []
+
   return (
     <header className="hero-section">
       <img
@@ -17,14 +19,14 @@ function HeroSection({ content }) {
       />
       <div className="brand-row">
         <img alt="" aria-hidden="true" className="brand-mark-asset" src={decorationImages.brandFlower} />
-        <span>{content.eyebrow}</span>
+        <span>Mood Garden 情绪花园</span>
       </div>
 
       <div className="hero-layout">
         <div className="hero-copy-stack">
-          <h1>{content.title}</h1>
-          <p className="hero-greeting">{content.greeting}</p>
-          <p className="hero-copy">{content.description}</p>
+          <h1>今天想记录什么？</h1>
+          <p className="hero-greeting">给此刻的心情留一朵小花。</p>
+          <p className="hero-copy">写下一句话，之后再慢慢回看你的花园、月历和备份。</p>
         </div>
 
         <div className="hero-side">
@@ -34,9 +36,9 @@ function HeroSection({ content }) {
             <img className="hero-leaf-sprig" src={decorationImages.leafSprig} alt="" />
           </div>
 
-          {content.metrics.length > 0 ? (
-            <div className="hero-metrics" aria-label="静态概览指标">
-              {content.metrics.map((metric) => (
+          {metrics.length > 0 ? (
+            <div className="hero-metrics" aria-label="花园概览">
+              {metrics.map((metric) => (
                 <article className="metric-tile" key={metric.label}>
                   <span>{metric.label}</span>
                   <strong>{metric.value}</strong>

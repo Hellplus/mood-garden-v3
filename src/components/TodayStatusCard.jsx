@@ -1,5 +1,6 @@
 import { getRecordView } from '../utils/records.js'
 import { decorationImages, getEmotionAssetKey, getFlowerAsset, strengthIcons } from '../assets/uiAssets.js'
+import todayStatusArrowImage from '../assets/ui/cards/recent-view-all-arrow.png'
 
 function TodayStatusCard({ record, todayRecordCount = record ? 1 : 0 }) {
   const view = record ? getRecordView(record) : null
@@ -16,7 +17,10 @@ function TodayStatusCard({ record, todayRecordCount = record ? 1 : 0 }) {
         src={decorationImages.leafSprig}
       />
       <div className="panel-heading">
-        <h2>今日状态</h2>
+        <h2>今天的花</h2>
+        <span className="today-status-arrow" aria-hidden="true">
+          <img alt="" src={todayStatusArrowImage} />
+        </span>
       </div>
 
       <div
@@ -61,7 +65,7 @@ function TodayStatusCard({ record, todayRecordCount = record ? 1 : 0 }) {
           <p className="status-label">今天还没有记录</p>
           <strong>0 / 5</strong>
           <p className="today-status-count">记录 0 条 · 种了 0 朵花</p>
-          <span>选一个情绪，写下一句话，第一朵花就会出现。</span>
+          <span>选一个此刻的心情，第一朵花就会出现。</span>
         </div>
       )}
     </article>

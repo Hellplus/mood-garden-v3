@@ -187,9 +187,9 @@ function AnalyticsDashboard({
       <section className="surface-panel analytics-dashboard">
         <div className="section-heading">
           <div>
-            <h2>数据回顾</h2>
+            <h2>花园回顾</h2>
           </div>
-          <span className="section-caption">全部记录</span>
+          <span className="section-caption">慢慢从记录里长出来</span>
         </div>
 
         <div className="empty-state analytics-empty">
@@ -199,8 +199,8 @@ function AnalyticsDashboard({
             className="ui-illustration ui-illustration--md empty-state-asset"
             src={emptyStateImages.analyticsInsufficient}
           />
-          <strong>记录还不够形成回顾</strong>
-          <p>写下第一条心情后，这里会慢慢出现总览、趋势和温柔回顾。</p>
+          <strong>还需要多几朵花</strong>
+          <p>写下第一条心情后，这里会慢慢出现你的花园脉络。</p>
           <button className="secondary-action" type="button" onClick={onGoToRecord}>
             去记录
           </button>
@@ -213,9 +213,9 @@ function AnalyticsDashboard({
     <section className="surface-panel analytics-dashboard">
       <div className="section-heading analytics-dashboard-heading">
         <div>
-          <h2>数据回顾</h2>
+          <h2>花园回顾</h2>
         </div>
-        <span className="section-caption">基于全部记录</span>
+        <span className="section-caption">慢慢从记录里长出来</span>
       </div>
 
       <div className={getMobileReviewContentClass(mobileView, 'today', 'analytics-summary')}>
@@ -271,12 +271,12 @@ function AnalyticsDashboard({
                 className="analytics-icon analytics-icon--heading"
                 src={analyticsIcons.overview}
               />
-              情绪分布
+              心情花分布
             </h3>
           </div>
 
           {analytics.moodDistribution.length === 0 ? (
-            <p className="soft-note">记录还不多，情绪分布会在这里慢慢出现。</p>
+            <p className="soft-note">记录还不多，心情花分布会在这里慢慢出现。</p>
           ) : (
             <div className="mood-bars">
               {analytics.moodDistribution.map((bar) => (
@@ -301,11 +301,11 @@ function AnalyticsDashboard({
                 className="analytics-icon analytics-icon--heading"
                 src={analyticsIcons.trend}
               />
-              最近 7 天
+              近 7 天花园
             </h3>
           </div>
 
-          <div className="weekly-chart" aria-label="最近 7 天记录统计">
+          <div className="weekly-chart" aria-label="近 7 天记录节奏">
             {analytics.last7DaysStats.map((point) => (
               <div className="chart-column" key={point.dateKey}>
                 <span style={{ height: `${point.percent}%` }}></span>
@@ -325,11 +325,11 @@ function AnalyticsDashboard({
               className="analytics-icon analytics-icon--heading"
               src={analyticsIcons.month}
             />
-            最近 30 天趋势
+            最近一段时间
           </h3>
         </div>
 
-        <div className="trend-strip" aria-label="最近 30 天记录趋势">
+        <div className="trend-strip" aria-label="最近一段时间的记录节奏">
           {analytics.last30DaysTrend.map((point) => (
             <span
               className={point.count > 0 ? 'trend-dot has-record' : 'trend-dot'}
@@ -364,9 +364,9 @@ function AnalyticsDashboard({
           <div className="stat-list">
             <span>平均强度</span>
             <strong>{analytics.intensityStats.averageText} / 5</strong>
-            <span>高强度记录</span>
+            <span>比较饱满</span>
             <strong>{analytics.intensityStats.highCount} 条</strong>
-            <span>低强度记录</span>
+            <span>比较轻柔</span>
             <strong>{analytics.intensityStats.lowCount} 条</strong>
           </div>
         </section>
@@ -386,7 +386,7 @@ function AnalyticsDashboard({
                 className="analytics-icon analytics-icon--heading"
                 src={analyticsIcons.tags}
               />
-              标签 Top 5
+              常出现的标签
             </h3>
           </div>
 
@@ -420,7 +420,7 @@ function AnalyticsDashboard({
             </h3>
           </div>
 
-          <p className="soft-note">共收藏 {analytics.favoriteSummary.count} 条记录。</p>
+          <p className="soft-note">你收藏了 {analytics.favoriteSummary.count} 个想记住的瞬间。</p>
           {analytics.favoriteSummary.recent.length > 0 ? (
             <div className="favorite-list">
               {analytics.favoriteSummary.recent.map((record) => (
@@ -502,7 +502,7 @@ function AnalyticsDashboard({
         )}
       >
         <div>
-          <strong>再多记录几天，趋势会更清楚</strong>
+          <strong>再多记录几天，花园会更清楚</strong>
           <p>不用急着分析自己，先把每一天轻轻留下来。</p>
         </div>
         <button className="primary-action" type="button" onClick={onGoToRecord}>

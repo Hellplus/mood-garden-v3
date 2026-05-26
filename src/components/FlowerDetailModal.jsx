@@ -6,6 +6,9 @@ import {
   warningIcons,
 } from '../assets/uiAssets.js'
 import detailBottomSheetHandleImage from '../assets/ui/detail/detail-bottom-sheet-handle.png'
+import detailFavoriteBadgeImage from '../assets/ui/detail/detail-favorite-badge.png'
+import detailNoteCornerLeafImage from '../assets/ui/detail/detail-note-corner-leaf.png'
+import detailNotePaperImage from '../assets/ui/detail/detail-note-paper.png'
 import detailOverlayFlowerImage from '../assets/ui/detail/detail-overlay-flower.png'
 import detailStrengthFlowerRowImage from '../assets/ui/detail/detail-strength-flower-row.png'
 import strengthFlowerEmptyImage from '../assets/ui/strength/strength-flower-empty.png'
@@ -194,11 +197,17 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
       <p className="detail-mood">
         {view.date} · {view.emotionLabel} · {view.intensityText}
       </p>
+      {view.isFavorite ? (
+        <span className="detail-favorite-badge" aria-label="已收藏">
+          <img alt="" aria-hidden="true" src={detailFavoriteBadgeImage} />
+          已收藏
+        </span>
+      ) : null}
 
       {isEditing ? (
         <form className="detail-form" onSubmit={handleSave}>
           <label className="form-field">
-            记录片段
+            这一刻的心情
             <textarea onChange={(event) => setNote(event.target.value)} value={note} />
           </label>
 
@@ -223,8 +232,11 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
             />
           </label>
 
-          <label className="form-field">
-            详情备注
+          <label className="form-field detail-note-edit-field">
+            <span className="field-label-row">
+              <img alt="" aria-hidden="true" className="ui-icon ui-icon--sm" src={detailNoteCornerLeafImage} />
+              补充日记
+            </span>
             <textarea
               onChange={(event) => setDetailNote(event.target.value)}
               placeholder="可以补充一点只有自己看得懂的细节。"
@@ -247,7 +259,19 @@ function FlowerDetailModal({ record, mode, onClose, onSave, onDelete, onToggleFa
         <>
           <p>{view.note}</p>
           <p className="flower-quote">{view.quote}</p>
-          {view.detailNote ? <p className="detail-extra">{view.detailNote}</p> : null}
+          <section className="detail-note-section" aria-label="补充日记">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="detail-note-paper"
+              src={detailNotePaperImage}
+            />
+            <span className="detail-note-heading">
+              <img alt="" aria-hidden="true" src={detailNoteCornerLeafImage} />
+              <strong>补充日记</strong>
+            </span>
+            <p>{view.detailNote || '还没有补充日记。等想起来的时候，再为这朵花添几句话。'}</p>
+          </section>
           <DetailStrengthRow intensity={view.intensity} />
 
           <div className="detail-tags">
