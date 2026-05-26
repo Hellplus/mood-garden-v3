@@ -12,7 +12,7 @@
 - UI 实现规范：`UI_IMPLEMENTATION_SPEC_V3_1.md`
 - 素材清单：`ASSET_MANIFEST_V3_1.md`
 
-后续 Codex 实现 UI 时，必须按图实现，而不是只参考风格。已经存在正式素材的地方，必须优先使用正式素材，不允许自由发挥新的图标、插画或装饰风格。
+后续 Codex 实现 UI 时，必须按图实现，而不是只参考风格。01-09 UI 图是页面元素蓝图和视觉验收标准；不要求 1:1 像素复刻，但蓝图中明确存在的必要元素、结构层级、背景装饰、入口卡、空状态、弹窗、确认 Dialog 和页面级顶部装饰必须具备。已经存在正式素材的地方，必须优先使用正式素材，不允许自由发挥新的图标、插画或装饰风格。
 
 ---
 
@@ -25,6 +25,8 @@
 5. 素材接入不得改变业务功能、records localStorage 主结构、导入导出格式或核心计算逻辑。
 6. 不得引入第三方图标库、第三方 UI 库、Tailwind、date-fns 或动画库来替代现有素材。
 7. 正式素材只用于视觉表达，不得为接入素材新增业务字段或改变组件职责。
+8. 第五批不再使用页面氛围纹理 `patterns/`；后续不得引用 `src/assets/ui/patterns/`。
+9. 背景层优先使用 `src/assets/ui/backgrounds/`、`src/assets/ui/decorations/`、`src/assets/ui/paper/` 和 CSS 柔和渐变。
 
 ---
 
@@ -357,7 +359,8 @@
 - `entry-data-card.png` / `entry-data-small.png`：记录页“数据”入口卡。
 
 接入规则：
-- 如果 DX.5-R1 按最新 R0 审计恢复 05 图中的轻量入口卡，必须优先使用 `entries/` 中的正式素材。
+- DX.5-R1 已按 05 图恢复记录页轻量入口卡；后续必须保留“花园 / 回顾 / 数据”三张入口卡，并优先使用 `entries/` 中的正式素材。
+- 入口卡位于最近记录之后，不能抢占首屏快速记录任务。
 - 入口卡只能切换到已有移动端 tab，不得新增路由、业务功能或新的数据流。
 - 如果入口素材缺失，必须先报告缺失，不能用 emoji 或临时 SVG 代替。
 
@@ -631,7 +634,7 @@ src/assets/ui/badges/
 4. Codex 后续不得用临时 CSS 图形、emoji、随机 SVG、浏览器默认符号或外部图片替代第五批正式素材。
 5. 后续如果组件需要第五批目录中的素材但文件尚未存在，必须停止当前 UI 接入并报告缺失素材，不能临时替代。
 6. 纸感、分割装饰、反馈状态、引导提示、图表装饰和状态徽章都是 UI 蓝图元素的一部分；不能因为“只是装饰”而默认省略或临时伪造。
-7. 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/` 素材，以及 CSS 的柔和渐变和色块。
+7. 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/`、`paper/` 素材，以及 CSS 的柔和渐变和色块。
 
 ## 4. 交给 CSS 实现的视觉
 
@@ -654,7 +657,7 @@ src/assets/ui/badges/
 - PNG / SVG 素材只负责图标、花朵、插画、装饰和语义视觉；
 - 不允许用图片模拟按钮、卡片、输入框或布局容器。
 - 如果第五批已经提供纸感、分割装饰、反馈状态或徽章类正式素材，后续实现必须优先使用正式素材；CSS 不能用临时图形伪造这些 UI 蓝图元素。
-- 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/` 素材，以及 CSS 的柔和渐变和色块。
+- 页面背景不依赖第五批 `patterns/` 纹理素材；后续 Codex 不得引用 `src/assets/ui/patterns/`，背景层优先使用已有 `backgrounds/`、`decorations/`、`paper/` 素材，以及 CSS 的柔和渐变和色块。
 
 ---
 
