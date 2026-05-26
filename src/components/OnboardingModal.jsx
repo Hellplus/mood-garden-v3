@@ -48,7 +48,7 @@ function OnboardingModal({
           </li>
           <li>
             <img alt="" aria-hidden="true" className="onboarding-step-icon" src={onboardingIcons.plant} />
-            <span>想长期保存或换设备查看，记得导出一份备份。</span>
+            <span>你的记录会保存在当前浏览器，建议定期导出 JSON 备份。</span>
           </li>
         </ol>
         <div className="onboarding-actions">

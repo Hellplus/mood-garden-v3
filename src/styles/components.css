@@ -4299,42 +4299,74 @@ select {
 /* V3.1-DX.6.1 desktop hotfix: keep desktop secondary panels compact without changing mobile layouts. */
 @media (min-width: 821px) {
   .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: auto;
-    gap: 7px;
-    padding: 18px;
+    gap: 12px;
+    padding: 24px;
   }
 
   .garden-empty,
   .analytics-empty {
-    min-height: 178px;
+    min-height: 188px;
   }
 
   .compact-empty {
-    min-height: 128px;
-    padding: 16px;
+    min-height: 136px;
+    padding: 20px;
   }
 
   .empty-state .empty-state-asset,
   .empty-state .ui-illustration {
-    width: min(112px, 100%);
-    max-height: 112px;
+    flex: 0 0 auto;
+    width: min(132px, 34%);
+    max-width: 132px;
+    max-height: 132px;
+    object-fit: contain;
   }
 
   .garden-empty .empty-state-asset,
   .analytics-empty .empty-state-asset,
   .empty-state .ui-illustration--md {
-    width: min(116px, 100%);
-    max-height: 116px;
+    width: min(128px, 38%);
+    max-width: 128px;
+    max-height: 128px;
   }
 
   .compact-empty .empty-state-asset,
   .compact-empty .ui-illustration {
-    width: min(78px, 100%);
-    max-height: 74px;
+    width: min(96px, 30%);
+    max-width: 96px;
+    max-height: 96px;
+  }
+
+  .today-review-empty .empty-state-asset,
+  .calendar-selected-panel .compact-empty .empty-state-asset,
+  .recent-records .compact-empty .empty-state-asset,
+  .tag-cloud .compact-empty .empty-state-asset {
+    width: min(92px, 28%);
+    max-width: 92px;
+    max-height: 92px;
+  }
+
+  .empty-state .secondary-action {
+    align-self: center;
+    width: auto;
+    min-height: 40px;
+    padding: 8px 14px;
+  }
+
+  .review-go-record-sprout {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   .empty-state p {
-    max-width: 280px;
+    max-width: 300px;
     font-size: 0.9rem;
   }
 
