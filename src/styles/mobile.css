@@ -15,7 +15,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   body {
     overflow-x: hidden;
   }
@@ -101,7 +101,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 38px;
+    min-height: 44px;
   }
 
   .filter-body:not(.is-open) {
@@ -168,13 +168,16 @@
   .flower-card-actions button,
   .detail-actions button,
   .calendar-record-actions button,
+  .calendar-controls button,
   .data-actions button,
+  .filter-collapse-toggle,
   .filter-toggle,
   .filter-reset,
   .choice-chip,
   .tag-chip,
   .tag-cloud-item,
   .segmented-control button,
+  .mobile-review-tab,
   .icon-button,
   .text-action,
   .secondary-action {
@@ -451,7 +454,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   .app-shell {
     padding-bottom: calc(var(--space-bottom-safe) + 12px);
   }
@@ -665,7 +668,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   .hero-section {
     margin-bottom: 16px;
     padding: 18px;
@@ -908,7 +911,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   .daily-grid {
     grid-template-areas:
       'record'
@@ -1148,7 +1151,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   body {
     font-size: 0.94rem;
   }
